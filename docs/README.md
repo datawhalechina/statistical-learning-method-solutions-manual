@@ -8,7 +8,7 @@
 &emsp;&emsp;如果觉得解答不详细，可以[点击这里](https://github.com/Relph1119/statistical-learning-method-solutions-manual/issues)提交你希望补充推导或者习题编号，我们看到后会尽快进行补充。
 
 ## 选用的《统计学习方法》版本
-<img src="https://github.com/Relph1119/statistical-learning-method-solutions-manual/blob/master/res/statistical-learning-method-solutions-manual.jpg?raw=true" width="336" height= "500">
+<img src="https://github.com/Relph1119/statistical-learning-method-solutions-manual/blob/master/res/statistical-learning-method-book.jpg?raw=true" width="336" height= "500">
 
 
 > 书名：统计学习方法<br/>

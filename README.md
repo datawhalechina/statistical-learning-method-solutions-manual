@@ -24,7 +24,7 @@
 - 第11章 [条件随机场](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter11/chapter11)
 
 ## 选用的《统计学习方法》版本
-<img src="https://github.com/Relph1119/statistical-learning-method-solutions-manual/blob/master/res/statistical-learning-method-solutions-manual.jpg?raw=true" width="336" height= "500">
+<img src="https://github.com/Relph1119/statistical-learning-method-solutions-manual/blob/master/res/statistical-learning-method-book.jpg?raw=true" width="336" height= "500">
 
 
 > 书名：统计学习方法<br/>
