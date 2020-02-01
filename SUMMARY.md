@@ -12,4 +12,3 @@
     * [第9章 EM算法及其推广](docs/chapter9/chapter9.md)
     * [第10章 隐马尔可夫模型](docs/chapter10/chapter10.md)
     * [第11章 条件随机场](docs/chapter11/chapter11.md)
-
