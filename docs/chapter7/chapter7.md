@@ -32,7 +32,8 @@ $$\begin{array}{cl}
 alpha_i \\
 \text{s.t.} & \displaystyle \sum_{i=1}^N \alpha_i y+i = 0 \\
 & \alpha \geqslant 0, i=1,2,\cdots,N
-\end{array}$$根据书上**定理7.2**，可得$\displaystyle w^*=\sum_{i=1}^N \alpha_i^* y_j x_i, b^*=y_i-\sum_{i=1}^N \alpha^* y_i (x_i \cdot x_j)$，可以看出$w,b$实质上也是将其表示为$\langle x_i, x_j\rangle$的线性组合形式。
+\end{array}$$
+根据书上**定理7.2**，可得$\displaystyle w^*=\sum_{i=1}^N \alpha_i^* y_j x_i, b^*=y_i-\sum_{i=1}^N \alpha^* y_i (x_i \cdot x_j)$，可以看出$w,b$实质上也是将其表示为$\langle x_i, x_j\rangle$的线性组合形式。
 
 ## 习题7.2
 
@@ -64,9 +65,9 @@ print("support vectors =", clf.support_vectors_)
      [3. 3.]]
     
 
-**最大间隔分离超平面：**$-x^{(1)}+2x^{(2)}-2=0$  
-**分类决策函数：**$f(x)=\text{sign}(-x^{(1)}+2x^{(2)}-2)$  
-**支持向量：**$x_1=(3,2)^T,x_2=(1,2)^T, x_3=(3,3)^T$  
+**最大间隔分离超平面：** $-x^{(1)}+2x^{(2)}-2=0$  
+**分类决策函数：** $f(x)=\text{sign}(-x^{(1)}+2x^{(2)}-2)$  
+**支持向量：** $x_1=(3,2)^T,x_2=(1,2)^T, x_3=(3,3)^T$  
 
 
 ```python
