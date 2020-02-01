@@ -24,11 +24,13 @@
 
 ## 选用的《统计学习方法》版本
 <img src="https://github.com/Relph1119/statistical-learning-method-book/blob/master/res/statistical-learning-method-book.jpg?raw=true" width="336" height= "500">
-> 书名：统计学习方法<br>
-> 作者：李航<br>
-> 出版社：清华大学出版社<br>
-> 版次：2012年3月第1版<br>
-> 勘误表：http://blog.sina.com.cn/s/blog_7ad48fee01017dpi.html<br>
+
+
+> 书名：统计学习方法<br/>
+> 作者：李航<br/>
+> 出版社：清华大学出版社<br/>
+> 版次：2012年3月第1版<br/>
+> 勘误表：http://blog.sina.com.cn/s/blog_7ad48fee01017dpi.html<br/>
 
 ## 协作规范
 
