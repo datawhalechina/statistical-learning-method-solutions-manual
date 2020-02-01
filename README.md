@@ -11,17 +11,17 @@
 在线阅读地址：https://datawhalechina.github.io/statistical-learning-method-solutions-manual
 
 ## 目录
-- 第1章 [统计学习方法概论](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter1/chapter1)
-- 第2章 [感知机](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter2/chapter2)
-- 第3章 [k近邻法](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter3/chapter3)
-- 第4章 [朴素贝叶斯法](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter4/chapter4)
-- 第5章 [决策树](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter5/chapter5)
-- 第6章 [Ligistic回归与最大熵模型](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter6/chapter6)
-- 第7章 [支持向量机](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter7/chapter7)
-- 第8章 [提升方法](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter8/chapter8)
-- 第9章 [EM算法及其推广](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter9/chapter9)
-- 第10章 [隐马尔可夫模型](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter10/chapter10)
-- 第11章 [条件随机场](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter11/chapter11)
+- 第1章 [统计学习方法概论](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter1/chapter1)
+- 第2章 [感知机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter2/chapter2)
+- 第3章 [k近邻法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter3/chapter3)
+- 第4章 [朴素贝叶斯法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter4/chapter4)
+- 第5章 [决策树](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter5/chapter5)
+- 第6章 [Ligistic回归与最大熵模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter6/chapter6)
+- 第7章 [支持向量机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter7/chapter7)
+- 第8章 [提升方法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter8/chapter8)
+- 第9章 [EM算法及其推广](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter9/chapter9)
+- 第10章 [隐马尔可夫模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter10/chapter10)
+- 第11章 [条件随机场](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter11/chapter11)
 
 ## 选用的《统计学习方法》版本
 <img src="https://github.com/datawhalechina/statistical-learning-method-solutions-manual/blob/master/res/statistical-learning-method-book.jpg?raw=true" width="336" height= "500">
