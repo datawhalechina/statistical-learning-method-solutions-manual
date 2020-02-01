@@ -8,7 +8,7 @@
 &emsp;&emsp;如果觉得解答不详细，可以[点击这里](https://github.com/datawhalechina/statistical-learning-method-solutions-manual/issues)提交你希望补充推导或者习题编号，我们看到后会尽快进行补充。
 
 ### 在线阅读地址
-在线阅读地址：https://relph1119.github.io/statistical-learning-method-solutions-manual
+在线阅读地址：https://datawhalechina.github.io/statistical-learning-method-solutions-manual
 
 ## 目录
 - 第1章 [统计学习方法概论](https://relph1119.github.io/statistical-learning-method-solutions-manual/#/chapter1/chapter1)
