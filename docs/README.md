@@ -8,7 +8,7 @@
 
 ## 所选用版本
 
-<img src="https://raw.githubusercontent.com/Relph1119/statistical-learning-method-book/master/res/statistical-learning-method-book.jpg" width="300" height= "350">
+<img src="https://github.com/Relph1119/statistical-learning-method-book/blob/master/res/statistical-learning-method-book.jpg?raw=true" width="336" height= "500">
 
 > 书名：统计学习方法<br>
 > 作者：李航<br>
