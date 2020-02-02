@@ -54,4 +54,4 @@ P(x^{(j)}=a_{jl} | Y=c_k)
 &= \frac{\displaystyle \sum_{i=1}^N I(y_i=c_k, x_i^{(j)}=a_{jl})+\lambda}{\displaystyle \sum_{i=1}^N I(y_i=c_k) + \lambda} (其中\lambda = S_j \lambda)\\
 &= \frac{\displaystyle \sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=c_k) + \lambda}{\displaystyle \sum_{i=1}^N I(y_i=c_k) + S_j \lambda}
 \end{aligned} $$  
-公式(4.11)得证。
+公式(4.10)得证。
