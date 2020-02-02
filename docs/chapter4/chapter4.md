@@ -24,7 +24,7 @@
 ## 习题4.2
 &emsp;&emsp;用贝叶斯估计法推出朴素贝叶斯法中的慨率估计公式(4.10)及公式(4.11)
 
-**解答：** 
+**解答：**  
 **第1步：**证明公式(4.11)：$\displaystyle P(Y=c_k) = \frac{\displaystyle \sum_{i=1}^N I(y_i=c_k) + \lambda}{N+K \lambda}$  
 假设$P_\lambda(Y=c_i)=\theta_i,i=1,2,\cdots,K$是随机变量，且$\theta_i,i=1,2,\cdots,K$的先验分布是服从参数为$\lambda$的Dirichlet分布：
 $$P(\theta_1,\theta_2,\cdots,\theta_K|\lambda)=\frac{1}{B(\lambda)}\prod_{i=1}^{K}\theta_i^{\lambda-1}\quad(1)$$
