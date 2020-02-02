@@ -26,13 +26,14 @@
 
 **解答：**  
 **第1步：**证明公式(4.11)：$\displaystyle P(Y=c_k) = \frac{\displaystyle \sum_{i=1}^N I(y_i=c_k) + \lambda}{N+K \lambda}$  
-假设$P_\lambda(Y=c_i)=\theta_i,i=1,2,\cdots,K$是随机变量，且$\theta_i,i=1,2,\cdots,K$的先验分布是服从参数为$\lambda$的Dirichlet分布：
+假设$P_\lambda(Y=c_i)=\theta_i,i=1,2,\cdots,K$是随机变量。  
+由于$c_i$的分布服从多项分布，$\theta_i$是根据$c_i$的分布来选定的，通常选取共轭分布，由于在贝叶斯推断中，多项分布的共轭先验分布是Dirichlet分布，故可假设$\theta_i,i=1,2,\cdots,K$的先验分布是服从参数为$\lambda$的Dirichlet分布：
 $$P(\theta_1,\theta_2,\cdots,\theta_K|\lambda)=\frac{1}{B(\lambda)}\prod_{i=1}^{K}\theta_i^{\lambda-1}\quad(1)$$
-考虑训练数据集$T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}$，记$\displaystyle M_i=\sum_{j=1}^NI(y_i=c_i)$，其中$i=1,2,\cdots-K$为随机变量。  
+考虑训练数据集$T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}$，记$\displaystyle M_i=\sum_{j=1}^NI(y_i=c_i)$，其中$i=1,2,\cdots,K$为随机变量。  
 令$\theta=(\theta_1,\theta_2,\cdots,\theta_K),M=(M_1,M_2,\cdots,M_K)$，用上述数据集改进先验分布(1)，得到后验分布：
 $$P(\theta|M)=\frac{P(M|\theta) \cdot P(\theta)}{\int P(M|\theta)P(\theta)d\theta}\quad(2)$$
 其中(2)式的分母$\int P(M|\theta)P(\theta)d\theta$是一个定值，与$\theta$无关。假设$P(M|\theta)$服从多项分布：
-$$P(M|\theta)=\theta_1^{M_1}\cdot\theta_2^{M_2}\cdots\theta_K^{M_K}\quad(3)$$
+$$P(M|\theta)=\frac{K!}{M_1!\cdot M_2!\cdots M_K!}\theta_1^{M_1}\cdot\theta_2^{M_2}\cdots\theta_K^{M_K}\quad(3)$$
 将(1),(3)式代入(2)式中，可得：
 $$P(\theta|M) \propto \prod_{i=1}^{K}\theta_i^{\lambda+M_i-1} $$
 由上式可知，后验概率$P(\theta|M)$也服从Dirichlet分布，因此$P_\lambda(Y=c_i)$取随机变量$\theta_i$的期望，即
