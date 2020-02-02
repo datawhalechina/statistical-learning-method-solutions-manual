@@ -24,13 +24,20 @@
 ## 习题4.2
 &emsp;&emsp;用贝叶斯估计法推出朴素贝叶斯法中的慨率估计公式(4.10)及公式(4.11)
 
-**解答：**  
+**解答：** 
 **第1步：**证明公式(4.11)：$\displaystyle P(Y=c_k) = \frac{\displaystyle \sum_{i=1}^N I(y_i=c_k) + \lambda}{N+K \lambda}$  
-加入先验概率，在没有任何信息的情况下，可以假设先验概率为均匀概率（即每个事件的概率是相同的）。  
-可得$\displaystyle p=\frac{1}{K} \Leftrightarrow pK-1=0\quad(1)$  
-根据习题4.1得出先验概率的极大似然估计是$\displaystyle pN - \sum_{i=1}^N I(y_i=c_k) = 0\quad(2)$  
-存在参数$\lambda$使得$(1) \cdot \lambda + (2) = 0$  
-所以有$$\lambda(pK-1) + pN - \sum_{i=1}^N I(y_i=c_k) = 0$$可得$\displaystyle P(Y=c_k) = \frac{\displaystyle \sum_{i=1}^N I(y_i=c_k) + \lambda}{N+K \lambda}$，公式(4.11)得证。  
+假设$P_\lambda(Y=c_i)=\theta_i,i=1,2,\cdots,K$是随机变量，且$\theta_i,i=1,2,\cdots,K$的先验分布是服从参数为$\lambda$的Dirichlet分布：
+$$P(\theta_1,\theta_2,\cdots,\theta_K|\lambda)=\frac{1}{B(\lambda)}\prod_{i=1}^{K}\theta_i^{\lambda-1}\quad(1)$$
+考虑训练数据集$T={(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)}$，记$\displaystyle M_i=\sum_{j=1}^NI(y_i=c_i)$，其中$i=1,2,\cdots-K$为随机变量。  
+令$\theta=(\theta_1,\theta_2,\cdots,\theta_K),M=(M_1,M_2,\cdots,M_K)$，用上述数据集改进先验分布(1)，得到后验分布：
+$$P(\theta|M)=\frac{P(M|\theta) \cdot P(\theta)}{\int P(M|\theta)P(\theta)d\theta}\quad(2)$$
+其中(2)式的分母$\int P(M|\theta)P(\theta)d\theta$是一个定值，与$\theta$无关。假设$P(M|\theta)$服从多项分布：
+$$P(M|\theta)=\theta_1^{M_1}\cdot\theta_2^{M_2}\cdots\theta_K^{M_K}\quad(3)$$
+将(1),(3)式代入(2)式中，可得：
+$$P(\theta|M) \propto \prod_{i=1}^{K}\theta_i^{\lambda+M_i-1} $$
+由上式可知，后验概率$P(\theta|M)$也服从Dirichlet分布，因此$P_\lambda(Y=c_i)$取随机变量$\theta_i$的期望，即
+$$P(Y=c_k) = E(\theta) = \frac{M_i+\lambda}{N+K\lambda}=\frac{\displaystyle \sum_{i=1}^N I(y_i=c_k) + \lambda}{N+K \lambda}$$
+公式(4.11)得证。 
 
 ----
 
