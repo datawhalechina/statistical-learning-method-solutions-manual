@@ -319,6 +319,7 @@ P(O|\lambda)
 
 **维特比算法：**  
 1. 初始化$$\delta_1(i)=\pi_ib_i(o_1),i=1,2,\cdots,N$$
-2. 递推，对$t=2,3,\cdots,T$$$\delta_t(i)=\max_{1 \leqslant j \leqslant N} [\delta_{t-1}(j)a_{ji}]b_i(o_t), i=1,2,\cdots,N$$  
+2. 递推，对$t=2,3,\cdots,T$
+$$\delta_t(i)=\max_{1 \leqslant j \leqslant N} [\delta_{t-1}(j)a_{ji}]b_i(o_t), i=1,2,\cdots,N$$  
 
 &emsp;&emsp;由上面算法可知，计算变量$\alpha$的时候直接对上个的结果进行数值计算，而计算变量$\delta$需要在上个结果计算的基础上选择最大值
