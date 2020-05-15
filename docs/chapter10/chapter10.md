@@ -1,7 +1,6 @@
+# 第10章隐马尔可夫模型-习题
 
-## 第10章隐马尔可夫模型-习题
-
-### 习题10.1
+## 习题10.1
 &emsp;&emsp;给定盒子和球组成的隐马尔可夫模型$\lambda=(A,B,\pi)$，其中，$$A=\left[\begin{array}{ccc}0.5&0.2&0.3\\0.3&0.5&0.2\\0.2&0.3&0.5\end{array}\right], \quad B=\left[\begin{array}{cc}0.5&0.5\\0.4&0.6\\0.7&0.3\end{array}\right], \quad \pi=(0.2,0.4,0.4)^T$$设$T=4,O=(红,白,红,白)$，试用后向算法计算$P(O|\lambda)$。
 
 **解答：**
@@ -158,7 +157,7 @@ HMM.backward(Q, V, A, B, O, PI)
 
 可得$P(O|\lambda) = 0.060091$
 
-### 习题10.2
+## 习题10.2
 
 &emsp;&emsp;给定盒子和球组成的隐马尔可夫模型$\lambda=(A,B,\pi)$，其中，$$A=\left[\begin{array}{ccc}0.5&0.1&0.4\\0.3&0.5&0.2\\0.2&0.2&0.6\end{array}\right], \quad B=\left[\begin{array}{cc}0.5&0.5\\0.4&0.6\\0.7&0.3\end{array}\right], \quad \pi=(0.2,0.3,0.5)^T$$设$T=8,O=(红,白,红,红,白,红,白,白)$，试用前向后向概率计算$P(i_4=q_3|O,\lambda)$
 
@@ -246,7 +245,7 @@ print("P(i4=q3|O,lambda) =",result)
     P(i4=q3|O,lambda) = 0.5369518160647322
     
 
-### 习题10.3
+## 习题10.3
 
 &emsp;&emsp;在习题10.1中，试用维特比算法求最优路径$I^*=(i_1^*,i_2^*,i_3^*,i_4^*)$。
 
@@ -294,7 +293,7 @@ HMM.viterbi(Q, V, A, B, O, PI)
     最优路径是： 3->2->2->2
     
 
-### 习题10.4
+## 习题10.4
 &emsp;&emsp;试用前向概率和后向概率推导$$P(O|\lambda)=\sum_{i=1}^N\sum_{j=1}^N\alpha_t(i)a_{ij}b_j(o_{t+1})\beta_{t+1}(j),\quad t=1,2,\cdots,T-1$$
 
 **解答：**  
@@ -308,7 +307,7 @@ P(O|\lambda)
 \end{aligned}$$
 命题得证。
 
-### 习题10.5
+## 习题10.5
 
 &emsp;&emsp;比较维特比算法中变量$\delta$的计算和前向算法中变量$\alpha$的计算的主要区别。
 
