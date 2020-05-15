@@ -1,6 +1,7 @@
-# 第10章隐马尔可夫模型-习题
 
-## 习题10.1
+## 第10章隐马尔可夫模型-习题
+
+### 习题10.1
 &emsp;&emsp;给定盒子和球组成的隐马尔可夫模型$\lambda=(A,B,\pi)$，其中，$$A=\left[\begin{array}{ccc}0.5&0.2&0.3\\0.3&0.5&0.2\\0.2&0.3&0.5\end{array}\right], \quad B=\left[\begin{array}{cc}0.5&0.5\\0.4&0.6\\0.7&0.3\end{array}\right], \quad \pi=(0.2,0.4,0.4)^T$$设$T=4,O=(红,白,红,白)$，试用后向算法计算$P(O|\lambda)$。
 
 **解答：**
@@ -10,6 +11,12 @@
 import numpy as np
 
 class HiddenMarkov:
+    def __init__(self):
+        self.alphas = None
+        self.forward_P = None
+        self.betas = None
+        self.backward_P = None
+    
     # 前向算法
     def forward(self, Q, V, A, B, O, PI):
         # 状态序列的大小
@@ -30,14 +37,15 @@ class HiddenMarkov:
                 if t == 0: 
                     # P176 公式(10.15)
                     alphas[i][t] = PI[t][i] * B[i][indexOfO]  
-                    print('alpha1(%d) = p%db%db(o1) = %f' % (i, i, i, alphas[i][t]))
+                    print('alpha1(%d) = p%db%db(o1) = %f' % (i+1, i, i, alphas[i][t]))
                 else:
                     # P176 公式(10.16)
                     alphas[i][t] = np.dot([alpha[t - 1] for alpha in alphas], [a[i] for a in A]) * B[i][indexOfO]  
-                    print('alpha%d(%d) = [sigma alpha%d(i)ai%d]b%d(o%d) = %f' % (t, i, t - 1, i, i, t, alphas[i][t]))
+                    print('alpha%d(%d) = [sigma alpha%d(i)ai%d]b%d(o%d) = %f' % (t+1, i+1, t - 1, i, i, t, alphas[i][t]))
         # P176 公式(10.17)
-        P = np.sum([alpha[M - 1] for alpha in alphas]) 
-
+        self.forward_P = np.sum([alpha[M - 1] for alpha in alphas]) 
+        self.alphas = alphas        
+        
     # 后向算法
     def backward(self, Q, V, A, B, O, PI):  
         # 状态序列的大小
@@ -48,7 +56,7 @@ class HiddenMarkov:
         betas = np.ones((N, M))  
         # 
         for i in range(N):
-            print('beta%d(%d) = 1' % (M, i))
+            print('beta%d(%d) = 1' % (M, i+1))
         # 对观测序列逆向遍历
         for t in range(M - 2, -1, -1):
             # 得到序列对应的索引
@@ -66,8 +74,10 @@ class HiddenMarkov:
                 print("0) = %.3f" % betas[i][t])
         # 取出第一个值
         indexOfO = V.index(O[0])
+        self.betas = betas
         # P178 公式(10.21)
         P = np.dot(np.multiply(PI, [b[indexOfO] for b in B]), [beta[0] for beta in betas])
+        self.backward_P = P
         print("P(O|lambda) = ", end="")
         for i in range(N):
             print("%.1f * %.1f * %.5f + " % (PI[0][i], B[i][indexOfO], betas[i][0]), end="")
@@ -131,9 +141,9 @@ HMM = HiddenMarkov()
 HMM.backward(Q, V, A, B, O, PI)
 ```
 
-    beta4(0) = 1
     beta4(1) = 1
     beta4(2) = 1
+    beta4(3) = 1
     beta3(1) = sigma[a1jbj(o4)beta4(j)] = (0.50 * 0.50 * 1.00 + 0.20 * 0.60 * 1.00 + 0.30 * 0.30 * 1.00 + 0) = 0.460
     beta3(2) = sigma[a2jbj(o4)beta4(j)] = (0.30 * 0.50 * 1.00 + 0.50 * 0.60 * 1.00 + 0.20 * 0.30 * 1.00 + 0) = 0.510
     beta3(3) = sigma[a3jbj(o4)beta4(j)] = (0.20 * 0.50 * 1.00 + 0.30 * 0.60 * 1.00 + 0.50 * 0.30 * 1.00 + 0) = 0.430
@@ -148,7 +158,7 @@ HMM.backward(Q, V, A, B, O, PI)
 
 可得$P(O|\lambda) = 0.060091$
 
-## 习题10.2
+### 习题10.2
 
 &emsp;&emsp;给定盒子和球组成的隐马尔可夫模型$\lambda=(A,B,\pi)$，其中，$$A=\left[\begin{array}{ccc}0.5&0.1&0.4\\0.3&0.5&0.2\\0.2&0.2&0.6\end{array}\right], \quad B=\left[\begin{array}{cc}0.5&0.5\\0.4&0.6\\0.7&0.3\end{array}\right], \quad \pi=(0.2,0.3,0.5)^T$$设$T=8,O=(红,白,红,红,白,红,白,白)$，试用前向后向概率计算$P(i_4=q_3|O,\lambda)$
 
@@ -168,33 +178,33 @@ HMM.forward(Q, V, A, B, O, PI)
 HMM.backward(Q, V, A, B, O, PI)
 ```
 
-    alpha1(0) = p0b0b(o1) = 0.100000
-    alpha1(1) = p1b1b(o1) = 0.120000
-    alpha1(2) = p2b2b(o1) = 0.350000
-    alpha1(0) = [sigma alpha0(i)ai0]b0(o1) = 0.078000
-    alpha1(1) = [sigma alpha0(i)ai1]b1(o1) = 0.084000
-    alpha1(2) = [sigma alpha0(i)ai2]b2(o1) = 0.082200
-    alpha2(0) = [sigma alpha1(i)ai0]b0(o2) = 0.040320
-    alpha2(1) = [sigma alpha1(i)ai1]b1(o2) = 0.026496
-    alpha2(2) = [sigma alpha1(i)ai2]b2(o2) = 0.068124
-    alpha3(0) = [sigma alpha2(i)ai0]b0(o3) = 0.020867
-    alpha3(1) = [sigma alpha2(i)ai1]b1(o3) = 0.012362
-    alpha3(2) = [sigma alpha2(i)ai2]b2(o3) = 0.043611
-    alpha4(0) = [sigma alpha3(i)ai0]b0(o4) = 0.011432
-    alpha4(1) = [sigma alpha3(i)ai1]b1(o4) = 0.010194
-    alpha4(2) = [sigma alpha3(i)ai2]b2(o4) = 0.011096
-    alpha5(0) = [sigma alpha4(i)ai0]b0(o5) = 0.005497
-    alpha5(1) = [sigma alpha4(i)ai1]b1(o5) = 0.003384
-    alpha5(2) = [sigma alpha4(i)ai2]b2(o5) = 0.009288
-    alpha6(0) = [sigma alpha5(i)ai0]b0(o6) = 0.002811
-    alpha6(1) = [sigma alpha5(i)ai1]b1(o6) = 0.002460
-    alpha6(2) = [sigma alpha5(i)ai2]b2(o6) = 0.002535
-    alpha7(0) = [sigma alpha6(i)ai0]b0(o7) = 0.001325
-    alpha7(1) = [sigma alpha6(i)ai1]b1(o7) = 0.001211
-    alpha7(2) = [sigma alpha6(i)ai2]b2(o7) = 0.000941
-    beta8(0) = 1
+    alpha1(1) = p0b0b(o1) = 0.100000
+    alpha1(2) = p1b1b(o1) = 0.120000
+    alpha1(3) = p2b2b(o1) = 0.350000
+    alpha2(1) = [sigma alpha0(i)ai0]b0(o1) = 0.078000
+    alpha2(2) = [sigma alpha0(i)ai1]b1(o1) = 0.084000
+    alpha2(3) = [sigma alpha0(i)ai2]b2(o1) = 0.082200
+    alpha3(1) = [sigma alpha1(i)ai0]b0(o2) = 0.040320
+    alpha3(2) = [sigma alpha1(i)ai1]b1(o2) = 0.026496
+    alpha3(3) = [sigma alpha1(i)ai2]b2(o2) = 0.068124
+    alpha4(1) = [sigma alpha2(i)ai0]b0(o3) = 0.020867
+    alpha4(2) = [sigma alpha2(i)ai1]b1(o3) = 0.012362
+    alpha4(3) = [sigma alpha2(i)ai2]b2(o3) = 0.043611
+    alpha5(1) = [sigma alpha3(i)ai0]b0(o4) = 0.011432
+    alpha5(2) = [sigma alpha3(i)ai1]b1(o4) = 0.010194
+    alpha5(3) = [sigma alpha3(i)ai2]b2(o4) = 0.011096
+    alpha6(1) = [sigma alpha4(i)ai0]b0(o5) = 0.005497
+    alpha6(2) = [sigma alpha4(i)ai1]b1(o5) = 0.003384
+    alpha6(3) = [sigma alpha4(i)ai2]b2(o5) = 0.009288
+    alpha7(1) = [sigma alpha5(i)ai0]b0(o6) = 0.002811
+    alpha7(2) = [sigma alpha5(i)ai1]b1(o6) = 0.002460
+    alpha7(3) = [sigma alpha5(i)ai2]b2(o6) = 0.002535
+    alpha8(1) = [sigma alpha6(i)ai0]b0(o7) = 0.001325
+    alpha8(2) = [sigma alpha6(i)ai1]b1(o7) = 0.001211
+    alpha8(3) = [sigma alpha6(i)ai2]b2(o7) = 0.000941
     beta8(1) = 1
     beta8(2) = 1
+    beta8(3) = 1
     beta7(1) = sigma[a1jbj(o8)beta8(j)] = (0.50 * 0.50 * 1.00 + 0.10 * 0.60 * 1.00 + 0.40 * 0.30 * 1.00 + 0) = 0.430
     beta7(2) = sigma[a2jbj(o8)beta8(j)] = (0.30 * 0.50 * 1.00 + 0.50 * 0.60 * 1.00 + 0.20 * 0.30 * 1.00 + 0) = 0.510
     beta7(3) = sigma[a3jbj(o8)beta8(j)] = (0.20 * 0.50 * 1.00 + 0.20 * 0.60 * 1.00 + 0.60 * 0.30 * 1.00 + 0) = 0.400
@@ -223,14 +233,20 @@ HMM.backward(Q, V, A, B, O, PI)
 
 
 ```python
-result = (0.011096 * 0.043) / 0.003477
+print("alpha4(3)=", HMM.alphas[3-1][4-1])
+print("beta4(3)=", HMM.betas[3-1][4-1])
+print("P(O|lambda)=", HMM.backward_P[0])
+result = (HMM.alphas[3-1][4-1] * HMM.betas[3-1][4-1]) / HMM.backward_P[0]
 print("P(i4=q3|O,lambda) =",result)
 ```
 
-    P(i4=q3|O,lambda) = 0.13722404371584698
+    alpha4(3)= 0.043611119999999996
+    beta4(3)= 0.04280618
+    P(O|lambda)= 0.0034767094492824
+    P(i4=q3|O,lambda) = 0.5369518160647322
     
 
-## 习题10.3
+### 习题10.3
 
 &emsp;&emsp;在习题10.1中，试用维特比算法求最优路径$I^*=(i_1^*,i_2^*,i_3^*,i_4^*)$。
 
@@ -278,7 +294,7 @@ HMM.viterbi(Q, V, A, B, O, PI)
     最优路径是： 3->2->2->2
     
 
-## 习题10.4
+### 习题10.4
 &emsp;&emsp;试用前向概率和后向概率推导$$P(O|\lambda)=\sum_{i=1}^N\sum_{j=1}^N\alpha_t(i)a_{ij}b_j(o_{t+1})\beta_{t+1}(j),\quad t=1,2,\cdots,T-1$$
 
 **解答：**  
@@ -292,7 +308,7 @@ P(O|\lambda)
 \end{aligned}$$
 命题得证。
 
-## 习题10.5
+### 习题10.5
 
 &emsp;&emsp;比较维特比算法中变量$\delta$的计算和前向算法中变量$\alpha$的计算的主要区别。
 

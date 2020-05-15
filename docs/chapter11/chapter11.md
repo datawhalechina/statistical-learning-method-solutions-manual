@@ -55,7 +55,7 @@ $\begin{aligned}
 
 **解答：**  
 条件随机场的对数极大似然函数为：$$L(w)=\sum^N_{j=1} \sum^K_{k=1} w_k f_k(y_j,x_j)-\sum^N_{j=1} \log{Z_w(x_j)}$$梯度下降算法的目标函数是$f(w)=-L(w)$  
-目标函数的梯度为：$$g(w)=\frac{\nabla{f(w)}}{\nabla{w}}=\left(\frac{\partial{f(w)}}{\partial{w_1}},\frac{\partial{f(w)}}{\partial{w_2}},\cdots,\frac{\partial{f(w)}}{\partial{w_k}}\right)$$其中$$\begin{aligned}
+目标函数的梯度为：$$g(w)=\nabla{f(w^{(k)})}=\left(\frac{\partial{f(w)}}{\partial{w_1}},\frac{\partial{f(w)}}{\partial{w_2}},\cdots,\frac{\partial{f(w)}}{\partial{w_k}}\right)$$其中$$\begin{aligned}
 \frac{\partial{f(w)}}{\partial{w_i}}
 &= -\sum^N_{j=1} w_i f_i(y_j,x_j) + \sum^N_{j=1} \frac{1}{Z_w(x_j)} \cdot \frac{\partial{Z_w(x_j)}}{\partial{w_i}}\\
 &= -\sum^N_{j=1}w_if_i(y_j,x_j)+\sum^N_{j=1}\frac{1}{Z_w(x_j)}\sum_y(\exp{\sum^K_{k=1}w_kf_k(y,x_j))}w_if_i(y,x_j)
