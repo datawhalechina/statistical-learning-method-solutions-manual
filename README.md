@@ -39,7 +39,19 @@
 3. [CART剪枝详解](https://blog.csdn.net/wjc1182511338/article/details/76793164)
 4. [CART剪枝算法详解](http://www.pianshen.com/article/1752163397/)
 
+## Notebook运行环境配置
+1. 安装相关的依赖包
+    ```shell
+    pip install -r requirements.txt
+    ```
+2. 安装graphviz（用于决策树展示）  
+    可参考博客：https://blog.csdn.net/HNUCSEE_LJK/article/details/86772806
+
 ## 协作规范
+1. 由于习题解答中需要有程序和执行结果，采用jupyter notebook的格式进行编写（文件路径：notebook/notes），然后将其导出成markdown格式，再覆盖到docs对应的章节下。
+2. 目前已完成全部习题解答，需要进行全部解答校对。
+3. 可按照Notebook运行环境配置，配置相关的运行环境。
+4. 校对过程中，在数学概念补充上，尽量使用初学者（有高数基础）能理解的数学概念，如果涉及到推导和证明，可附上参考链接。
 
 ### 主要贡献者（按首字母排名）
  [@胡锐锋-天国之影-Relph](https://github.com/Relph1119)
