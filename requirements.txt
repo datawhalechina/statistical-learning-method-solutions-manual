@@ -1,7 +1,7 @@
 argon2-cffi==20.1.0
 attrs==19.3.0
 backcall==0.2.0
-bleach==3.1.5
+bleach==3.3.0
 cffi==1.14.1
 colorama==0.4.3
 cycler==0.10.0
