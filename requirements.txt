@@ -14,7 +14,7 @@ ipykernel==5.3.4
 ipython==7.17.0
 ipython-genutils==0.2.0
 jedi==0.17.2
-Jinja2==2.11.2
+Jinja2==2.11.3
 joblib==0.16.0
 jsonschema==3.2.0
 jupyter-client==6.1.6
@@ -34,7 +34,7 @@ pandas==1.1.0
 pandocfilters==1.4.2
 parso==0.7.1
 pickleshare==0.7.5
-Pillow==7.2.0
+Pillow==8.1.2
 prometheus-client==0.8.0
 prompt-toolkit==3.0.5
 pycparser==2.20
@@ -45,7 +45,7 @@ python-dateutil==2.8.1
 pytz==2020.1
 pywin32==228
 pywinpty==0.5.7
-PyYAML==5.3.1
+PyYAML==5.4.1
 pyzmq==19.0.2
 scikit-learn==0.23.2
 scipy==1.5.2
