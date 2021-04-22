@@ -40,11 +40,13 @@
 4. [CART剪枝算法详解](http://www.pianshen.com/article/1752163397/)
 
 ## Notebook运行环境配置
-1. 安装相关的依赖包
+1. Python版本
+   请使用python3.7.X，如使用其他版本，requirements.txt中所列的依赖包可能不兼容。
+2. 安装相关的依赖包
     ```shell
     pip install -r requirements.txt
     ```
-2. 安装graphviz（用于决策树展示）  
+3. 安装graphviz（用于决策树展示）  
     可参考博客：https://blog.csdn.net/HNUCSEE_LJK/article/details/86772806
 
 ## 协作规范
