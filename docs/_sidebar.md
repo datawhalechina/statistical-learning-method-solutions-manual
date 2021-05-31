@@ -4,7 +4,7 @@
     * [第3章 k近邻法](chapter3/chapter3.md)
     * [第4章 朴素贝叶斯法](chapter4/chapter4.md)
     * [第5章 决策树](chapter5/chapter5.md)
-    * [第6章 Ligistic回归与最大熵模型](chapter6/chapter6.md)
+    * [第6章 Logistic回归与最大熵模型](chapter6/chapter6.md)
     * [第7章 支持向量机](chapter7/chapter7.md)
     * [第8章 提升方法](chapter8/chapter8.md)
     * [第9章 EM算法及其推广](chapter9/chapter9.md)
