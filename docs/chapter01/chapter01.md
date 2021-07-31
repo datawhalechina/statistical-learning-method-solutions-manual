@@ -32,7 +32,7 @@ $$
 （1）极大似然估计  
 模型：$\mathcal{F}=\{f|f(x|p)=p^x(1-p)^{(1-x)}\}$  
 策略：最大化似然函数  
-算法：$\displaystyle \mathop{\arg\max}_{p} L(p|X)= \mathop{\arg\max}_{p} f(X|p)$ 
+算法：$\displaystyle \mathop{\arg\max} \limits_{p} L(p|X)= \mathop{\arg\max} \limits_{p} f(X|p)$ 
 
 （2）贝叶斯估计  
 模型：$\mathcal{F}=\{f|f_p(x)=p^x(1-p)^{(1-x)}\}$  
@@ -70,8 +70,8 @@ $$
 求解参数$p$：
 $$
 \begin{aligned}
-\hat{p} &= \mathop{\arg\max}_p L(p|X) \\
-&= \mathop{\arg\max}_p C_n^k \left[ k\log p + (n-k)\log (1-p)\right]
+\hat{p} &= \mathop{\arg\max} \limits_{p} L(p|X) \\
+&= \mathop{\arg\max} \limits_{p} C_n^k \left[ k\log p + (n-k)\log (1-p)\right]
 \end{aligned}
 $$
 对参数$p$求导，并求解导数为0时的$p$值：
@@ -149,19 +149,19 @@ L(Y,P(Y|X)) = -\log P(Y|X)
 $$
 根据书中第18页，按照经验风险最小化求最优模型就是求解最优化问题：
 $$
-\min_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i))
+\min \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i))
 $$
 结合上述两个式子，可得经验风险最小化函数：
 $$
 \begin{aligned} 
-\mathop{\arg\min}_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i)) &= \mathop{\arg\min}_{f \in \mathcal{F}} \frac{1}{N} \sum_D [-\log P(Y|X)] \\
-&= \mathop{\arg\max}_{f \in \mathcal{F}} \frac{1}{N} \sum_D \log P(Y|X) \\
-&= \mathop{\arg\max}_{f \in \mathcal{F}} \frac{1}{N} \log \prod_D P(Y|X) \\
-&= \frac{1}{N} \mathop{\arg\max}_{f \in \mathcal{F}} \log \prod_D P(Y|X)
+\mathop{\arg\min} \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i)) &= \mathop{\arg\min} \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_D [-\log P(Y|X)] \\
+&= \mathop{\arg\max} \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_D \log P(Y|X) \\
+&= \mathop{\arg\max} \limits_{f \in \mathcal{F}} \frac{1}{N} \log \prod_D P(Y|X) \\
+&= \frac{1}{N} \mathop{\arg\max} \limits_{f \in \mathcal{F}} \log \prod_D P(Y|X)
 \end{aligned}
 $$
 根据似然函数定义：$\displaystyle L(\theta)=\prod_D P_{\theta}(Y|X)$，以及极大似然估计的一般步骤，可得：
 $$
-\mathop{\arg\min}_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i)) = \frac{1}{N} \mathop{\arg\max}_{f \in \mathcal{F}} \log L(\theta)
+\mathop{\arg\min} \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i)) = \frac{1}{N} \mathop{\arg\max} \limits_{f \in \mathcal{F}} \log L(\theta)
 $$
 即经验风险最小化等价于极大似然估计，得证。
