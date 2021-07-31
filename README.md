@@ -16,7 +16,7 @@
 - 第3章 [k近邻法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter3/chapter3)
 - 第4章 [朴素贝叶斯法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter4/chapter4)
 - 第5章 [决策树](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter5/chapter5)
-- 第6章 [Ligistic回归与最大熵模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter6/chapter6)
+- 第6章 [Logistic回归与最大熵模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter6/chapter6)
 - 第7章 [支持向量机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter7/chapter7)
 - 第8章 [提升方法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter8/chapter8)
 - 第9章 [EM算法及其推广](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter9/chapter9)
@@ -54,6 +54,23 @@
 2. 目前已完成全部习题解答，需要进行全部解答校对。
 3. 可按照Notebook运行环境配置，配置相关的运行环境。
 4. 校对过程中，在数学概念补充上，尽量使用初学者（有高数基础）能理解的数学概念，如果涉及到推导和证明，可附上参考链接。
+5. 当前进度
+| 章节号 |           标题           |  进度  |
+| :----: | :----------------------: | :----: |
+|   1    |     统计学习方法概论     | 待定稿 |
+|   2    |          感知机          | 未校对 |
+|   3    |         k近邻法          | 未校对 |
+|   4    |       朴素贝叶斯法       | 未校对 |
+|   5    |          决策树          | 未校对 |
+|   6    | Logistic回归与最大熵模型 | 未校对 |
+|   7    |        支持向量机        | 未校对 |
+|   8    |         提升方法         | 未校对 |
+|   9    |      EM算法及其推广      | 未校对 |
+|   10   |      隐马尔可夫模型      | 未校对 |
+|   11   |        条件随机场        | 未校对 |
+
+
+
 
 ### 主要贡献者（按首字母排名）
  [@胡锐锋-天国之影-Relph](https://github.com/Relph1119)
