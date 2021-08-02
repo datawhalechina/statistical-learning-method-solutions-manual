@@ -95,7 +95,7 @@ $$
 定义$P(Y=1)$概率为$p$，$p$在$[0,1]$之间的取值是等概率的，因此先验概率密度函数$\pi(p) = 1$，可得似然函数： 
 $$
 L(p)=f(X|p)=C_n^k p^k (1-p)^{n-k}
-$$  
+$$
 根据似然函数和先验概率密度函数，可以求解$p$的后验分布为：
 $$
 \begin{aligned}
@@ -131,6 +131,8 @@ $\therefore \displaystyle E_\pi[p|X] = \frac{B(k+2,n-k+1)}{B(k+1,n-k+1)}$
 
 $\therefore \displaystyle E_\pi[p|X] = \frac{B(k+2,n-k+1)}{B(k+1,n-k+1)} = \frac{k+2-1}{k+2+n-k+1-1} = \frac{k+1}{n+2}$  
 $\therefore \displaystyle P(X=1)=\frac{k+1}{n+2}$
+
+
 
 ## 习题1.2
 &emsp;&emsp;通过经验风险最小化推导极大似然估计。证明模型是条件概率分布，当损失函数是对数损失函数时，经验风险最小化等价于极大似然估计。
