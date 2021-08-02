@@ -27,10 +27,10 @@
 
 
 ```python
-%matplotlib inline
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
 
 # 使用Dataframe表示异或的输入与输出数据
 x1 = [0, 0, 1, 1]
@@ -121,7 +121,7 @@ plt.ylabel("x2")
 plt.plot(positive['x1'], positive['x2'], "ro")
 plt.plot(negative['x1'], negative['x2'], "bx")
 # 添加图示
-plt.legend(['Positive','Negative'])
+plt.legend(['Positive', 'Negative'])
 plt.show()
 ```
 
@@ -146,7 +146,8 @@ perceptron_model = Perceptron()
 perceptron_model.fit(X_train, y)
 
 # 打印模型参数
-print("感知机模型的参数：w=", perceptron_model.coef_[0], "b=", perceptron_model.intercept_[0]) 
+print("感知机模型的参数：w=", perceptron_model.coef_[
+      0], "b=", perceptron_model.intercept_[0])
 ```
 
     感知机模型的参数：w= [0. 0.] b= 0.0
@@ -207,6 +208,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 %matplotlib tk
 
+
 class Perceptron:
     def __init__(self, X, Y, lr=0.001, plot=True):
         """
@@ -248,7 +250,8 @@ class Perceptron:
                     b += self.lr * self.Y[index]
                     # 训练次数加1
                     train_counts += 1
-                    print("Epoch {}, weight = {}, b = {}, formula: {}".format(train_counts, weight, b, model_plot.formula(weight, b)))
+                    print("Epoch {}, weight = {}, b = {}, formula: {}".format(
+                        train_counts, weight, b, model_plot.formula(weight, b)))
                     # 本次循环有误分类点（即分类错误），置为True
                     mistake_flag = True
                     break
@@ -297,7 +300,8 @@ class Perceptron:
             text = 'x1 ' if weight[0] == 1 else '%d*x1 ' % weight[0]
             text += '+ x2 ' if weight[1] == 1 else (
                 '+ %d*x2 ' % weight[1] if weight[1] > 0 else '- %d*x2 ' % -weight[1])
-            text += '= 0' if b == 0 else ('+ %d = 0' % b if b > 0 else '- %d = 0' % -b)
+            text += '= 0' if b == 0 else ('+ %d = 0' %
+                                          b if b > 0 else '- %d = 0' % -b)
             return text
 ```
 
@@ -438,6 +442,7 @@ $$
 $$
 w\cdot x +b = \frac{1}{2}[\text{dist}(x,x_-)^2-\text{dist}(x,x_+)^2] \geqslant 0
 $$
-&emsp;&emsp;同理，对于任意负实例点$x \neq x_-$，都有$\text{dist}(x,x_+) \geqslant \text{dist}(x , x_-)$，可得$w\cdot x +b \leqslant 0$  
+&emsp;&emsp;综上所述，对于任意正实例点$x \neq x_+$，都有$w\cdot x +b \geqslant 0$。  
+&emsp;&emsp;同理，对于任意负实例点$x \neq x_-$，都有$\text{dist}(x,x_+) \geqslant \text{dist}(x , x_-)$，可得$w\cdot x +b \leqslant 0$。  
 
   &emsp;&emsp;根据线性可分条件，对所有正实例$x_i$，有$w \cdot x_i + b > 0$，对所有负实例$x_i$，有$w \cdot x_i + b < 0$，则称数据集$T$为线性可分数据集，该法线为分离超平面，必要性得证。
