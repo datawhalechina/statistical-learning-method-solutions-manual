@@ -13,7 +13,7 @@
 **解答步骤：**
 
 **第1步：极大似然估计的一般步骤**  
-> 参考Wiki：https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1   
+> 参考Wiki：https://en.wikipedia.org/wiki/Maximum_likelihood_estimation   
 > 1. 写出随机变量的概率分布函数；  
 > 2. 写出似然函数；
 > 3. 对似然函数取对数，得到对数似然函数，并进行化简；
