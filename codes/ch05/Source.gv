@@ -1,0 +1,13 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname=SimSun] ;
+edge [fontname=helvetica] ;
+0 [label=<有自己的房子 &le; 3.0<br/>gini = 0.48<br/>samples = 15<br/>value = [6, 9]<br/>class = 是>, fillcolor="#bddef6"] ;
+1 [label=<有工作 &le; 3.0<br/>gini = 0.444<br/>samples = 9<br/>value = [6, 3]<br/>class = 否>, fillcolor="#f2c09c"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<gini = 0.0<br/>samples = 6<br/>value = [6, 0]<br/>class = 否>, fillcolor="#e58139"] ;
+1 -> 2 ;
+3 [label=<gini = 0.0<br/>samples = 3<br/>value = [0, 3]<br/>class = 是>, fillcolor="#399de5"] ;
+1 -> 3 ;
+4 [label=<gini = 0.0<br/>samples = 6<br/>value = [0, 6]<br/>class = 是>, fillcolor="#399de5"] ;
+0 -> 4 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+}

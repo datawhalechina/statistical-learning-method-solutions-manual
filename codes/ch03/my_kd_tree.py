@@ -11,8 +11,8 @@
 
 # 节点类
 class Node:
-    def __init__(self, node, index, left_child, right_child):
-        self.node = node
+    def __init__(self, value, index, left_child, right_child):
+        self.value = value
         self.index = index
         self.left_child = left_child
         self.right_child = right_child
@@ -45,7 +45,7 @@ class KDTree:
         node_index = [i for i, v in enumerate(self.data) if list(v) == list(data[median_index])]
         return Node(
             # 本结点
-            node=data[median_index],
+            value=data[median_index],
             # 本结点在数据集中的位置
             index=node_index[0],
             # 左子结点
@@ -84,7 +84,7 @@ class KDTree:
             return self._update_k_neighbor_sets(k_neighbor_sets, k, tree, point)
 
         # 递归地向下访问kd树
-        if point[0][depth % k] < tree.node[depth % k]:
+        if point[0][depth % k] < tree.value[depth % k]:
             direct = 'left'
             next_branch = tree.left_child
         else:
@@ -95,13 +95,13 @@ class KDTree:
             k_neighbor_sets = self._update_k_neighbor_sets(k_neighbor_sets, k, next_branch, point)
             # (3)(b)检查另一子结点对应的区域是否相交
             if direct == 'left':
-                node_distance = self._cal_node_distance(point, tree.right_child.node)
+                node_distance = self._cal_node_distance(point, tree.right_child.value)
                 if k_neighbor_sets[0][0] > node_distance:
                     # 如果相交，递归地进行近邻搜索
                     return self._search(point, tree=tree.right_child, k=k, depth=depth + 1,
                                         k_neighbor_sets=k_neighbor_sets)
             else:
-                node_distance = self._cal_node_distance(point, tree.left_child.node)
+                node_distance = self._cal_node_distance(point, tree.left_child.value)
                 if k_neighbor_sets[0][0] > node_distance:
                     return self._search(point, tree=tree.left_child, k=k, depth=depth + 1,
                                         k_neighbor_sets=k_neighbor_sets)
@@ -110,9 +110,9 @@ class KDTree:
 
     def _update_k_neighbor_sets(self, best, k, tree, point):
         # 计算目标点与当前结点的距离
-        node_distance = self._cal_node_distance(point, tree.node)
+        node_distance = self._cal_node_distance(point, tree.value)
         if len(best) == 0:
-            best.append((node_distance, tree.index, tree.node))
+            best.append((node_distance, tree.index, tree.value))
         elif len(best) < k:
             # 如果“当前k近邻点集”元素数量小于k
             self._insert_k_neighbor_sets(best, tree, node_distance)
@@ -130,10 +130,10 @@ class KDTree:
         for i, item in enumerate(best):
             if item[0] < node_distance:
                 # 将距离最远的结点插入到前面
-                best.insert(i, (node_distance, tree.index, tree.node))
+                best.insert(i, (node_distance, tree.index, tree.value))
                 break
         if len(best) == n:
-            best.append((node_distance, tree.index, tree.node))
+            best.append((node_distance, tree.index, tree.value))
 
 
 def print_k_neighbor_sets(k, ii, dd):
