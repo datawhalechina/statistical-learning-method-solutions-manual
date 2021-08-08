@@ -86,7 +86,7 @@ $$
 与第2步推导过程类似，可求解得到$\displaystyle p=\frac{q}{m}$  
 综上所述，$\displaystyle P(X^{(j)}=a_{jl}|Y=c_k)=p=\frac{q}{m}=\frac{\displaystyle \sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=c_k)}{\displaystyle \sum_{i=1}^N I(y_i=c_k)}$，公式(4.9)得证。
 
-### 4.2 习题4.2
+## 习题4.2
 &emsp;&emsp;用贝叶斯估计法推出朴素贝叶斯法中的慨率估计公式(4.10)及公式(4.11)
 
 **解答：** 
