@@ -24,7 +24,7 @@
 - 第11章 [条件随机场](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter11/chapter11)
 
 ## 选用的《统计学习方法》版本
-<img src="https://github.com/datawhalechina/statistical-learning-method-solutions-manual/blob/master/res/statistical-learning-method-book.jpg?raw=true" width="336" height= "500">
+<img src="res/statistical-learning-method-book.jpg?raw=true" width="336" height= "500">
 
 
 > 书名：统计学习方法<br/>
@@ -63,7 +63,7 @@
 |   3    |         k近邻法          | 待定稿 |
 |   4    |       朴素贝叶斯法       | 待定稿 |
 |   5    |          决策树          | 待定稿 |
-|   6    | Logistic回归与最大熵模型 | 未校对 |
+|   6    | Logistic回归与最大熵模型 | 待定稿 |
 |   7    |        支持向量机        | 未校对 |
 |   8    |         提升方法         | 未校对 |
 |   9    |      EM算法及其推广      | 未校对 |
@@ -75,7 +75,7 @@
  [@胡锐锋-天国之影-Relph](https://github.com/Relph1119)
 
 ## 关注我们
-<div align=center><img src="https://raw.githubusercontent.com/datawhalechina/pumpkin-book/master/res/qrcode.jpeg" width = "250" height = "270" alt="Datawhale，一个专注于AI领域的学习圈子。初衷是for the learner，和学习者一起成长。目前加入学习社群的人数已经数千人，组织了机器学习，深度学习，数据分析，数据挖掘，爬虫，编程，统计学，Mysql，数据竞赛等多个领域的内容学习，微信搜索公众号Datawhale可以加入我们。"></div>
+<div align=center><img src="res/qrcode.jpeg" width = "250" height = "270" alt="Datawhale，一个专注于AI领域的学习圈子。初衷是for the learner，和学习者一起成长。目前加入学习社群的人数已经数千人，组织了机器学习，深度学习，数据分析，数据挖掘，爬虫，编程，统计学，Mysql，数据竞赛等多个领域的内容学习，微信搜索公众号Datawhale可以加入我们。"></div>
 
 ## LICENSE
 [GNU General Public License v3.0](https://github.com/datawhalechina/statistical-learning-method-solutions-manual/blob/master/LICENSE)
