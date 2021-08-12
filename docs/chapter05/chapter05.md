@@ -662,7 +662,7 @@ $$
 
 &emsp;&emsp;根据定理10.7，可以得到该书定理10.9的第一个推论：
 > THEOREM 10.9.   
-(i) If $\alpha_2 \geqslant \alpha_2$, then $T(α2) \preceq T(α1)$.
+(i) If $\alpha_2 \geqslant \alpha_1$, then $T(α2) \preceq T(α1)$.
 
 &emsp;&emsp;定理10.9(i)表示，当$\alpha_2 \geqslant \alpha_1$时，树$T$在$\alpha_2$下的最优子树一定是树$T$在$\alpha_1$下的最优子树的子树。
 
