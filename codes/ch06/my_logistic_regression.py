@@ -148,4 +148,4 @@ if __name__ == '__main__':
     print("迭代次数：{}次".format(clf.n_iter_))
     print("梯度：{}".format(clf.grad_))
     print("权重：{}".format(clf.w[0]))
-    print("模型准确率：%0.2f%%" % (clf.score(X_train, y_train) * 100))
+    print("模型准确率：{:.2%}".format(clf.score(X_train, y_train)))
