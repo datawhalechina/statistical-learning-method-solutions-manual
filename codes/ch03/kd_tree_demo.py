@@ -2,7 +2,7 @@
 # encoding: utf-8
 """
 @author: HuRuiFeng
-@file: kd_tree.py
+@file: kd_tree_demo.py
 @time: 2021/8/3 17:08
 @project: statistical-learning-method-solutions-manual
 @desc: 习题3.2 kd树的构建与求最近邻点

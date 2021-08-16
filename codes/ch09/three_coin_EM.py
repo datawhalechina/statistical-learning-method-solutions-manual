@@ -37,7 +37,8 @@ class ThreeCoinEM:
 
     def fit(self, data):
         count = len(data)
-        print("模型参数的初值：prob_A={}, prob_B={}, prob_C={}".format(self.prob_A, self.prob_B, self.prob_C))
+        print("模型参数的初值：")
+        print("prob_A={}, prob_B={}, prob_C={}".format(self.prob_A, self.prob_B, self.prob_C))
         print("EM算法训练过程：")
         for i in range(self.max_iter):
             # （E步）得到在模型参数下观测数据yj来自掷硬币B的概率
@@ -56,8 +57,9 @@ class ThreeCoinEM:
             self.prob_C = prob_C
             # 判断是否收敛
             if error < self.tol:
-                print("模型参数的极大似然估计：prob_A={:.4f}, prob_B={:.4f}, prob_C={:.4f}".format(self.prob_A, self.prob_B,
-                                                                                       self.prob_C))
+                print("模型参数的极大似然估计：")
+                print("prob_A={:.4f}, prob_B={:.4f}, prob_C={:.4f}".format(self.prob_A, self.prob_B,
+                                                                           self.prob_C))
                 break
 
 

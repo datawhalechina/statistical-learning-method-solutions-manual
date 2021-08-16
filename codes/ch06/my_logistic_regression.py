@@ -50,7 +50,7 @@ class MyLogisticRegression:
         grad = grad.sum(axis=0)
         return grad
 
-    def like_func(self, w):
+    def likelihood_func(self, w):
         z = np.dot(self._X, w.T)
         f = self._y * z - np.log(1 + np.exp(z))
         return np.sum(f)
@@ -62,7 +62,7 @@ class MyLogisticRegression:
         w = np.array([[0] * self._X.shape[1]], dtype=np.float)
         k = 0
         # （2）计算f(w)
-        fw = self.like_func(w)
+        fw = self.likelihood_func(w)
         for _ in range(self.max_iter):
             # 计算梯度g(w)
             grad = self.grad(w)
@@ -74,14 +74,14 @@ class MyLogisticRegression:
             # 梯度方向的一维函数
             def f(x):
                 z = w - np.dot(x, grad)
-                return -self.like_func(z)
+                return -self.likelihood_func(z)
 
             # （3）进行一维搜索，找到使得函数最大的lambda
             _lambda = fminbound(f, -self.distance, self.distance)
 
             # （4）设置w(k+1)
             w1 = w - np.dot(_lambda, grad)
-            fw1 = self.like_func(w1)
+            fw1 = self.likelihood_func(w1)
 
             # （4）当f(w(k+1))-f(w(k))的二范数小于精度，或w(k+1)-w(k)的二范数小于精度
             if np.linalg.norm(fw1 - fw) < self.epsilon or \
