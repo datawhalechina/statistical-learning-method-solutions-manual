@@ -154,7 +154,7 @@ Logistic回归模型学习的梯度下降算法：
 输出：$f(w)$的极大值$w^*$  
 (1) 取初始值$w^{(0)} \in R$，置$k=0$  
 (2) 计算$\displaystyle f(w^{(k)})=\sum_{i=1}^N \left[y_i (w^{(k)} \cdot x_i)-\log (1+\exp (w^{(k)} \cdot x_i))\right]$  
-(3) 计算梯度$\displaystyle g_k=g(w^{(k)})=\sum_{i=1}^N\left[x_i \cdot y_i-\frac{\exp (w^{(k)} \cdot x_i) \cdot x_i}{1+\exp (w^{(k)} \cdot x_i)}\right]$，当$\|g_k\| < \varepsilon$时，停止迭代，令$w^* = w^{(k)}$；否则，令$p_k=-g(x^{(w)})$，求$\lambda_k$，使
+(3) 计算梯度$\displaystyle g_k=g(w^{(k)})=\sum_{i=1}^N\left[x_i \cdot y_i-\frac{\exp (w^{(k)} \cdot x_i) \cdot x_i}{1+\exp (w^{(k)} \cdot x_i)}\right]$，当$\|g_k\| < \varepsilon$时，停止迭代，令$w^* = w^{(k)}$；否则，令$p_k=-g(w^{(k)})$，求$\lambda_k$，使
 
 $$
 \displaystyle f(w^{(k)}+\lambda_k p_k) = \max_{\lambda \geqslant 0}f(w^{(k)}+\lambda p_k)

@@ -5,7 +5,7 @@
 @file: my_gmm.py
 @time: 2021/8/14 2:46
 @project: statistical-learning-method-solutions-manual
-@desc: 习题9.3 求两个分量的高斯混合模型的5个参数
+@desc: 习题9.3 自编程实现求两个分量的高斯混合模型的5个参数
 """
 
 import numpy as np
