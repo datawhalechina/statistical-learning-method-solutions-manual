@@ -1,4 +1,4 @@
-# 第6章 Logistic回归与最大熵模型-习题
+# 第6章 Logistic回归与最大熵模型
 
 ## 习题6.1
 &emsp;&emsp;确认Logistic分布属于指数分布族。

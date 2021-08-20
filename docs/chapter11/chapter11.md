@@ -196,7 +196,7 @@ $\begin{aligned}
 
 综上所述：$Z(x)=a_{n}^T(x) \cdot \boldsymbol{1} = \boldsymbol{1}^T \cdot \beta_1(x)$，命题得证。  
 
-### 11.3 习题11.3
+## 习题11.3
 &emsp;&emsp;写出条件随机场模型学习的梯度下降法。
 
 **解答：**
