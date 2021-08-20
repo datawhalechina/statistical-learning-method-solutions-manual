@@ -3,7 +3,7 @@
 ## 习题11.1
 &emsp;&emsp;写出图11.3中无向图描述的概率图模型的因子分解式。
 <br/><center>
-<img style="border-radius: 0.3125em;box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="/images/11-1-Maximal-Clique.png"><br><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px;">图11.3 无向图的团和最大团</div></center>
+<img style="border-radius: 0.3125em;box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="./images/11-1-Maximal-Clique.png"><br><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px;">图11.3 无向图的团和最大团</div></center>
 
 **解答：**
 

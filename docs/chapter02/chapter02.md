@@ -342,9 +342,6 @@ weight, b = model.fit()
 > $$
 \text{conv}(S) = \left\{ x = \sum_{i=1}^k \lambda_i x_i \Big| \sum_{i=1}^k \lambda_i=1,\lambda_i \geqslant 0, i=1,2,\cdots, k \right\}
 $$
-> 凸壳可以用二维的图形表示如下：
-<br/><center>
-<img src="../images/2-1-Convex-Hull.png"><br><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px;">图2.1 凸壳</div></center>
 
 2. 根据书中第36页的线性可分定义如下： 
 > 给定一个数据集
