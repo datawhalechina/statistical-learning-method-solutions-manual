@@ -658,6 +658,8 @@ HMM.viterbi(Q, V, A, B, O, PI)
 
 **解答步骤：**  
 
+**第1步：$P(O|\lambda)$展开推导**
+
 $$\begin{aligned}
 P(O|\lambda)
 &= P(o_1,o_2,...,o_T|\lambda) \\
@@ -665,8 +667,40 @@ P(O|\lambda)
 &= \sum_{i=1}^N \sum_{j=1}^N P(o_1,..,o_t,i_t=q_i|\lambda) P(o_{t+1},i_{t+1}=q_j|i_t=q_i,\lambda)P(o_{t+2},..,o_T|i_{t+1}=q_j,\lambda) \\
 &= \sum_{i=1}^N \sum_{j=1}^N [P(o_1,..,o_t,i_t=q_i|\lambda) P(o_{t+1}|i_{t+1}=q_j,\lambda) P(i_{t+1}=q_j|i_t=q_i,\lambda) \\
 & \quad \quad \quad \quad P(o_{t+2},..,o_T|i_{t+1}=q_j,\lambda)] \\
-&= \sum_{i=1}^N \sum_{j=1}^N \alpha_t(i) a_{ij} b_j(o_{t+1}) \beta_{t+1}(j),{\quad}t=1,2,...,T-1
 \end{aligned}$$
+
+**第2步：前向概率和后向概率**
+
+根据书中第198页前向概率：
+> &emsp;&emsp;给定隐马尔可夫模型$\lambda$，定义到时刻$t$部分观测序列为$o_1, o_2, \cdots, o_t$且状态为$q_i$的概率为前向概率，记作  
+> $$
+\alpha_t(i) = P(o_1, o_2, \cdots, o_t, i_t=q_i | \lambda)
+$$
+> 可以递推地求得前向概率$\alpha_t(i)$及观测序列概率$P(O|\lambda)$
+
+根据书中第201页后向概率：
+> &emsp;&emsp;给定隐马尔可夫模型$\lambda$，定义在时刻$t$状态为$q_i$的条件下，从$t+1$到$T$的部分观测序列为$o_{t+1}, o_{t+2}, \cdots, o_T$的后向概率，记作  
+> $$
+\beta_t(i) = P(o_{t+1}, o_{t+2}, \cdots, o_T| | i_t=q_i , \lambda)
+$$
+> 可以用递推的方法求得后向概率$\beta_t(i)$及观测序列概率$P(O|\lambda)$
+
+**第3步：用$\alpha,\beta,a,b$表示**
+
+根据书中第193~194页状态转移概率矩阵公式(10.2)和观测概率矩阵公式(10.4)的定义：
+> $$
+a_{ij} = P(i_{t+1}=q_j | i_t = q_i), \quad i=1,2,\cdots,N; \quad j = 1,2,\cdots, N \\
+b_j(k) = P(o_t = v_k | i_t = q_j), \quad k=1,2, \cdots, M; \quad j=1,2,\cdots,N
+$$
+
+则
+$$\begin{aligned}
+P(O|\lambda) 
+&= \sum_{i=1}^N \sum_{j=1}^N [P(o_1,..,o_t,i_t=q_i|\lambda) P(o_{t+1}|i_{t+1}=q_j,\lambda) P(i_{t+1}=q_j|i_t=q_i,\lambda) \\
+& \quad \quad \quad \quad P(o_{t+2},..,o_T|i_{t+1}=q_j,\lambda)] \\
+&= \sum_{i=1}^N \sum_{j=1}^N \alpha_t(i) a_{ij} b_j(o_{t+1}) \beta_{t+1}(j), \quad t=1,2,...,T-1 \\
+\end{aligned}
+$$
 命题得证。
 
 ## 习题10.5
