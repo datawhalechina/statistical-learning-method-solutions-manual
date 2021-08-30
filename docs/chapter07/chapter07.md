@@ -385,7 +385,7 @@ $$
 \begin{aligned} 
 \sum_{i,j=1}^m c_i c_j K(x_i,x_j) 
 &= \sum_{i,j=1}^m c_i c_j (x_i \bullet x_j)^p \\
-&= \left(\sum_{i=1}^m c_i x_i \right)\left(\sum_{j=1}^m c_i x_j \right)  \left( \sum_{i,j=1}^m (x_i \bullet x_j)^{p-1} \right)\\
+&= \left(\sum_{i=1}^m c_i x_i \right)\left(\sum_{j=1}^m c_j x_j \right)  \left( \sum_{i,j=1}^m (x_i \bullet x_j)^{p-1} \right)\\
 &= \Bigg\|\left( \sum_{i=1}^m c_i x_i \right)\Bigg\|^2 \left( \sum_{i,j=1}^m (x_i \bullet x_j)^{p-1} \right)
 \end{aligned}
 $$
