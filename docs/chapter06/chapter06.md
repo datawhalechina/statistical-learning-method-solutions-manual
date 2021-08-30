@@ -19,8 +19,8 @@
 > 设$X$是连续随机变量，$X$服从Logistic分布是指$X$具有下列分布函数和密度函数：
 > 
 >$$
-F(x) = P(X \leqslant x) = \frac{1}{1 + e^{-(x-\mu)/\gamma}} \\
-f(x) = F'(x) = \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+ e^{-(x-\mu)/\gamma})^2}
+F(x) = P(X \leqslant x) = \frac{1}{1 + \text{e}^{-(x-\mu)/\gamma}} \\
+f(x) = F'(x) = \frac{\text{e}^{-(x-\mu)/\gamma}}{\gamma(1+ \text{e}^{-(x-\mu)/\gamma})^2}
 $$
 > 
 > 式中，$\mu$为位置参数，$\gamma > 0$为形状参数。
@@ -49,7 +49,7 @@ $$
 
 1. 设$\gamma=1$，可得单参数的Logistic分布；
 2. 计算当$\mu=0$时，函数$f(x|\mu=0)$；
-3. 根据Logistic分布的MGF（矩生成函数），可得$E(e^{\theta x})$；
+3. 根据Logistic分布的MGF（矩生成函数），可得$E(\text{e}^{\theta x})$；
 4. 根据指数倾斜的定义，证明单参数$\theta$的指数倾斜密度函数无法表示成Logistic分布的密度函数形式；可证得，Logistic分布不属于指数分布族；
 
 证明步骤：
@@ -57,23 +57,23 @@ $$
 1. 单参数Logistic分布：  
 设$\gamma=1$，则单参数$\mu$的Logistic分布：
 $$
-f(x|\mu) = \frac{e^{-(x-\mu)}}{(1+ e^{-(x-\mu)})^2}
+f(x|\mu) = \frac{\text{e}^{-(x-\mu)}}{(1+ \text{e}^{-(x-\mu)})^2}
 $$
 
 2. 计算$f(x|\mu=0)$  
-$$f(x|\mu=0) = \frac{e^{-x}}{(1+ e^{-x})^2}$$
+$$f(x|\mu=0) = \frac{\text{e}^{-x}}{(1+ \text{e}^{-x})^2}$$
 
 3. Logistic分布的MGF矩生成函数
 
 根据Logistic分布的Wikipedia：https://en.wikipedia.org/wiki/Logistic_distribution
 >  Logistic的MGF矩生成函数$M_X(\theta)$：
-$$M_X(\theta) = e^{\mu t}B(1-st, 1+st)$$ 
+$$M_X(\theta) = \text{e}^{\mu t}B(1-st, 1+st)$$ 
 > 
 > 其中$t \in (-1/s, 1/s)$，$B$表示Beta函数。
 
 可知，当$\mu=0, s=1$时，
 $$
-M_X(\theta) = E(e^{\theta x}) = B(1-\theta, 1+\theta), \quad \theta \in (-1, 1)
+M_X(\theta) = E(\text{e}^{\theta x}) = B(1-\theta, 1+\theta), \quad \theta \in (-1, 1)
 $$
 
 4. 证明单参数$\theta$的指数倾斜密度函数无法表示成Logistic分布的形式
@@ -82,14 +82,14 @@ $$
 > &emsp;&emsp;给定一个随机变量$X$，其概率分布为$P$，概率密度为$f$和矩生成函数(MGF)为$M_X(\theta) = E(e^{\theta x})$，指数倾斜$P_{\theta}$定义如下：
 > 
 > $$
-P_{\theta}(X \in dx) = \frac{E[e^{\theta X} I(X \in dx)]}{ M_X(\theta)} = e^{\theta x - k(\theta)}P(X \in dx)
+P_{\theta}(X \in dx) = \frac{E[\text{e}^{\theta X} I(X \in dx)]}{ M_X(\theta)} = \text{e}^{\theta x - k(\theta)}P(X \in dx)
 $$
 > 
-> &emsp;&emsp;其中，$k(\theta)$表示为累积生成函数（CGF），即$\log E(e^{\theta X})$，称$P_{\theta}(X \in dx)=f_{\theta}(x)$为随机变量$X$的$\theta$-tilted密度分布。
+> &emsp;&emsp;其中，$k(\theta)$表示为累积生成函数（CGF），即$\log E(\text{e}^{\theta X})$，称$P_{\theta}(X \in dx)=f_{\theta}(x)$为随机变量$X$的$\theta$-tilted密度分布。
 
 &emsp;&emsp;综上可知
 $$
-f_{\theta}(x)=e^{\theta x - k(\theta)} f_0(x)
+f_{\theta}(x)=\text{e}^{\theta x - k(\theta)} f_0(x)
 $$
 
 &emsp;&emsp;其中，$k(t)= \log M_X(\theta) = B(1-\theta, 1+\theta), \quad \theta \in (-1, 1)$，根据指数倾斜性质，$f_{\theta}(x)$无法表示Logistic分布的密度函数形式。  
@@ -152,7 +152,7 @@ $$
 Logistic回归模型学习的梯度下降算法：   
 输入：目标函数$f(w)$，梯度函数$g(w) = \nabla f(w)$，计算精度$\varepsilon$  
 输出：$f(w)$的极大值$w^*$  
-(1) 取初始值$w^{(0)} \in R$，置$k=0$  
+(1) 取初始值$w^{(0)} \in R^n$，置$k=0$  
 (2) 计算$\displaystyle f(w^{(k)})=\sum_{i=1}^N \left[y_i (w^{(k)} \cdot x_i)-\log (1+\exp (w^{(k)} \cdot x_i))\right]$  
 (3) 计算梯度$\displaystyle g_k=g(w^{(k)})=\sum_{i=1}^N\left[x_i \cdot y_i-\frac{\exp (w^{(k)} \cdot x_i) \cdot x_i}{1+\exp (w^{(k)} \cdot x_i)}\right]$，当$\|g_k\| < \varepsilon$时，停止迭代，令$w^* = w^{(k)}$；否则，令$p_k=-g(w^{(k)})$，求$\lambda_k$，使
 
