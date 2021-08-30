@@ -255,15 +255,15 @@ $$
 &emsp;&emsp;将对数似然函数求偏导，可得
 $$
 \begin{aligned}
-g(w^{(n)}) = \frac{\partial L(w)}{\partial w^{(i)}}
+g(w^{(n)}) = \frac{\partial L(w)}{\partial w^{(n)}}
 &= \sum^N_{j=1} f_n(y_j,x_j) - \sum^N_{j=1} \frac{1}{Z_w(x_j)} \cdot \frac{\partial{Z_w(x_j)}}{\partial{w_n}}\\
-&= \sum^N_{j=1} f_i(y_j,x_j) - \sum^N_{i=1} \frac{1}{Z_w(x_i)} \cdot \sum^N_{j=1} \left[ \left( \exp{\sum^K_{k=1} w_k f_k (y_j,x_i)} \right) \cdot f_n(y_j, x_i) \right]
+&= \sum^N_{j=1} f_n(y_j,x_j) - \sum^N_{i=1} \frac{1}{Z_w(x_i)} \cdot \sum^N_{j=1} \left[ \left( \exp{\sum^K_{k=1} w_k f_k (y_j,x_i)} \right) \cdot f_n(y_j, x_i) \right]
 \end{aligned}
 $$
 
 &emsp;&emsp;梯度函数为
 $$
-\nabla L(w)=\left[\frac{\partial L(w)}{\partial w^{(0)}}, \cdots, \frac{\partial L(w)}{\partial w^{(n)}}\right]
+\nabla L(w)=\left[\frac{\partial L(w)}{\partial w^{(0)}}, \cdots, \frac{\partial L(w)}{\partial w^{(N)}}\right]
 $$
 
 **第2步：写出条件随机场模型学习的梯度下降法**
