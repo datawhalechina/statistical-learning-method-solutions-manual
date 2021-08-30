@@ -7,22 +7,25 @@
 @project: statistical-learning-method-solutions-manual
 @desc: 习题3.3 用kd树的k邻近搜索算法
 """
+import json
 
 
-# 节点类
 class Node:
+    """节点类"""
+
     def __init__(self, value, index, left_child, right_child):
-        self.value = value
+        self.value = value.tolist()
         self.index = index
         self.left_child = left_child
         self.right_child = right_child
 
     def __repr__(self):
-        return str(self.__dict__)
+        return json.dumps(self, indent=3, default=lambda obj: obj.__dict__, ensure_ascii=False)
 
 
-# kd tree类
 class KDTree:
+    """kd tree类"""
+
     def __init__(self, data):
         # 数据集
         self.data = np.asarray(data)
@@ -165,13 +168,14 @@ def print_k_neighbor_sets(k, ii, dd):
 if __name__ == '__main__':
     import numpy as np
 
-    X_train = np.array([[2, 3, 4],
-                        [5, 4, 4],
-                        [9, 6, 4],
-                        [4, 7, 4],
-                        [8, 1, 4],
-                        [7, 2, 4]])
+    X_train = np.array([[2, 3],
+                        [5, 4],
+                        [9, 6],
+                        [4, 7],
+                        [8, 1],
+                        [7, 2]])
     kd_tree = KDTree(X_train)
     k = 3
-    dists, indices = kd_tree.query(np.array([[3, 4.5, 4]]), k=k)
+    dists, indices = kd_tree.query(np.array([[3, 4.5]]), k=k)
     print_k_neighbor_sets(k, indices, dists)
+    print(kd_tree)

@@ -112,26 +112,33 @@ np.meshgrid方法：用于构造网格点坐标矩阵，可参考https://blog.cs
 
 1. $k$值选择与模型复杂度的关系  
 &emsp;&emsp;根据书中第52页（3.2.3节：$k$值的选择）
-  > &emsp;&emsp;如果选择较小的$k$值，就相当于用较小的领域中的训练实例进行预测，“学习”的近似误差会减小，只有与输入实例较近的（相似的）训练实例才会对预测结果起作用。$k$值的减小就意味着整体模型变得复杂，容易发生过拟合。  
-  > &emsp;&emsp;如果选择交大的$k$值，就相当于用交大领域中的训练实例进行预测。$k$值的增大就意味着整体的模型变得简单。
+  > &emsp;&emsp;如果选择较小的$k$值，就相当于用较小的邻域中的训练实例进行预测，“学习”的近似误差会减小，只有与输入实例较近的（相似的）训练实例才会对预测结果起作用。$k$值的减小就意味着整体模型变得复杂，容易发生过拟合。  
+  > &emsp;&emsp;如果选择较大的$k$值，就相当于用较大邻域中的训练实例进行预测。$k$值的增大就意味着整体的模型变得简单。
 
   &emsp;&emsp;综上所属，$k$值越大，模型复杂度越低，模型越简单，容易发生欠拟合。反之，$k$值越小，模型越复杂，容易发生过拟合。
   
   
 2. $k$值选择与预测准确率的关系  
-&emsp;&emsp;从图中观察到，$k$值越大，预测准确率越低，也反映模型泛化能力越差，模型简单。反之，$k$值越小，预测准确率越高，模型具有更好的泛化能力，模型复杂。
+&emsp;&emsp;从图中观察到，当$k=1$时，模型易产生过拟合，当$k=2$时准确率仅有88%，故在过拟合发生前，$k$值越大，预测准确率越低，也反映模型泛化能力越差，模型简单。反之，$k$值越小，预测准确率越高，模型具有更好的泛化能力，模型复杂。
 
 ## 习题3.2
 &emsp;&emsp;利用例题3.2构造的$kd$树求点$x=(3,4.5)^T$的最近邻点。
 
 **解答：**
 
-**解答思路：**
+**解答思路：**  
+
+**方法一：**
 1. 使用sklearn的KDTree类，结合例题3.2构建平衡$kd$树，配置相关参数（构建平衡树kd树算法，见书中第54页算法3.2内容）；
 2. 使用tree.query方法，查找(3, 4.5)的最近邻点（搜索kd树算法，见书中第55页第3.3.2节内容）；
 3. 根据第3步返回的参数，得到最近邻点。
 
+**方法二：**  
+&emsp;&emsp;根据书中第56页算法3.3用$kd$树的最近邻搜索方法，查找(3, 4.5)的最近邻点
+
 **解答步骤：**
+
+**方法一：**
 
 
 ```python
@@ -165,6 +172,14 @@ print("x点(3,4.5)的最近邻点是({0}, {1})".format(x1, x2))
 
 可得到点$x=(3,4.5)^T$的最近邻点是$(2,3)^T$
 
+**方法二：** 
+
+1. 首先找到点$x=(3,4.5)^T$所在领域的叶节点$x_1=(4,7)^T$，则最近邻点一定在以$x$为圆心，$x$到$x_1$距离为半径的圆内；
+2. 找到$x_1$的父节点$x_2=(5,4)^T$，$x_2$的另一子节点为$x_3=(2,3)^T$，此时$x_3$在圆内，故$x_3$为最新的最近邻点，并形成以$x$为圆心，以$x$到$x_3$距离为半径的圆；
+3. 继续探索$x_2$的父节点$x_4=(7,2)^T$,$x_4$的另一个子节点$(9,6)$对应的区域不与圆相交，故不存在最近邻点，所以最近邻点为$x_3=(2,3)^T$。
+
+可得到点$x=(3,4.5)^T$的最近邻点是$(2,3)^T$
+
 ## 习题3.3
 &emsp;&emsp;参照算法3.3，写出输出为$x$的$k$近邻的算法。
 
@@ -178,7 +193,8 @@ print("x点(3,4.5)的最近邻点是({0}, {1})".format(x1, x2))
 
 **第1步：用$kd$树的$k$邻近搜索算法**
 
-输入：已构造的kd树；目标点$x$；    
+根据书中第56页算法3.3（用$kd$树的最近邻搜索）
+> 输入：已构造的kd树；目标点$x$；    
 输出：$x$的k近邻    
 （1）在$kd$树中找出包含目标点$x$的叶结点：从根结点出发，递归地向下访问树。若目标点$x$当前维的坐标小于切分点的坐标，则移动到左子结点，否则移动到右子结点，直到子结点为叶结点为止；  
 （2）如果“当前$k$近邻点集”元素数量小于$k$或者叶节点距离小于“当前$k$近邻点集”中最远点距离，那么将叶节点插入“当前k近邻点集”；  
@@ -193,22 +209,27 @@ print("x点(3,4.5)的最近邻点是({0}, {1})".format(x1, x2))
 
 
 ```python
-# 节点类
+import json
+
+
 class Node:
-    def __init__(self, node, index, left_child, right_child):
-        self.node = node
+    """节点类"""
+
+    def __init__(self, value, index, left_child, right_child):
+        self.value = value.tolist()
         self.index = index
         self.left_child = left_child
         self.right_child = right_child
 
     def __repr__(self):
-        return str(self.__dict__)
+        return json.dumps(self, indent=3, default=lambda obj: obj.__dict__, ensure_ascii=False, allow_nan=False)
 ```
 
 
 ```python
-# kd tree类
 class KDTree:
+    """kd tree类"""
+
     def __init__(self, data):
         # 数据集
         self.data = np.asarray(data)
@@ -232,7 +253,7 @@ class KDTree:
             self.data) if list(v) == list(data[median_index])]
         return Node(
             # 本结点
-            node=data[median_index],
+            value=data[median_index],
             # 本结点在数据集中的位置
             index=node_index[0],
             # 左子结点
@@ -252,6 +273,9 @@ class KDTree:
         ii = np.array([hit[1] for hit in hits])
         return dd, ii
 
+    def __repr__(self):
+        return str(self.kd_tree)
+
     @staticmethod
     def _cal_node_distance(node1, node2):
         """计算两个结点之间的距离"""
@@ -269,7 +293,7 @@ class KDTree:
             return self._update_k_neighbor_sets(k_neighbor_sets, k, tree, point)
 
         # 递归地向下访问kd树
-        if point[0][depth % k] < tree.node[depth % k]:
+        if point[0][depth % k] < tree.value[depth % k]:
             direct = 'left'
             next_branch = tree.left_child
         else:
@@ -282,26 +306,25 @@ class KDTree:
             # (3)(b)检查另一子结点对应的区域是否相交
             if direct == 'left':
                 node_distance = self._cal_node_distance(
-                    point, tree.right_child.node)
+                    point, tree.right_child.value)
                 if k_neighbor_sets[0][0] > node_distance:
                     # 如果相交，递归地进行近邻搜索
                     return self._search(point, tree=tree.right_child, k=k, depth=depth + 1,
                                         k_neighbor_sets=k_neighbor_sets)
             else:
                 node_distance = self._cal_node_distance(
-                    point, tree.left_child.node)
+                    point, tree.left_child.value)
                 if k_neighbor_sets[0][0] > node_distance:
                     return self._search(point, tree=tree.left_child, k=k, depth=depth + 1,
                                         k_neighbor_sets=k_neighbor_sets)
 
-        return self._search(point, tree=next_branch, k=k, depth=depth + 1, 
-                            k_neighbor_sets=k_neighbor_sets)
+        return self._search(point, tree=next_branch, k=k, depth=depth + 1, k_neighbor_sets=k_neighbor_sets)
 
     def _update_k_neighbor_sets(self, best, k, tree, point):
         # 计算目标点与当前结点的距离
-        node_distance = self._cal_node_distance(point, tree.node)
+        node_distance = self._cal_node_distance(point, tree.value)
         if len(best) == 0:
-            best.append((node_distance, tree.index, tree.node))
+            best.append((node_distance, tree.index, tree.value))
         elif len(best) < k:
             # 如果“当前k近邻点集”元素数量小于k
             self._insert_k_neighbor_sets(best, tree, node_distance)
@@ -319,13 +342,10 @@ class KDTree:
         for i, item in enumerate(best):
             if item[0] < node_distance:
                 # 将距离最远的结点插入到前面
-                best.insert(i, (node_distance, tree.index, tree.node))
+                best.insert(i, (node_distance, tree.index, tree.value))
                 break
         if len(best) == n:
-            best.append((node_distance, tree.index, tree.node))
-
-    def __repr__(self):
-        return str(self.kd_tree)
+            best.append((node_distance, tree.index, tree.value))
 ```
 
 
@@ -336,6 +356,7 @@ def print_k_neighbor_sets(k, ii, dd):
         text = "x点的最近邻点是"
     else:
         text = "x点的%d个近邻点是" % k
+
     for i, index in enumerate(ii):
         res = X_train[index]
         if i == 0:
@@ -378,6 +399,71 @@ print_k_neighbor_sets(k, indices, dists)
     x点的最近邻点是(2, 3)，距离是1.8028
     
 
+
+```python
+# 打印kd树
+kd_tree
+```
+
+
+
+
+    {
+       "value": [
+          7,
+          2
+       ],
+       "index": 5,
+       "left_child": {
+          "value": [
+             5,
+             4
+          ],
+          "index": 1,
+          "left_child": {
+             "value": [
+                2,
+                3
+             ],
+             "index": 0,
+             "left_child": null,
+             "right_child": null
+          },
+          "right_child": {
+             "value": [
+                4,
+                7
+             ],
+             "index": 3,
+             "left_child": null,
+             "right_child": null
+          }
+       },
+       "right_child": {
+          "value": [
+             9,
+             6
+          ],
+          "index": 2,
+          "left_child": {
+             "value": [
+                8,
+                1
+             ],
+             "index": 4,
+             "left_child": null,
+             "right_child": null
+          },
+          "right_child": null
+       }
+    }
+
+
+
+&emsp;&emsp;上述打印的平衡kd树和书中第55页的图3.4 kd树示例一致。
+
+![3-1-KD-Tree-Demo.png](./images/3-1-KD-Tree-Demo.png)
+
 更换数据集，使用更高维度的数据，并设置$k=3$
 
 
@@ -401,16 +487,3 @@ print_k_neighbor_sets(k, indices, dists)
 
     x点的3个近邻点是(4, 7, 4), (5, 4, 4), (2, 3, 4)，距离分别是2.6926, 2.0616, 1.8028
     
-
-
-```python
-# 打印kd树，查看平衡kd树
-print(kd_tree)
-```
-
-    {'node': array([7, 2, 4]), 'index': 5, 'left_child': {'node': array([5, 4, 4]), 'index': 1, 'left_child': {'node': array([2, 3, 4]), 'index': 0, 'left_child': None, 'right_child': None}, 'right_child': {'node': array([4, 7, 4]), 'index': 3, 'left_child': None, 'right_child': None}}, 'right_child': {'node': array([9, 6, 4]), 'index': 2, 'left_child': {'node': array([8, 1, 4]), 'index': 4, 'left_child': None, 'right_child': None}, 'right_child': None}}
-    
-
-&emsp;&emsp;上述打印的平衡kd树和书中第55页的图3.4 kd树示例一致。
-
-![3-1-KD-Tree-Demo.png](../images/3-1-KD-Tree-Demo.png)
