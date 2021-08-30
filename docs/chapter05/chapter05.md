@@ -38,7 +38,7 @@ ID | 年龄 | 有工作 | 有自己的房子 | 信贷情况 | 类别
 输出：决策树$T$。  
 （1）如果$D$中所有实例属于同一类$C_k$，则置$T$为单结点树，并将$C_k$作为该结点的类，返回$T$；  
 （2）如果$A = \emptyset$，则置$T$为单结点树，并将$D$中实例数最大的类$C_k$作为该结点的类，返回$T$；  
-（3）否则，按式(5.10)计算$A$中各特征对$D$的信息增益比，选择信息增益比最大的特征$A_g$；  
+（3）否则，按式$\displaystyle g_R(D,A)=\frac{g(D,A)}{H_A(D)}$计算$A$中各特征对$D$的信息增益比，选择信息增益比最大的特征$A_g$；  
 （4）如果$A_g$的信息增益比小于阈值$\epsilon$，则置$T$为单结点树，并将$D$中实例数最大的类$C_k$作为该结点的类，返回$T$；  
 （5）否则，对$A_g$的每一可能值$a_i$，依$A_g=a_i$将$D$分割为子集若干非空$D_i$，将$D_i$中实例数最大的类作为标记，构建子结点，由结点及其子结点构成树$T$，返回$T$；  
 （6）对结点$i$，以$D_i$为训练集，以$A-\{A_g\}$为特征集，递归地调用步(1)~步(5)，得到子树$T_i$，返回$T_i$
@@ -641,7 +641,7 @@ $$
 **第2步：证明当$\alpha=0$和$\alpha= + \infty$时的最优子树**
 
 根据书中第85页：
-> &emsp;&emsp;当$\alpha$大的时候，最优子树$T_\alpha$偏小；当$\alpha$小的时候，最优子树$T_\alpha$偏大。极端情况，当$\alpha=0$时，整体树时最优的。当$\alpha \rightarrow +\infty$时，根结点组成的单结点树是最优的。
+> &emsp;&emsp;当$\alpha$大的时候，最优子树$T_\alpha$偏小；当$\alpha$小的时候，最优子树$T_\alpha$偏大。极端情况，当$\alpha=0$时，整体树是最优的。当$\alpha \rightarrow +\infty$时，根结点组成的单结点树是最优的。
 
 **第3步：证明$T_1$是区间$[\alpha_1, \alpha_2)$的最优子树**
 
@@ -649,10 +649,10 @@ $$
 > THEOREM 10.7. Every tree T has a unique smallest optimally pruned subtree $T(\alpha)$. Let T be a nontrivial tree having root $t_1$ and primary branches $T_L$ and $T_R$. Then $$R_{\alpha}(T(\alpha)) = \min[R_{\alpha}(t_1), R_{\alpha}(T_L(\alpha))+R_{\alpha}(T_R(\alpha))]$$ If $R_{\alpha}(t_1) \leqslant R_{\alpha}(T_L(\alpha))+R_{\alpha}(T_R(\alpha))$, then $T(\alpha)=\{t_1\}$; otherwise, $T(\alpha) = \{t_1\} \cup T_L(\alpha) \cup T_R(\alpha)$.
 
 &emsp;&emsp;根据该书的符号描述，其中：
-1. $T(\alpha)$表示，在$\alpha$时，树$T$的最小最优剪枝子树
-2. $R_{\alpha}(T(\alpha))$表示，在$\alpha$时，$T(\alpha)$的损失值，即$C_{\alpha}(T_{\alpha})$
+1. $T(\alpha)$表示，在$\alpha$条件时，树$T$的最小最优剪枝子树
+2. $R_{\alpha}(T(\alpha))$表示，在$\alpha$条件时，$T(\alpha)$的损失值，即$C_{\alpha}(T_{\alpha})$
 
-&emsp;&emsp;定理10.7表示，树$T$分为根结点$t_1$、左子树$T_L$和右子树$T_R$，计算在$\alpha$时的最优子树的损失，可取$R_{\alpha}(t_1)$和$R_{\alpha}(T_L(\alpha))+R_{\alpha}(T_R(\alpha))$中的最小值，并且$T(\alpha)$满足以下公式：
+&emsp;&emsp;定理10.7表示，树$T$分为根结点$t_1$、左子树$T_L$和右子树$T_R$，计算在$\alpha$条件时的最优子树的损失，可取$R_{\alpha}(t_1)$和$R_{\alpha}(T_L(\alpha))+R_{\alpha}(T_R(\alpha))$中的最小值，并且$T(\alpha)$满足以下公式：
 $$
 T(\alpha) = \left\{ \begin{array}{l}
 \{t_1 \}, \quad R_{\alpha}(t_1) \leqslant R_{\alpha}(T_L(\alpha))+R_{\alpha}(T_R(\alpha)) \\
@@ -664,7 +664,7 @@ $$
 > THEOREM 10.9.   
 (i) If $\alpha_2 \geqslant \alpha_1$, then $T(α2) \preceq T(α1)$.
 
-&emsp;&emsp;定理10.9(i)表示，当$\alpha_2 \geqslant \alpha_1$时，树$T$在$\alpha_2$下的最优子树一定是树$T$在$\alpha_1$下的最优子树的子树。
+&emsp;&emsp;定理10.9(i)表示，当$\alpha_2 \geqslant \alpha_1$时，树$T$在$\alpha_2$条件下的最优子树一定是树$T$在$\alpha_1$条件下的最优子树的子树。
 
 &emsp;&emsp;根据CART剪枝算法和定理10.9，可知（见该书的第368页）：
 1. 当$\alpha \geqslant \alpha_1$时，$T_0(\alpha)=T_1$
