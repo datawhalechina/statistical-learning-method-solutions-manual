@@ -184,8 +184,15 @@ $\begin{aligned}
 \therefore F(\tilde{P}, \theta) 
 &= E_{\tilde{P}}[\log P(Y, Z|\theta)] + H(\tilde{P}) \\
 &= E_{\tilde{P}}[\log P(Y,Z|\theta)] -E_{\tilde{P}} \log \tilde{P}(Z) \quad （F函数定义：H(\tilde{P}) = - E_{\tilde{P}} \log \tilde{P}(Z)）\\
+&= \sum_Z \log P(Y,Z|\theta) \tilde{P}_{\theta}(Z) - \sum_Z \log \tilde{P}(Z) \cdot \tilde{P}(Z)
+\end{aligned}$ 
+
+根据引理9.1：$\tilde{P}_{\theta}(Z) = P(Z | Y, \theta)$
+
+$\begin{aligned}
+F(\tilde{P}, \theta)
 &= \sum_Z \log P(Y,Z|\theta) \tilde{P}_{\theta}(Z) - \sum_Z \log \tilde{P}(Z) \cdot \tilde{P}(Z) \\
-&= \sum_Z \log P(Y,Z|\theta) P(Z|Y,\theta) -  \sum_Z \log P(Z|Y,\theta) \cdot P(Z|Y,\theta) \quad（引理9.1：\tilde{P}_{\theta}(Z) = P(Z | Y, \theta)）\\
+&= \sum_Z \log P(Y,Z|\theta) P(Z|Y,\theta) -  \sum_Z \log P(Z|Y,\theta) \cdot P(Z|Y,\theta) \\
 &= \sum_Z P(Z|Y,\theta) \left[ \log P(Y,Z|\theta) - \log P(Z|Y,\theta) \right] \\
 &= \sum_Z P(Z|Y,\theta) \log \frac{P(Y,Z|\theta)}{P(Z|Y,\theta)} \\
 &= \sum_Z P(Z|Y,\theta) \log P(Y|\theta) \\
@@ -301,7 +308,7 @@ plt.show()
 ```
 
 
-![png](output_28_0.png)
+![png](output_29_0.png)
 
 
 **第4步：自编程实现高斯混合模型的EM算法**
@@ -472,7 +479,7 @@ P(Y=c_k) = \frac{\displaystyle \sum_{i=1}^N I(y_i=c_k)}{N}, \quad k=1,2,\cdots, 
 P(X^{(j)}=a_{jl}|Y=c_k)= \frac{\displaystyle \sum_{i=1}^N I(x_i^{(j)} = a_{jl}, y_i=c_k) }{\displaystyle \sum_{i=1}^N I(y_i=c_k)} \\
 j=1,2,\cdots,n; \quad l=1,2,\cdots, S_j; \quad k=1,2,\cdots, K
 $$  
->（2）对于给定的实例$x=(x^{(1)}, x^{(2)}, \cdots, x^{(n)})^T$，计算\
+>（2）对于给定的实例$x=(x^{(1)}, x^{(2)}, \cdots, x^{(n)})^T$，计算
 > $$
 P(Y=c_k) \prod_{j=1}^n P(X^{(j)}=x^{(j)} | Y=c_k), \quad k=1,2,\cdots,K
 $$  
@@ -504,7 +511,7 @@ P_j^{(t+1)}(X=x_i^{(j)} | y) = \frac
 {\displaystyle \sum_{i=1}^N P(X=x_i^{(j)})\delta(y|i) }
 {\displaystyle \sum_{i=1}^N \delta(y|i)}
 $$
-5. 计算似然函数，得到使得似然函数最大的$\theta$，重复第（3）步和第（4）两步，直至收敛
+5. 计算似然函数，得到使得似然函数最大的$\theta$，重复第3步和第4步，直至收敛
 $$
 \begin{aligned}
 \theta^* &= \arg \max \limits_{\theta \in \Omega} L(\theta) \\
@@ -512,7 +519,7 @@ $$
 \end{aligned}
 $$
 
-所以，朴素贝叶斯的EM算法：
+所以，朴素贝叶斯的EM算法如下：
 
 输入：隐变量数据是$y \in \mathcal{Y} = \{c_1, c_2, \cdots, c_K\}$，$x \in \mathcal{X} = (x_1, x_2, \cdots, x_N)$，输入空间$\mathcal{X} \subset R^n$为$n$维向量的集合，$x=(x^{(1)}, x^{(2)}, \cdots, x^{(n)})^T$，$x^{(i)}$取值范围是$\{-1, +1\}$；  
 输出：参数$P^{(t+1)}(Y=y)$，$P_j^{(t+1)}(X=x_i^{(j)} | y)$；  
