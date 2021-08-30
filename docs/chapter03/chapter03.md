@@ -462,7 +462,7 @@ kd_tree
 
 &emsp;&emsp;上述打印的平衡kd树和书中第55页的图3.4 kd树示例一致。
 
-![3-1-KD-Tree-Demo.png](./images/3-1-KD-Tree-Demo.png)
+![3-1-KD-Tree-Demo.png](../images/3-1-KD-Tree-Demo.png)
 
 更换数据集，使用更高维度的数据，并设置$k=3$
 
