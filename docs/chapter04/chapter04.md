@@ -26,7 +26,7 @@ $$
 $$   
 
 &emsp;&emsp;根据书中第59页，朴素贝叶斯法的基本方法：
-> &emsp;&emsp;设输入空间$\mathcal{X} \subseteq R^n$为$n$维向量的集合，输出空间为类标记集合$\mathcal{Y}=\{c_1,c_2,\ldots,c_k\}$。输入为特征向量$x \in \mathcal{Y}$，输出为类标记$y \in \mathcal{Y}$。$X$是定义在输入空间$\mathcal{X}$上的随机向量，$Y$是定义在输出空间$\mathcal{Y}$上的随机变量，训练数据集
+> &emsp;&emsp;设输入空间$\mathcal{X} \subseteq R^n$为$n$维向量的集合，输出空间为类标记集合$\mathcal{Y}=\{c_1,c_2,\ldots,c_k\}$。输入为特征向量$x \in \mathcal{X}$，输出为类标记$y \in \mathcal{Y}$。$X$是定义在输入空间$\mathcal{X}$上的随机向量，$Y$是定义在输出空间$\mathcal{Y}$上的随机变量。$P(X,Y)$是$X$和$Y$的联合概率分布。训练数据集
 > $$
 T=\{(x_1,y_1),(x_2,y_2),\ldots,(x_N,y_N)\}
 $$
@@ -112,9 +112,9 @@ $$
 
 证明思路：
 1. 条件假设：$P_\lambda(Y=c_k)=u_k$，且服从参数为$\lambda$的Dirichlet分布；随机变量$Y$出现$y=c_k$的次数为$m_k$； 
-2. 得到$u$的先验概率$p(u)$；
-3. 得到似然函数$p(m|u)$；
-4. 根据贝叶斯公式，计算后验概率$p(u|m)$
+2. 得到$u$的先验概率$P(u)$；
+3. 得到似然函数$P(m|u)$；
+4. 根据贝叶斯公式，计算后验概率$P(u|m)$
 5. 计算$u$的期望$E(u)$
 
 证明步骤：
@@ -162,11 +162,11 @@ $$
 4. 得到后验概率分布  
 &emsp;&emsp;结合贝叶斯公式，求$u$的后验概率分布，可得
 $$
-P(u|m) = \frac{p(m|u)p(u)}{p(m)}
+P(u|m) = \frac{P(m|u)P(u)}{P(m)}
 $$
 &emsp;&emsp;根据假设(1)，可得
 $$
-P(u|m,\lambda) \propto p(m|u)p(u|\lambda) \propto \prod_{k=1}^K u_k^{\lambda+m_k-1}
+P(u|m,\lambda) \propto P(m|u)P(u|\lambda) \propto \prod_{k=1}^K u_k^{\lambda+m_k-1}
 $$
 &emsp;&emsp;上式表明，后验概率分布$P(u|m,\lambda)$也服从Dirichlet分布
 
@@ -196,9 +196,9 @@ $$
 
 证明思路：
 1. 条件假设：$P_{\lambda}(X^{(j)}=a_{jl} | Y = c_k)=u_l$，其中$l=1,2,\ldots,S_j$，且服从参数为$\lambda$的Dirichlet分布；出现$x^{(j)}=a_{jl}, y=c_k$的次数为$m_l$； 
-2. 得到$u$的先验概率$p(u)$；
-3. 得到似然函数$p(m|u)$；
-4. 根据贝叶斯公式，计算后验概率$p(u|m)$
+2. 得到$u$的先验概率$P(u)$；
+3. 得到似然函数$P(m|u)$；
+4. 根据贝叶斯公式，计算后验概率$P(u|m)$
 5. 计算$u$的期望$E(u)$
 
 证明步骤：
@@ -223,11 +223,11 @@ $$
 4. 得到后验概率分布  
 &emsp;&emsp;结合贝叶斯公式，求$u$的后验概率分布，可得
 $$
-P(u|m) = \frac{p(m|u)p(u)}{p(m)}
+P(u|m) = \frac{P(m|u)P(u)}{P(m)}
 $$
 &emsp;&emsp;根据假设(1)，可得
 $$
-P(u|m,\lambda) \propto p(m|u)p(u|\lambda) \propto \prod_{l=1}^{S_j} u_l^{\lambda+m_l-1}
+P(u|m,\lambda) \propto P(m|u)P(u|\lambda) \propto \prod_{l=1}^{S_j} u_l^{\lambda+m_l-1}
 $$
 &emsp;&emsp;上式表明，后验概率分布$P(u|m,\lambda)$也服从Dirichlet分布
 
