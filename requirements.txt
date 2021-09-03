@@ -3,6 +3,7 @@ attrs==19.3.0
 autopep8==1.5.7
 backcall==0.2.0
 bleach==3.3.0
+certifi==2021.5.30
 cffi==1.14.1
 colorama==0.4.3
 cycler==0.10.0
@@ -32,7 +33,7 @@ matplotlib==3.3.0
 mistune==0.8.4
 nbconvert==5.6.1
 nbformat==5.0.7
-notebook==6.4.3
+notebook==6.3.0
 numpy==1.19.1
 packaging==20.4
 pandas==1.1.0
@@ -65,4 +66,5 @@ tornado==6.1
 traitlets==4.3.3
 wcwidth==0.2.5
 webencodings==0.5.1
+wincertstore==0.2
 zipp==3.1.0
