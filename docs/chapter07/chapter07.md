@@ -431,7 +431,7 @@ $$
 &= \sum_{i,j=1}^n c_i c_j (\phi(x_i) \cdot \phi(x_j)) \cdot (x_i \cdot x_j) \\
 &= \sum_{i,j=1}^n c_i c_j ((\phi(x_i)\cdot x_i) \cdot (\phi(x_j) \cdot x_j)) \\
 &= \left( \sum_i c_i (\phi(x_i) \cdot x_i) \right) \left( \sum_j c_j (\phi(x_j) \cdot x_j) \right) \\
-&= \Bigg\|\left( \sum_{i=1}^m c_i (\phi(x_i) \cdot x_i) \right)\Bigg\|^2 \geqslant 0
+&= \Bigg\|\left( \sum_i c_i (\phi(x_i) \cdot x_i) \right)\Bigg\|^2 \geqslant 0
 \end{aligned}
 $$
 
