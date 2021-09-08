@@ -92,7 +92,7 @@ $$
 f_{\theta}(x)=\text{e}^{\theta x - k(\theta)} f_0(x)
 $$
 
-&emsp;&emsp;其中，$k(t)= \log M_X(\theta) = B(1-\theta, 1+\theta), \quad \theta \in (-1, 1)$，根据指数倾斜性质，$f_{\theta}(x)$无法表示Logistic分布的密度函数形式。  
+&emsp;&emsp;其中，$k(\theta)= \log M_X(\theta) = B(1-\theta, 1+\theta), \quad \theta \in (-1, 1)$，根据指数倾斜性质，$f_{\theta}(x)$无法表示Logistic分布的密度函数形式。  
 &emsp;&emsp;所以，Logistic分布不属于指数分布族。
 
 ## 习题6.2

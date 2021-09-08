@@ -360,66 +360,82 @@ $$
 
 ## 习题7.4
 
-&emsp;&emsp;证明内积的正整数幂函数：$$K(x,z)=(x \bullet z)^p$$是正定核函数，这里$p$是正整数，$ x,z\in R^n$。
+&emsp;&emsp;证明内积的正整数幂函数：$$K(x,z)=(x \bullet z)^p$$是正定核函数，这里$p$是正整数，$x,z\in R^n$。
 
 **解答：**
 
-**解答思路：**
-1. 根据书中第139页定理7.5，计算$\displaystyle \sum_{i,j=1}^m c_i c_j K(x_i, x_j)$；
-2. 根据定理7.5的必要性证明，可得$K(x, z)$的Gram矩阵是半正定的；
-3. 根据定理7.5的充分性证明，可得$K(x, z)$是正定核函数。
+**解答思路：**  
+1. 写出正定核函数的判定依据
+2. 使用数学归纳法，证明
+  1. 当$p=1$时，根据定理7.5，证明$K(x, z)=x \bullet z$是正定核函数
+  2. 假设当$p=k$且$k>1$时，$K(x, z)=(x \bullet z)^k$是正定核函数
+  3. 证明当$p=k+1$时，$K(x, z)=(x \bullet z)^{k+1}$是正定核函数
 
 **解答步骤：**
 
-**第1步：根据定理7.5，计算$\displaystyle \sum_{i,j=1}^m c_i c_j K(x_i,x_j)$**
+**第1步：列出正定核函数的判定依据**
 
-根据书中第139页定理7.5：
+根据书中第139页定理7.5（正定核的充要条件）：
 > 设$K: \mathcal{X} \times \mathcal{X} \rightarrow R$是对称函数，则$K(x,z)$为正定核函数的充要条件是对任意$x_i \in \mathcal{X}, i=1,2,\cdots, m$，$K(x, z)$对应的Gram矩阵：
 >$$
 K = [K(x_i, x_j)]_{m \times m}
 $$
 > 是半正定矩阵。
 
-对任意$c_1,c_2,\cdots,c_m \in \mathbf{R}$，有
+**第2步：使用数学归纳法，证明$K(x, z)=(x \bullet z)^p$是正定核函数**
+
+1. 当$p=1$时，$K(x, z)=x \bullet z$，对任意$c_1,c_2,\cdots,c_n \in \mathbf{R}$，有
+
 $$
 \begin{aligned} 
-\sum_{i,j=1}^m c_i c_j K(x_i,x_j) 
-&= \sum_{i,j=1}^m c_i c_j (x_i \bullet x_j)^p \\
-&= \left(\sum_{i=1}^m c_i x_i \right)\left(\sum_{j=1}^m c_j x_j \right)  \left( \sum_{i,j=1}^m (x_i \bullet x_j)^{p-1} \right)\\
-&= \Bigg\|\left( \sum_{i=1}^m c_i x_i \right)\Bigg\|^2 \left( \sum_{i,j=1}^m (x_i \bullet x_j)^{p-1} \right)
+\sum_{i,j=1}^n c_i c_j K(x_i,x_j) 
+&= \sum_{i,j=1}^n c_i c_j (x_i \bullet x_j) \\
+&= \left(\sum_{i=1}^m c_i x_i \right)\left(\sum_{j=1}^m c_j x_j \right) \\
+&= \Bigg\|\left( \sum_{i=1}^m c_i x_i \right)\Bigg\|^2 \geqslant 0
+\end{aligned}
+$$
+可得，当$p=1$时，$K(x, z)=x \bullet z$对应的Gram矩阵是半正定的，根据定理7.5，可知$K(x,z)=x \bullet z$是正定核函数。
+
+2. 假设$p=k$且$k$是大于1的正整数时，$K(x, z)=(x \bullet z)^k$是正定核函数
+
+根据书中第134页定义7.6的（核函数）：
+> 设$\mathcal{X}$是输入空间（欧式空间$R^n$的子集或离散集合），又设$\mathcal{H}$为特征空间（希尔伯特空间），如果存在一个从$\mathcal{X}$到$\mathcal{H}$的映射
+> $$
+\phi(x):\mathcal{X} \rightarrow \mathcal{H}
+$$
+> 使得对所有$x,z \in \mathcal{X}$，函数$K(x,z)$满足条件
+> $$
+K(x,z) = \phi(x) \bullet \phi(z)
+$$
+> 则称$K(x,z)$为核函数，$\phi(x)$为映射函数，式中$\phi(x) \bullet \phi(z)$为$\phi(x)$和$\phi(z)$的内积。
+
+故存在一个从$\mathcal{X}=R^n$到$\mathcal{H}$的映射
+$$
+\phi(x):\mathcal{X} \rightarrow \mathcal{H}
+$$
+使得函数$K(x,z)=(x \bullet z)^k$满足条件
+$$
+K(x,z) = \phi(x) \bullet \phi(z)
+$$
+
+3. 当$p=k+1$时，对于任意$x_1, x_2, \cdots, x_n$，构造$K(x, z)=(x \bullet z)^{k+1}$对应的Gram矩阵
+
+$$
+[K_{ij}]_{n \times n} = [K(x_i, x_j)]_{n \times n}
+$$
+对任意$c_1,c_2, \cdots, c_n \in R$，有
+$$
+\begin{aligned}
+\sum_{i,j=1}^n c_i c_j K(x_i,x_j) &= \sum_{i,j=1}^n c_i c_j (x_i \cdot x_j)^{k+1} \\
+&= \sum_{i,j=1}^n c_i c_j (x_i \cdot x_j)^k \cdot (x_i \cdot x_j) \\
+&= \sum_{i,j=1}^n c_i c_j (\phi(x_i) \cdot \phi(x_j)) \cdot (x_i \cdot x_j) \\
+&= \sum_{i,j=1}^n c_i c_j ((\phi(x_i)\cdot x_i) \cdot (\phi(x_j) \cdot x_j)) \\
+&= \left( \sum_i c_i (\phi(x_i) \cdot x_i) \right) \left( \sum_j c_j (\phi(x_j) \cdot x_j) \right) \\
+&= \Bigg\|\left( \sum_{i=1}^m c_i (\phi(x_i) \cdot x_i) \right)\Bigg\|^2 \geqslant 0
 \end{aligned}
 $$
 
-**第2步：根据定理7.5的必要性证明，$K(x, z)$的Gram矩阵是半正定的**
+&emsp;&emsp;表明$K(x,z)=(x \bullet z)^{k+1}$关于$x_1, x_2, \cdots, x_n$的Gram矩阵是半正定的，根据定理7.5，可知$K(x,z)=(x \bullet z)^{k+1}$是正定核函数。
 
-&emsp;&emsp;根据第1步，可得
-$$
-\sum_{i,j=1}^m c_i c_j K(x_i,x_j) = \Bigg\|\left( \sum_{i=1}^m c_i x_i \right)\Bigg\|^2 \left( \sum_{i,j=1}^m (x_i \bullet x_j)^{p-1} \right)
-$$
-
-&emsp;&emsp;根据题意，$p$是正整数，可得$p \geqslant 1$。
-
-&emsp;&emsp;所以$(x_i \bullet x_j)^{p-1} \geqslant 0 $，$\displaystyle \sum_{i,j=1}^m (x_i \bullet x_j)^{p-1} \geqslant 0$  
-&emsp;&emsp;故$\displaystyle \sum_{i,j=1}^m c_i c_j K(x_i,x_j) \geqslant 0$，即$K(x, z)$的Gram矩阵是半正定的。
-
-**第3步：根据定理7.5的充分性证明，可得$K(x, z)$是正定核函数**
-
-&emsp;&emsp;根据书中第136页的预备知识：
-> 已知对称函数$K(x, z)$对任意$x_1, x_2, \cdots, x_m \in \mathcal{X}$，$K(x, z)$关于$x_1, x_2, \cdots, x_m$的Gram矩阵是半正定的。可以依据函数$K(x, z)$，构成一个希尔伯特空间，其步骤是：
-> 1. 定义映射$\phi$并构成向量空间$\mathcal{S}$；
-> 2. 在$\mathcal{S}$上定义内积，构成内积空间；
-> 3. 最后将$\mathcal{S}$完备化构成希尔伯特空间。
-
-&emsp;&emsp;对给定的$K(x, z)$，可以构造从$\mathcal{X}$到某个希尔伯特空间$\mathcal{H}$的映射：
-
-$$
-\phi:x \rightarrow K( \bullet, x)
-$$
-
-&emsp;&emsp;由$K(\bullet, x) \cdot f = f(x)$和$K(\bullet, x) \bullet K(\bullet, z) = K(x, z)$可得
-
-$$
-K(x, z) = \phi(x) \bullet \phi(z)
-$$
-
-&emsp;&emsp;表明$K(x, z)$是$\mathcal{X} \times \mathcal{X}$上的核函数。因此可以作为正定核，即核函数的另一定义。
+&emsp;&emsp;根据数学归纳法可得：  
+&emsp;&emsp;当$p$是正整数，$x,z\in R^n$时，内积的正整数幂函数：$$K(x,z)=(x \bullet z)^p$$是正定核函数。

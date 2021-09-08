@@ -47,7 +47,7 @@ $$
 
 **第3步：伯努利模型的极大似然估计**  
 > 极大似然估计的一般步骤：  
-参考Wiki：https://en.wikipedia.org/wiki/Maximum_likelihood_estimation   
+参考Wiki：https://en.wikipedia.org/wiki/Maximum_likelihood_estimation  
 > 1. 写出随机变量的概率分布函数；  
 > 2. 写出似然函数；
 > 3. 对似然函数取对数，得到对数似然函数，并进行化简；
@@ -143,11 +143,11 @@ $\therefore \displaystyle P(X=1)=\frac{k+1}{n+2}$
 3. 根据似然函数定义和极大似然估计的一般步骤（计算时需要取对数），可得到结论。
 
 **解答步骤：**  
-&emsp;&emsp;假设模型的条件概率分布是$P_{\theta}(Y|X)$，样本集$D=\{(x_1,y_1),(x_2,y_2),\ldots,(x_N,y_N)\}$，根据书中第17页，对数损失函数为：
+&emsp;&emsp;假设模型的条件概率分布是$P_{\theta}(Y|X)$，样本集$D=\{(x_1,y_1),(x_2,y_2),\ldots,(x_N,y_N)\}$，根据书中第17页公式(1.12)，对数损失函数为：
 $$
 L(Y,P(Y|X)) = -\log P(Y|X)
 $$
-&emsp;&emsp;根据书中第18页，按照经验风险最小化求最优模型就是求解最优化问题：
+&emsp;&emsp;根据书中第18页公式(1.15)，按照经验风险最小化求最优模型就是求解最优化问题：
 $$
 \min \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i))
 $$

@@ -34,7 +34,7 @@ import matplotlib.pyplot as plt
 
 # 使用Dataframe表示异或的输入与输出数据
 x1 = [0, 0, 1, 1]
-x2 = [1, 0, 1, 0]
+x2 = [0, 1, 0, 1]
 y = [-1, 1, 1, -1]
 x1 = np.array(x1)
 x2 = np.array(x2)
@@ -74,25 +74,25 @@ data.head()
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
       <td>-1</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
       <td>1</td>
     </tr>
     <tr>
       <th>2</th>
       <td>1</td>
-      <td>1</td>
+      <td>0</td>
       <td>1</td>
     </tr>
     <tr>
       <th>3</th>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -158,7 +158,7 @@ print("感知机模型的参数：w=", perceptron_model.coef_[
 **第3步：使用反证法证明感知机无法表示异或**
 
 &emsp;&emsp;根据书中第35页感知机模型的定义：  
-> **定义2.1（感知机）** 假设输入空间（特征空间）是$\mathcal{X} \in R^n$，输出空间是$\mathcal{y}=\{+1,-1\}$。输入$x \in \mathcal{X}$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in \mathcal{y}$表示实例的类别。由输入空间到输出空间的如下函数：
+> **定义2.1（感知机）** 假设输入空间（特征空间）是$\mathcal{X} \subseteq R^n$，输出空间是$\mathcal{y}=\{+1,-1\}$。输入$x \in \mathcal{X}$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y \in \mathcal{Y}$表示实例的类别。由输入空间到输出空间的如下函数：
 > $$
 f(x)=\text{sign}(w \cdot x + b)
 $$
@@ -198,7 +198,7 @@ w \leftarrow w + \eta y_i x_i \\
 b \leftarrow b + \eta y_i
 \end{array}
 $$  
->（4）如果转至（2），直至训练集中没有误分类点。  
+>（4）转至（2），直至训练集中没有误分类点。  
 
 **解题步骤：**
 
@@ -222,28 +222,28 @@ class Perceptron:
         self.Y = Y
         self.lr = lr
         self.plot = plot
+        if plot:
+            self.__model_plot = self._ModelPlot(self.X, self.Y)
+            self.__model_plot.open_in()
 
     def fit(self):
-        # （1）初始化weight, b
+        # (1)初始化weight, b
         weight = np.zeros(self.X.shape[1])
         b = 0
         # 训练次数
         train_counts = 0
         # 分类错误标识
         mistake_flag = True
-        if self.plot:
-            model_plot = self._ModelPlot(self.X, self.Y)
-            model_plot.open_in()
-        while mistake_flag is True:
+        while mistake_flag:
             # 开始前，将mistake_flag设置为False，用于判断本次循环是否有分类错误
             mistake_flag = False
-            # （2）从训练集中选取x,y
+            # (2)从训练集中选取x,y
             for index in range(self.X.shape[0]):
                 if self.plot:
-                    model_plot.plot(weight, b, train_counts)
+                    self.__model_plot.plot(weight, b, train_counts)
                 # 损失函数
                 loss = self.Y[index] * (weight @ self.X[index] + b)
-                # （3）如果损失函数小于0，则该点是误分类点
+                # (3)如果损失函数小于0，则该点是误分类点
                 if loss <= 0:
                     # 更新weight, b
                     weight += self.lr * self.Y[index] * self.X[index]
@@ -251,13 +251,13 @@ class Perceptron:
                     # 训练次数加1
                     train_counts += 1
                     print("Epoch {}, weight = {}, b = {}, formula: {}".format(
-                        train_counts, weight, b, model_plot.formula(weight, b)))
+                        train_counts, weight, b, self.__model_plot.formula(weight, b)))
                     # 本次循环有误分类点（即分类错误），置为True
                     mistake_flag = True
                     break
         if self.plot:
-            model_plot.close()
-        # （4）直至训练集中没有误分类点
+            self.__model_plot.close()
+        # (4)直至训练集中没有误分类点
         return weight, b
 
     class _ModelPlot:
@@ -265,11 +265,13 @@ class Perceptron:
             self.X = X
             self.Y = Y
 
-        def open_in(self):
+        @staticmethod
+        def open_in():
             # 打开交互模式，用于展示动态交互图
             plt.ion()
 
-        def close(self):
+        @staticmethod
+        def close():
             # 关闭交互模式，并显示最终的图形
             plt.ioff()
             plt.show()
@@ -296,7 +298,8 @@ class Perceptron:
             plt.title('Epoch %d' % epoch)
             plt.pause(0.01)
 
-        def formula(self, weight, b):
+        @staticmethod
+        def formula(weight, b):
             text = 'x1 ' if weight[0] == 1 else '%d*x1 ' % weight[0]
             text += '+ x2 ' if weight[1] == 1 else (
                 '+ %d*x2 ' % weight[1] if weight[1] > 0 else '- %d*x2 ' % -weight[1])
