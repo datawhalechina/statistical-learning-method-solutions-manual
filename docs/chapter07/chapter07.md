@@ -390,7 +390,7 @@ $$
 \begin{aligned} 
 \sum_{i,j=1}^n c_i c_j K(x_i,x_j) 
 &= \sum_{i,j=1}^n c_i c_j (x_i \bullet x_j) \\
-&= \left(\sum_{i=1}^m c_i x_i \right)\left(\sum_{j=1}^m c_j x_j \right) \\
+&= \left(\sum_{i=1}^m c_i x_i \right) \bullet \left(\sum_{j=1}^m c_j x_j \right) \\
 &= \Bigg\|\left( \sum_{i=1}^m c_i x_i \right)\Bigg\|^2 \geqslant 0
 \end{aligned}
 $$
@@ -409,33 +409,45 @@ K(x,z) = \phi(x) \bullet \phi(z)
 $$
 > 则称$K(x,z)$为核函数，$\phi(x)$为映射函数，式中$\phi(x) \bullet \phi(z)$为$\phi(x)$和$\phi(z)$的内积。
 
-故存在一个从$\mathcal{X}=R^n$到$\mathcal{H}$的映射
+故存在一个输入空间为$R^n$，$R^n$到$\mathcal{H}$的映射
 $$
-\phi(x):\mathcal{X} \rightarrow \mathcal{H}
+\phi(x):R^n \rightarrow \mathcal{H}
 $$
-使得函数$K(x,z)=(x \bullet z)^k$满足条件
+使得对所有$x,z \in R^n$，函数$K(x,z)=(x \bullet z)^k$满足条件
 $$
 K(x,z) = \phi(x) \bullet \phi(z)
 $$
+可假设$\phi(x)=(f_1(x), f_2(x), \cdots, f_m(x))^T$，其中$x=(x^{(1)}, x^{(2)}, \cdots, x^{(n)})^T$
 
-3. 当$p=k+1$时，对于任意$x_1, x_2, \cdots, x_n$，构造$K(x, z)=(x \bullet z)^{k+1}$对应的Gram矩阵
-
-$$
-[K_{ij}]_{n \times n} = [K(x_i, x_j)]_{n \times n}
-$$
-对任意$c_1,c_2, \cdots, c_n \in R$，有
+3. 当$p=k+1$时  
 $$
 \begin{aligned}
-\sum_{i,j=1}^n c_i c_j K(x_i,x_j) &= \sum_{i,j=1}^n c_i c_j (x_i \cdot x_j)^{k+1} \\
-&= \sum_{i,j=1}^n c_i c_j (x_i \cdot x_j)^k \cdot (x_i \cdot x_j) \\
-&= \sum_{i,j=1}^n c_i c_j (\phi(x_i) \cdot \phi(x_j)) \cdot (x_i \cdot x_j) \\
-&= \sum_{i,j=1}^n c_i c_j ((\phi(x_i)\cdot x_i) \cdot (\phi(x_j) \cdot x_j)) \\
-&= \left( \sum_i c_i (\phi(x_i) \cdot x_i) \right) \left( \sum_j c_j (\phi(x_j) \cdot x_j) \right) \\
-&= \Bigg\|\left( \sum_i c_i (\phi(x_i) \cdot x_i) \right)\Bigg\|^2 \geqslant 0
+K(x,z) 
+&= (x \bullet z)^{k+1} \\
+&= (x \bullet z)^k (x \bullet z) \\
+&= (\phi(x) \bullet \phi(z))(x \bullet z) \\
+&= (f_1(x)f_1(z) + f_2(x)f_2(z) + \cdots + f_m(x)f_m(z))(x^{(1)}z^{(1)} + x^{(2)}z^{(2)} + \cdots + x^{(n)}z^{(n)}) \\
+&= f_1(x)f_1(z)(x^{(1)}z^{(1)} + x^{(2)}z^{(2)} + \cdots + x^{(n)}z^{(n)}) \\ 
+& \quad + f_2(x)f_2(z)(x^{(1)}z^{(1)} + x^{(2)}z^{(2)} + \cdots + x^{(n)}z^{(n)}) + \cdots \\
+& \quad + f_m(x)f_m(z)(x^{(1)}z^{(1)} + x^{(2)}z^{(2)} + \cdots + x^{(n)}z^{(n)}) \\
+&= (f_1(x)x^{(1)})(f_1(z)z^{(1)}) + (f_1(x)x^{(2)})(f_1(z)z^{(2)}) + \cdots + (f_1(x)x^{(n)})(f_1(z)z^{(n)}) \\
+& \quad + (f_2(x)x^{(1)})(f_2(z)z^{(1)}) + (f_2(x)x^{(2)})(f_2(z)z^{(2)}) + \cdots + (f_2(x)x^{(n)})(f_2(z)z^{(n)}) + \cdots \\
+& \quad + (f_m(x)x^{(1)})(f_m(z)z^{(1)}) + (f_m(x)x^{(2)})(f_m(z)z^{(2)}) + \cdots + (f_m(x)x^{(n)})(f_m(z)z^{(n)}) 
 \end{aligned}
 $$
 
-&emsp;&emsp;表明$K(x,z)=(x \bullet z)^{k+1}$关于$x_1, x_2, \cdots, x_n$的Gram矩阵是半正定的，根据定理7.5，可知$K(x,z)=(x \bullet z)^{k+1}$是正定核函数。
+&emsp;&emsp;可得$\phi'(x) = (f_1(x)x^{(1)}, f_1(x)x^{(2)}, \cdots, f_1(x)x^{(n)}, f_2(x)x^{(1)}, f_2(x)x^{(2)}, \cdots, f_2(x)x^{(n)}, f_m(x)x^{(1)}, \cdots, f_m(x)x^{(n)})^T$  
+
+&emsp;&emsp;故存在从$R^n$到希尔伯特空间$\mathcal{H}$的映射$\phi'(x)$，使得
+$$
+K(x,z) = (x \bullet z)^{k+1} = \phi'(x) \bullet \phi'(z)
+$$
+
+&emsp;&emsp;根据[《矩阵分析》](http://www.cse.zju.edu.cn/eclass/attachments/2015-10/01-1446086008-145421.pdf)书中定理7.5.3：
+> 如果$A,B \in M_n$是半正定矩阵，则$A \bullet B$也是半正定矩阵，此外如果$A$和$B$都是正定矩阵，则$A \bullet B$也是正定矩阵。  
+> 其中，$A \bullet B$称为$A$和$B$的Hadamard乘积。
+
+&emsp;&emsp;由根据书中定理7.5，可得$K(x,z)=(x \bullet z)^{k+1}$是正定核函数。
 
 &emsp;&emsp;根据数学归纳法可得：  
 &emsp;&emsp;当$p$是正整数，$x,z\in R^n$时，内积的正整数幂函数：$$K(x,z)=(x \bullet z)^p$$是正定核函数。
