@@ -336,8 +336,8 @@ weight, b = model.fit()
 
 **解答思路：**
 1. 写出凸壳和线性可分的定义
-2. 证明充分性：线性可分$\Rightarrow$凸壳不相交  
-3. 证明必要性：凸壳不相交$\Rightarrow$线性可分  
+2. 证明必要性：线性可分$\Rightarrow$凸壳不相交  
+3. 证明充分性：凸壳不相交$\Rightarrow$线性可分  
 
 **第1步：凸壳与线性可分的定义**  
 1. 根据书中第47页脚注1的凸壳定义如下：  
@@ -357,92 +357,106 @@ w \cdot x + b = 0
 $$
 > 能够将数据集的正实例点和负实例点完全正确划分到超平面的两侧，即对所有$y_i=+1$的实例$i$，有$w \cdot x_i + b > 0$，对$y_i = -1$的实例$i$，有$w \cdot x_i + b < 0$，则称数据集$T$为线性可分数据集，否则称数据集$T$线性不可分。
 
-**第2步：证明充分性：线性可分$\Rightarrow$凸壳不相交**  
+**第2步：证明必要性：线性可分$\Rightarrow$凸壳不相交**  
 
-证明思路：
-1. 条件假设：将数据集分为正实例的凸壳（正凸壳）、负实例的凸壳（负凸壳），并列出相关性质；
-2. 采用反证法，即凸壳相交，假设一个点同时存在于正负两个凸壳中；
-3. 按照步骤1得到的性质，不能同时满足正负实例点的条件，得出矛盾。
+证明思路（反证法）：
+1. 假设原命题不成立：样本集线性可分，正实例点所构成的凸壳与负实例点所构成的凸壳相交
+2. 条件推理
+3. 发现矛盾，得出原命题成立
 
 证明步骤：
-1. 条件假设：  
-&emsp;&emsp;假设数据集$T$中的正例点集为$S_+$，$S_+$的凸壳为$\text{conv}(S_+)$，负实例点集为$S_-$，$S_-$的凸壳为$\text{conv}(S_-)$。  
-&emsp;&emsp;若数据集$T$是线性可分的，根据线性可分的定义，则存在一个超平面
+1. 假设原命题不成立：   
+设数据集$T$中的正例点集为$S_+$，$S_+$的凸壳为$\text{conv}(S_+)$，负实例点集为$S_-$，$S_-$的凸壳为$\text{conv}(S_-)$。  
+假设样本集线性可分，正实例点所构成的凸壳与负实例点所构成的凸壳相交，即存在某个元素$s$，同时满足$s \in \text{conv}(S_+)$和$s \in \text{conv}(S_-)$。    
+
+2. 条件推理：  
+若数据集$T$是线性可分的，根据线性可分的定义，则存在一个超平面能够将$S_+$和$S_-$完全分离：  
 $$
 w \cdot x + b = 0
 $$
-能够将$S_+$和$S_-$完全分离。  
-&emsp;&emsp;对于所有的正例点$x_i$，有
+对于所有的正例点$x_i$，有  
 $$
 w \cdot x_i + b = \varepsilon_i > 0, \quad i = 1,2,\cdots,|S_+|
 $$
-&emsp;&emsp;根据凸壳的定义，对于$\text{conv}(S_+)$中的元素$s^+$，有
+根据凸壳的定义，对于$\text{conv}(S_+)$中的元素$s_+$，有  
 $$
 \begin{aligned}
-w \cdot s^+ &= w \cdot \sum_{i=1}^k \lambda_i x_i \\
-&= \sum_{i=1}^k \lambda_i(\varepsilon_i - b) \\
-&= \sum_{i=1}^k \lambda_i \varepsilon_i - \sum_{i=1}^k \lambda_i b \quad (\because \sum_{i=1}^k \lambda_i = 1) \\
-& = \sum_{i=1}^k \lambda_i \varepsilon_i - b 
+w \cdot s_+ + b &= w \cdot (\sum_{i=1}^{|S_+|} \lambda_i x_i) + b \\
+&= (\sum_{i=1}^{|S_+|} \lambda_i(\varepsilon_i - b)) + b \\
+&= \sum_{i=1}^{|S_+|} \lambda_i \varepsilon_i - (b\sum_{i=1}^{|S_+|} \lambda_i) + b \quad (\because \sum_{i=1}^{|S_+|} \lambda_i = 1) \\
+& = \sum_{i=1}^{|S_+|} \lambda_i \varepsilon_i 
 \end{aligned}
 $$
-&emsp;&emsp;因此$\displaystyle w \cdot s^+ + b = \sum_{i=1}^k \lambda_i \varepsilon_i > 0$。  
-&emsp;&emsp;同理对于$S_-$中的元素$s^-$，有$\displaystyle w \cdot s^- + b = \sum_{i=1}^k \lambda_i \varepsilon_i < 0$ 
+因此$\displaystyle w \cdot s_+ + b = \sum_{i=1}^{|S_+|} \lambda_i \varepsilon_i > 0$。  
+同理对于$S_-$中的元素$s_-$，有$\displaystyle w \cdot s_- + b = \sum_{i=1}^{|S_-|} \lambda_i \varepsilon_i < 0$       
 
-2. 反证法：  
-&emsp;&emsp;假设$\text{conv}(S_+)$和$\text{conv}(S_-)$相交，即存在某个元素$s$，同时满足$s \in \text{conv}(S_+)$和$s \in \text{conv}(S_-)$。 
+3. 找出矛盾，得出原命题成立：  
+根据条件推理，当$s \in \text{conv}(S_+)$有$\displaystyle w \cdot s + b = \sum_{i=1}^{|S_+|} \lambda_i \varepsilon_i > 0$，当$s \in \text{conv}(S_-)$有$\displaystyle w \cdot s + b = \sum_{i=1}^{|S_-|} \lambda_i \varepsilon_i < 0$，既$s$不可能同时满足若$\displaystyle s \in \text{conv}(S_+)$和$s \in \text{conv}(S_-)$，这与假设命题矛盾。  
 
-3. 根据步骤1得到的性质：  
-&emsp;&emsp;有$\displaystyle w \cdot s + b = \sum_{i=1}^k \lambda_i \varepsilon_i > 0$且$\displaystyle w \cdot s + b = \sum_{i=1}^k \lambda_i \varepsilon_i < 0$，可推出矛盾。  
-&emsp;&emsp;因此，$\text{conv}(S_+)$ 和$\text{conv}(S_-)$必不相交，充分性得证。
+因此，原命题成立，当样本线性可分时，$\text{conv}(S_+)$ 和$\text{conv}(S_-)$必不相交。必要性得证。  
 
-**第3步：证明必要性：凸壳不相交$\Rightarrow$线性可分**  
+**第3步：证明充分性：凸壳不相交$\Rightarrow$线性可分**  
 
 证明思路：
-1. 条件假设：将数据集分为正实例的凸壳（正凸壳）、负实例的凸壳（负凸壳），并定义两个凸壳的距离：分别处于两个凸壳集合中的点的距离最小值，即为凸壳边界上的最近两点之间的距离
-2. 计算两点的法线方程参数$w$和$b$
-3. 根据线性可分正负实例点的条件，可得到该法线是分离超平面，即满足线性可分条件
+1. 根据凸壳不相交，找到一个超平面
+2. 证明这个超平面可将两个互不相交的凸壳分隔开（反证法）
+3. 上述超平面可以将凸壳分隔开，则样本集满足线性可分
 
 证明步骤：
-1. 条件假设：  
-&emsp;&emsp;假设数据集$T$中的正例点集为$S_+$，$S_+$的凸壳为$\text{conv}(S_+)$，负实例点集为$S_-$，$S_-$的凸壳为$\text{conv}(S_-)$，且$\text{conv}(S_+)$与$\text{conv}(S_-)$不相交。   
-&emsp;&emsp;定义两个点$x_1,x_2$的距离为
+1. 根据凸壳不相交，找到一个超平面：  
+设数据集$T$中的正例点集为$S_+$，$S_+$的凸壳为$\text{conv}(S_+)$，负实例点集为$S_-$，$S_-$的凸壳为$\text{conv}(S_-)$，且$\text{conv}(S_+)$与$\text{conv}(S_-)$不相交。   
+定义两个点$x_1,x_2$的距离为
 $$
-\text{dist}(x_1,x_2) = \|x_1 - x_2\|_2 = \sqrt{(x_1 - x_2)^2}
+\text{dist}(x_1,x_2) = \|x_1 - x_2\|_2
 $$  
-&emsp;&emsp;定义$\text{conv}(S_+)$、$\text{conv}(S_-)$的距离，分别处于两个凸壳集合中的点的距离最小值，即为分别处于两个凸壳边界上的最近两点之间的距离：
+定义$\text{conv}(S_+)$、$\text{conv}(S_-)$的距离是，分别处于两个凸壳集合中的点的距离最小值：
 $$
-\text{dist}(\text{conv}(S_+),\text{conv}(S_-)) = \min \|s_+ - s_-\|_2 = \text{dist}(s_+, s_-), \quad s_+ \in \text{conv}(S_+), s_- \in \text{conv}(S_-)
+\text{dist}(\text{conv}(S_+),\text{conv}(S_-)) = \min \|s_+ - s_-\|_2 \quad s_+ \in \text{conv}(S_+), s_- \in \text{conv}(S_-)
 $$  
-
-2. 计算两点的法线方程参数$w$和$b$  
-&emsp;&emsp;假设$x_+ \in \text{conv}(S_+), x_- \in \text{conv}(S_-)$，根据步骤1，可得：$$
-\text{dist}(x_+, x_-) = \text{dist}(\text{conv}(S_+),\text{conv}(S_-))
+记最小值点分别为$x_+, x_-$，即：
 $$
-&emsp;&emsp;该两点$(x_+, x_-)$之间存在一条法线，法线方程$w \cdot x + b = 0$的参数如下：
+\text{dist}(\text{conv}(S_+),\text{conv}(S_-)) = \text{dist}(x_+, x_-) \quad x_+ \in \text{conv}(S_+), x_- \in \text{conv}(S_-)
+$$  
+定义以$(x_+, x_-)$为法线，且过两点中点的超平面为$f(x|w,b)=0$，则参数为：
 $$
+\displaystyle f(x|w,b)=(x_+-x_-)^T(x - \frac{x_+ + x_-}{2})\\
 \left \{ \begin{array}{ll} 
-w = x_+ - x_- \\ 
-\displaystyle b = -\frac{1}{2}(x_+^2 -  x_-^2)
+w = (x_+ - x_-)^T \\ 
+\displaystyle b = -\frac{1}{2}({\|x_+\|_2}^2 -  {\|x_-\|_2}^2)
 \end{array}\right .
 $$
 
-3. 根据正负实例点的条件证明：  
-&emsp;&emsp;对于任意正实例点$x \neq x_+$，都有$\text{dist}(x,x_-) \geqslant \text{dist}(x , x_+)$，即点$x$与正凸壳边界上的正例点距离大于与负凸壳边界上的负例点距离，有
+2. 证明这个超平面可将两个互不相交的凸壳分隔开（反证法）  
+若某个超平面可将两个互不相交的凸壳分隔开，则$f(x)≥0, x\in \text{conv}(S_+)$且$f(x)≤0, x\in \text{conv}(S_-)$。
 $$
 \begin{aligned}
-w\cdot x +b & = (x_+-x_-)\cdot x -\frac{1}{2}(x_+^2 -  x_-^2) \\
-& = \frac{1}{2} [2x(x_+ - x_-) - (x_+^2 -  x_-^2)] \\
-&= \frac{1}{2} (x_-^2 - 2 x x_- - x_+^2 + 2 x x_+) \\
-&= \frac{1}{2} [(x_-^2 - 2 x x_- + x^2) - (x_+^2 - 2 x x_+ + x^2)] \\
-&= \frac{1}{2}(\|x_- - x\|_2^2-\|x_+ - x\|_2^2)\\
-&= \frac{1}{2}[\text{dist}(x,x_-)^2-\text{dist}(x,x_+)^2]
+\displaystyle f(x)&=(x_+-x_-)^T(x - \frac{x_+ + x_-}{2}) \\
+&=(x_+-x_-)^T(x + x_+ - x_+ - \frac{x_+ + x_-}{2}) \\
+&=(x_+-x_-)^T(x - x_+ + \frac{x_+ - x_-}{2}) \\
+&=(x_+-x_-)^T(x - x_+) + \frac{{\|x_+ - x_-\|_2}^2}{2} \\
 \end{aligned}
 $$
-&emsp;&emsp;根据$\text{dist}(x,x_-) \geqslant \text{dist}(x , x_+)$，则
+假设原命题不成立：当$x\in \text{conv}(S_+)$时，假设$f(x)<0$，则有：
 $$
-w\cdot x +b = \frac{1}{2}[\text{dist}(x,x_-)^2-\text{dist}(x,x_+)^2] \geqslant 0
+(x_+-x_-)^T(x - x_+) < 0
 $$
-&emsp;&emsp;综上所述，对于任意正实例点$x \neq x_+$，都有$w\cdot x +b \geqslant 0$。  
-&emsp;&emsp;同理，对于任意负实例点$x \neq x_-$，都有$\text{dist}(x,x_+) \geqslant \text{dist}(x , x_-)$，可得$w\cdot x +b \leqslant 0$。  
+设点$u=x_++t(x-x_+), t\in [0,1]$，即$u$在$x_+$和$x$的线段上。根据凸壳定义，$u \in \text{conv}(S_+)$。则$u$和$x_-$距离的平方为：
+$$
+\begin{aligned}
+\displaystyle g(t)&={\|u-x_-\|_2}^2 \\
+&={\|x_++t(x-x_+)-x_-\|_2}^2 \\
+\end{aligned}
+$$
+求解$u$和$x_-$距离的最小值，对上式求导：
+$$
+\begin{aligned}
+\displaystyle g'(t)&=2(x_++t(x-x_+)-x_-)(x-x_+) \\
+&=2(x_+-x_-)^T(x-x_+)+t{\|x-x_+\|_2}^2 \\
+\end{aligned}
+$$
+根据假设，在$t=0$时，得$g'(t)<0$。在当$t$足够接近于0时（导函数在0处的极限值为负，则存在邻域函数递减），即$g(t)<g(0)$。  
+$\therefore$ 存在一点$u$，使得它到$x_-$的距离，比定义的凸壳距离$\text{dist}(x_+,x_-)$还小。产生矛盾。  
+故原命题成立，即$f(x)≥0, x\in \text{conv}(S_+)$。同理，可证$f(x)≤0, x\in \text{conv}(S_-)$。则可以找到一个超平面将两个互不相交的凸壳分隔开。  
 
-  &emsp;&emsp;根据线性可分条件，对所有正实例$x_i$，有$w \cdot x_i + b > 0$，对所有负实例$x_i$，有$w \cdot x_i + b < 0$，则称数据集$T$为线性可分数据集，该法线为分离超平面，必要性得证。
+3. 上述超平面可以将凸壳分隔开，则样本集满足线性可分  
+&emsp;&emsp;根据凸壳定义，数据集$T$中正例点$s_+ \in \text{conv}(S_+)$，负例点$s_- \in \text{conv}(S_-)$。上述超平面可以将正例点集$S_+$和负例点集$S_-$两个凸壳分隔开，则可以使样本集线性可分。充分性得证。
