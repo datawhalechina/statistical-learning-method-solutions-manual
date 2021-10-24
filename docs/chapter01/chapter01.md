@@ -6,131 +6,190 @@
 **解答：**  
 
 **解答思路：**
-1. 写出伯努利模型的概率分布函数；
+1. 写出伯努利模型；
 2. 写出伯努利模型的极大似然估计以及贝叶斯估计中的统计学习方法三要素；
-3. 根据伯努利模型的极大似然估计算法，估计结果为1的概率；
-4. 根据伯努利模型的贝叶斯估计算法，估计结果为1的概率。
+3. 根据伯努利模型的极大似然估计，估计结果为1的概率；
+4. 根据伯努利模型的贝叶斯估计，估计结果为1的概率。
 
 **解答步骤：**  
 
-**第1步：伯努利模型的概率分布函数**  
+**第1步：伯努利模型**  
 &emsp;&emsp;根据题意：伯努利模型是定义在取值为0与1的随机变量上的概率分布。  
 &emsp;&emsp;对于随机变量$X$，则有：
 $$
-f(X=1)=p \\ f(X=0)=1-p
+P(X=1)=p \\ P(X=0)=1-p
 $$
-&emsp;&emsp;由于随机变量$X$只有0和1两个值，$X$的概率分布函数可写为：
+
+其中，$p$为随机变量$X$取值为1的概率，$1-p$则为取0的概率。  
+&emsp;&emsp;由于随机变量$X$只有0和1两个值，$X$的概率分布函数，即伯努利模型可写为：
 $$
-f(X=x|p)=p^x (1-p)^{(1-x)} \quad 0<p<1
+P_p(X=x)=p^x (1-p)^{(1-x)}, \quad 0 \leqslant p \leqslant 1
 $$
-&emsp;&emsp;根据题意，假设观测到伯努利模型$n$次独立的数据生成结果，其中$k$次的结果为1，则概率质量函数可以写成：
+
+&emsp;&emsp;则伯努利模型的假设空间为：
 $$
-f(X|p)=P\{X=k\}=C_n^k p^k (1-p)^{n-k}
+\mathcal{F}=\{P|P_p(X)=p^x(1-p)^{(1-x)}, p\in [0,1] \}
 $$
 
 **第2步：伯努利模型的极大似然估计以及贝叶斯估计中的统计学习方法三要素**  
 （1）极大似然估计  
-模型：$\mathcal{F}=\{f|f(x|p)=p^x(1-p)^{(1-x)}\}$  
-策略：最大化似然函数  
-算法：$\displaystyle \mathop{\arg\max} \limits_{p} L(p|X)= \mathop{\arg\max} \limits_{p} f(X|p)$ 
+&emsp;&emsp;模型：伯努利模型  
+&emsp;&emsp;策略：经验风险最小化。极大似然估计，等价于当模型是条件概率分布、损失函数是对数损失函数时的经验风险最小化。  
+&emsp;&emsp;算法：极大化似然：$\displaystyle \mathop{\arg\max} \limits_{p} L(p|X)= \mathop{\arg\max} \limits_{p} P(X|p)$ 
 
 （2）贝叶斯估计  
-模型：$\mathcal{F}=\{f|f_p(x)=p^x(1-p)^{(1-x)}\}$  
-策略：求参数期望  
-算法：
-$$
-\begin{aligned}  E_\pi [p |X ]
-&= {\int_0^1} p \pi (p|X) dp \\
-&= {\int_0^1} p \frac{f(X|p)\pi(p)}{\int_{\Omega}f(X|p)\pi(p)dp}dp \\
-\end{aligned}
-$$
+&emsp;&emsp;模型：伯努利模型  
+&emsp;&emsp;策略：结构风险最小化。贝叶斯估计中的最大后验概率估计，等价于当模型是条件概率分布、损失函数是对数损失函数、模型复杂度由模型的先验概率表示时的结构风险最小化。    
+&emsp;&emsp;算法：最大化后验概率：$\displaystyle \mathop{\arg\max} \limits_{p} \pi (p|X)= \displaystyle \mathop{\arg\max} \limits_{p} \frac{P(X|p)\pi(p)}{\int P(X|p)\pi(p)dp}$
+
 
 **第3步：伯努利模型的极大似然估计**  
-> 极大似然估计的一般步骤：  
-参考Wiki：https://en.wikipedia.org/wiki/Maximum_likelihood_estimation  
-> 1. 写出随机变量的概率分布函数；  
-> 2. 写出似然函数；
-> 3. 对似然函数取对数，得到对数似然函数，并进行化简；
-> 4. 对参数进行求导，并令导数等于0；
-> 5. 求解似然函数方程，得到参数的值。
 
-&emsp;&emsp;定义$P(X=1)$概率为$p$，可得似然函数为：
+&emsp;&emsp;极大似然估计的一般步骤：  
+&emsp;&emsp;参考Wiki：https://en.wikipedia.org/wiki/Maximum_likelihood_estimation  
+> 1. 写出随机变量的概率分布函数；  
+> 2. 写出似然函数；  
+> 3. 对似然函数取对数，得到对数似然函数，并进行化简；  
+> 4. 对参数进行求导，并令导数等于0；  
+> 5. 求解似然函数方程，得到参数的值。  
+
+&emsp;&emsp;对于伯努利模型$n$次独立的数据生成结果，其中$k$次的结果为1，可得似然函数为：
 $$
-\begin{aligned} L(p|X) &= f(X|p) \\
-&= C_n^k p^k (1-p)^{n-k}
+\begin{aligned} L(p|X) &= P(X|p) \\
+&= \prod_{i=1}^{n} P(x^{(i)}|p) \\
+&=p^k (1-p)^{n-k}
 \end{aligned}
 $$
+
 &emsp;&emsp;对似然函数取对数，得到对数似然函数为：
 $$
-\begin{aligned} \log L(p|X) &= \log C_n^k p^k (1-p)^{n-k} \\
-&= C_n^k \left[\log(p^k) + \log\left( (1-p)^{n-k} \right)\right] \\
-&= C_n^k \left[ k\log p + (n-k)\log (1-p)\right]
+\begin{aligned} \log L(p|X) &= \log p^k (1-p)^{n-k} \\
+&= \log(p^k) + \log\left( (1-p)^{n-k} \right) \\
+&= k\log p + (n-k)\log (1-p)
 \end{aligned}
 $$
+
 &emsp;&emsp;求解参数$p$：
 $$
 \begin{aligned}
 \hat{p} &= \mathop{\arg\max} \limits_{p} L(p|X) \\
-&= \mathop{\arg\max} \limits_{p} C_n^k \left[ k\log p + (n-k)\log (1-p)\right]
+&= \mathop{\arg\max} \limits_{p} \left[ k\log p + (n-k)\log (1-p) \right]
 \end{aligned}
 $$
+
 &emsp;&emsp;对参数$p$求导，并求解导数为0时的$p$值：
 $$
 \begin{aligned}
-\frac{\partial \log L(p)}{\partial p} &= C_n^k \left[ \frac{k}{p} - \frac{n-k}{1-p} \right] \\
-&= C_n^k \left[ \frac{k(1-p) - p(n-k)}{p(1-p)} \right] \\
-&= C_n^k \frac{k-np}{p(1-p)} = 0
+\frac{\partial \log L(p)}{\partial p} &= \frac{k}{p} - \frac{n-k}{1-p} \\
+&= \frac{k(1-p) - p(n-k)}{p(1-p)} \\
+&= \frac{k-np}{p(1-p)}
 \end{aligned}
 $$
-&emsp;&emsp;从上式可得，$k-np=0$，即$\displaystyle P(X=1)=p=\frac{k}{n}$
+
+&emsp;&emsp;令$\displaystyle \frac{\partial \log L(p)}{\partial p} = 0$，从上式可得，$k-np=0$，即$\displaystyle p=\frac{k}{n}$  
+&emsp;&emsp;所以$\displaystyle P(X=1)=\frac{k}{n}$
 
 **第4步：伯努利模型的贝叶斯估计**  
-> 贝叶斯估计的一般步骤：  
-参考Wiki：https://en.wikipedia.org/wiki/Bayes_estimator
-> 1. 确定参数$\theta$的先验概率$p(\theta)$
-> 2. 根据样本集$D={x_1,x_2,\ldots,x_n}$，计算似然函数$P(D|\theta)$：$\displaystyle P(D|\theta)=\prod_{i=1}^n P(x_n|D)$
-> 3. 利用贝叶斯公式，求$\theta$的后验概率：$\displaystyle P(\theta|D)=\frac{P(D|\theta)P(\theta)}{\displaystyle \int \limits_\Theta P(D|\theta) P(\theta) d \theta}$ 
-> 4. 计算后验概率分布参数$\theta$的期望，并求出贝叶斯估计值：$\displaystyle \hat{\theta}=\int \limits_{\Theta} \theta \cdot P(\theta|D) d \theta$
 
-&emsp;&emsp;定义$P(Y=1)$概率为$p$，$p$在$[0,1]$之间的取值是等概率的，因此先验概率密度函数$\pi(p) = 1$，可得似然函数： 
+解法一：求最大后验估计
+
+&emsp;&emsp;贝叶斯估计（最大后验估计）的一般步骤：  
+&emsp;&emsp;参考Wiki：https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation
+> 1. 确定参数$\theta$的先验概率$p(\theta)$  
+> 2. 根据样本集$D=\{ x_1, x_2, \ldots, x_n \}$，计算似然函数$P(D|\theta)$：$\displaystyle P(D|\theta)=\prod_{i=1}^n P(x_n|D)$  
+> 3. 利用贝叶斯公式，写出后验概率最大化公式：  
+> $$
+\mathop{\arg\max} \limits_{\theta}  P(\theta|D)=\mathop{\arg\max} \limits_{\theta} \frac{P(D|\theta)P(\theta)}{\displaystyle \int \limits_\Theta P(D|\theta) P(\theta) d \theta} = \mathop{\arg\max} \limits_{\theta} P(D|\theta)P(\theta)
+$$ 
+> 4. 利用求导，得到后验概率最大时的参数取值
+
+&emsp;&emsp;对于伯努利模型的参数$p$，根据贝叶斯估计，该参数也是随机变量。  
+&emsp;&emsp;假设$p$的先验分布$\pi(p)$为均匀分布，则最大后验概率估计等价于极大似然估计。  
+&emsp;&emsp;一般在贝叶斯估计中，如果后验分布与先验分布属于同一分布簇（共轭分布），则称此先验分布为似然函数的共轭先验。
+
+&emsp;&emsp;参考[极大似然估计和贝叶斯估计](https://zhuanlan.zhihu.com/p/61593112)
+> 选取共轭先验有如下好处，例如：    
+>（1）符合直观，先验分布和后验分布应该是相同形式的；  
+>（2）可以给出后验分布的解析形式；  
+>（3）可以形成一个先验链，即现在的后验分布可以作为下一次计算的先验分布，如果形式相同，就可以形成一个链条。
+
+&emsp;&emsp;伯努利分布的先验分布为Beta分布，则此处假设先验分布$\pi(p)$为Beta分布。  
+
+> **补充知识：Beta分布**  
+> 来源维基百科：https://zh.wikipedia.org/wiki/%CE%92%E5%88%86%E5%B8%83     
+&emsp;&emsp;Beta 分布（Beta distribution），是指一组定义在${\displaystyle (0,1)}$区间的连续概率分布，亦称Β分布。有两个参数$\alpha, \beta>0$。  
+> 概率密度函数：$\displaystyle f(x; \alpha, \beta)= \frac{1}{{\rm B}(\alpha, \beta)}x^{(\alpha-1)}(1-x)^{\beta-1}$   
+其中${\rm B}(\alpha, \beta)$是Beta函数，亦称Β函数。$\displaystyle {\rm B}(\alpha, \beta) =\int _{0}^{1} x^{\alpha-1}(1-x)^{\beta-1}dx$   
+> 随机变量$X$服从参数为$\alpha, \beta$的Beta分布记作：$X \sim {\rm Be}(\alpha, \beta)$   
+> 期望：$\displaystyle {\rm E}(X) = \frac{\alpha}{\alpha+\beta}$   
+> 与均匀分布关系：当$\alpha=1, \beta=1$时，Beta分布就是一个均匀分布  
+
+&emsp;&emsp;$p$的先验分布为：  
 $$
-L(p)=f(X|p)=C_n^k p^k (1-p)^{n-k}
-$$  
-&emsp;&emsp;根据似然函数和先验概率密度函数，可以求解$p$的后验分布为：
+\displaystyle \pi (p) = \frac{1}{B(\alpha, \beta)} p^{(\alpha-1)} (1-p)^{\beta-1}
 $$
-\begin{aligned}
-\pi(p|X) & =\frac{f(X|p)\pi(p)}{\int_{\Omega}f(X|p)\pi(p)dp} \\
-&= \frac{C_n^k p^k (1-p)^{n-k}}{\displaystyle \int_0^1 C_n^k p^k (1-p)^{n-k} dp} \\
-&= \frac{p^k (1-p)^{n-k}}{\displaystyle \int_0^1 p^k (1-p)^{n-k} dp}
+
+&emsp;&emsp;似然函数与第3步相同：
+$$
+\begin{aligned} L(p|X) &= P(X|p) \\
+&= \prod_{i=1}^{n} P(x^{(i)}|p) \\
+&=p^k (1-p)^{n-k}
 \end{aligned}
 $$
 
-> **知识补充：Beta函数**  
-来源百度百科：https://baike.baidu.com/item/%E8%B4%9D%E5%A1%94%E5%87%BD%E6%95%B0?fromtitle=Beta%E5%87%BD%E6%95%B0&fromid=50806259  
-对任意实数$P,Q>0$，有$$B(P,Q)=\int_0^1 x^{P-1} (1-x)^{Q-1} dx$$称该函数为贝塔函数，或为Beta函数、B函数。  
-递推公式：
-> 1. $\displaystyle B(P,Q)=\frac{Q-1}{P+Q-1} B(P,Q-1) \quad P>0,Q>1$
-> 2. $\displaystyle B(P,Q)=\frac{P-1}{P+Q-1} B(P-1,Q) \quad P>1,Q>0$
-> 3. $\displaystyle B(P,Q)=\frac{(P-1)(Q-1)}{(P+Q-1)(P+Q-2)} B(P-1,Q-1) \quad P>1,Q>1$
-
-&emsp;&emsp;根据Beta函数定义：$\displaystyle \int_0^1 p^k (1-p)^{n-k} dp=B(k+1,n-k+1)$  
-$\therefore p$的后验分布为$\displaystyle \pi(p|X) =\frac{p^k(1-p)^{n-k}}{B(k+1,n-k+1)}$  
-&emsp;&emsp;则$p$的期望为：
+&emsp;&emsp;最大化后验概率，求解参数$p$：
 $$
 \begin{aligned}
-E_\pi[p|X] &= {\int}p\pi(p|X)dp \\
-&= {\int_0^1} p \frac{p^k (1-p)^{n-k}}{B(k+1,n-k+1)}dp \\
-&= {\int_0^1} \frac{p^{k+1} (1-p)^{n-k}}{B(k+1,n-k+1)}dp \\
-&= \frac{\displaystyle \int_0^1 p^{k+1} (1-p)^{n-k} dp}{B(k+1,n-k+1)}
+\hat{p} &= \mathop{\arg\max} \limits_{p} \frac{P(X|p)\pi(p)}{\displaystyle \int P(X|p)\pi(p)dp} \\
+&=\mathop{\arg\max} \limits_{p} P(X|p)\pi(p) \\
+&=\mathop{\arg\max} \limits_{p} p^k (1-p)^{n-k} \frac{1}{B(\alpha, \beta)} p^{(\alpha-1)} (1-p)^{\beta-1} \\
+&=\frac{1}{B(\alpha, \beta)} \mathop{\arg\max} \limits_{p} p^{k+\alpha-1} (1-p)^{n-k+\beta-1}
 \end{aligned}
 $$
-&emsp;&emsp;根据Beta函数定义：$\displaystyle \int_0^1 p^{k+1} (1-p)^{n-k} dp = B(k+2, n-k+1)$   
-$\therefore \displaystyle E_\pi[p|X] = \frac{B(k+2,n-k+1)}{B(k+1,n-k+1)}$  
-&emsp;&emsp;根据Beta函数的递推公式：
-> $\displaystyle B(P,Q)=\frac{P-1}{P+Q-1} B(P-1,Q) \Rightarrow \frac{B(P,Q)}{B(P-1,Q)} = \frac{P-1}{P+Q-1}$   
 
-$\therefore \displaystyle E_\pi[p|X] = \frac{B(k+2,n-k+1)}{B(k+1,n-k+1)} = \frac{k+2-1}{k+2+n-k+1-1} = \frac{k+1}{n+2}$  
-$\therefore \displaystyle P(X=1)=\frac{k+1}{n+2}$
+&emsp;&emsp;令$g(p) = p^{k+\alpha-1} (1-p)^{n-k+\beta-1}$，对函数$g(p)$先取对数，再对$p$求导，得
+$$\frac{\partial \log g(p)}{\partial p} = \frac{k+\alpha-1}{p} - \frac{n-k+\beta-1}{1-p}$$ 
+
+&emsp;&emsp;令上式等于0，得$\displaystyle \hat{p} = \frac{k+\alpha-1}{n+\alpha+\beta-2}$，其中$\alpha, \beta$为beta分布的参数。
+
+&emsp;&emsp;所以最大后验概率估计得到$\displaystyle P(X=1)=\frac{k+\alpha-1}{n+\alpha+\beta-2}$
+
+解法二：求后验概率分布的期望  
+
+&emsp;&emsp;后验概率分布的期望求解  
+&emsp;&emsp;参考Wiki（中文）：https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87  
+&emsp;&emsp;参考Wiki（英文）：https://en.wikipedia.org/wiki/Bayes_estimator  
+> &emsp;&emsp;贝叶斯估计中的最大后验概率估计，得到的是模型参数$\theta$这个随机变量的后验分布的众数，通常被认为是点估计。而贝叶斯方法的特点是使用分布来总结数据和得出推论，因此贝叶斯方法倾向于得到后验均值或中值，以及可信区间。  
+> &emsp;&emsp;贝叶斯估计，利用后验分布的期望（均值）作为参数的估计值的方法，前两步与最大后验概率估计相同，第3、4步如下：  
+> 3. 利用贝叶斯公式，求$\theta$的后验概率：$\displaystyle P(\theta|D)=\frac{P(D|\theta)P(\theta)}{\displaystyle \int \limits_\Theta P(D|\theta) P(\theta) d \theta}$   
+> 4. 计算后验概率分布参数$\theta$的期望，并求出贝叶斯估计值：$\displaystyle \hat{\theta}=\int \limits_{\Theta} \theta \cdot P(\theta|D) d \theta$  
+
+&emsp;&emsp;已知似然函数和参数$p$的先验分布，参数$p$的后验分布为：
+$$
+\begin{aligned}
+P(p|X) &= \frac{P(X|p)\pi(p)}{\displaystyle \int P(X|p)\pi(p)dp} \\
+&=\frac{\displaystyle  \frac{1}{B(\alpha, \beta)}  p^{k+\alpha-1} (1-p)^{n-k+\beta-1}}{\displaystyle  \int \frac{1}{B(\alpha, \beta)}  p^{k+\alpha-1} (1-p)^{n-k+\beta-1} dp} \\
+&=\frac{ p^{k+\alpha-1} (1-p)^{n-k+\beta-1}}{\displaystyle \int p^{k+\alpha-1} (1-p)^{n-k+\beta-1} dp} \\
+&=\frac{1}{B(k+\alpha, n-k+\beta)} p^{k+\alpha-1} (1-p)^{n-k+\beta-1} \\
+&\sim \text{Be}(k+\alpha, n-k+\beta) \\
+\end{aligned}
+$$
+
+&emsp;&emsp;后验概率分布的期望:
+$$
+\begin{aligned}
+E_p(p|X)&=E_p({\rm Be}(k+\alpha, n-k+\beta)) \\
+&=\frac{k+\alpha}{(k+\alpha)+(n-k+\beta)} \\
+&=\frac{k+\alpha}{n+\alpha+\beta}
+\end{aligned}
+$$
+
+&emsp;&emsp;则以参数的后验概率分布的期望作为贝叶斯估计的参数值：
+$$
+\displaystyle \hat{p}=\frac{k+\alpha}{n+\alpha+\beta}
+$$
+
+&emsp;&emsp;所以贝叶斯估计得到$\displaystyle P(X=1)=\frac{k+\alpha}{n+\alpha+\beta}$
 
 ## 习题1.2
 &emsp;&emsp;通过经验风险最小化推导极大似然估计。证明模型是条件概率分布，当损失函数是对数损失函数时，经验风险最小化等价于极大似然估计。
@@ -143,15 +202,15 @@ $\therefore \displaystyle P(X=1)=\frac{k+1}{n+2}$
 3. 根据似然函数定义和极大似然估计的一般步骤（计算时需要取对数），可得到结论。
 
 **解答步骤：**  
-&emsp;&emsp;假设模型的条件概率分布是$P_{\theta}(Y|X)$，样本集$D=\{(x_1,y_1),(x_2,y_2),\ldots,(x_N,y_N)\}$，根据书中第17页公式(1.12)，对数损失函数为：
+&emsp;&emsp;假设模型的条件概率分布是$P_{\theta}(Y|X)$，样本集$D=\{(x_1,y_1),(x_2,y_2),\ldots,(x_N,y_N)\}$，根据书中第17页公式(1.12)，对数损失函数为：  
 $$
 L(Y,P(Y|X)) = -\log P(Y|X)
 $$
-&emsp;&emsp;根据书中第18页公式(1.15)，按照经验风险最小化求最优模型就是求解最优化问题：
+&emsp;&emsp;根据书中第18页公式(1.15)，按照经验风险最小化求最优模型就是求解最优化问题：  
 $$
 \min \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i))
 $$
-&emsp;&emsp;结合上述两个式子，可得经验风险最小化函数：
+&emsp;&emsp;结合上述两个式子，可得经验风险最小化函数：  
 $$
 \begin{aligned} 
 \mathop{\arg\min} \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i)) &= \mathop{\arg\min} \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_D [-\log P(Y|X)] \\
@@ -160,8 +219,8 @@ $$
 &= \frac{1}{N} \mathop{\arg\max} \limits_{f \in \mathcal{F}} \log \prod_D P(Y|X)
 \end{aligned}
 $$
-&emsp;&emsp;根据似然函数定义：$\displaystyle L(\theta)=\prod_D P_{\theta}(Y|X)$，以及极大似然估计的一般步骤，可得：
+&emsp;&emsp;根据似然函数定义：$\displaystyle L(\theta)=\prod_D P_{\theta}(Y|X)$，以及极大似然估计的一般步骤，可得：  
 $$
 \mathop{\arg\min} \limits_{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(x_i)) = \frac{1}{N} \mathop{\arg\max} \limits_{f \in \mathcal{F}} \log L(\theta)
 $$
-&emsp;&emsp;即经验风险最小化等价于极大似然估计，得证。
+&emsp;&emsp;即经验风险最小化等价于极大似然估计，得证。  
