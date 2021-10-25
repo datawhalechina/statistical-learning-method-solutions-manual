@@ -141,14 +141,14 @@ $$
 $$
 \begin{aligned}
 \hat{p} &= \mathop{\arg\max} \limits_{p} \frac{P(X|p)\pi(p)}{\displaystyle \int P(X|p)\pi(p)dp} \\
-&=\mathop{\arg\max} \limits_{p} P(X|p)\pi(p) \\
-&=\mathop{\arg\max} \limits_{p} p^k (1-p)^{n-k} \frac{1}{B(\alpha, \beta)} p^{(\alpha-1)} (1-p)^{\beta-1} \\
-&=\frac{1}{B(\alpha, \beta)} \mathop{\arg\max} \limits_{p} p^{k+\alpha-1} (1-p)^{n-k+\beta-1}
+&= \mathop{\arg\max} \limits_{p} P(X|p)\pi(p) \\
+&= \mathop{\arg\max} \limits_{p} p^k (1-p)^{n-k} \frac{1}{B(\alpha, \beta)} p^{(\alpha-1)} (1-p)^{\beta-1} \\
+&= \mathop{\arg\max} \limits_{p} \frac{1}{B(\alpha, \beta)} p^{k+\alpha-1} (1-p)^{n-k+\beta-1}
 \end{aligned}
 $$
 
-&emsp;&emsp;令$g(p) = p^{k+\alpha-1} (1-p)^{n-k+\beta-1}$，对函数$g(p)$先取对数，再对$p$求导，得
-$$\frac{\partial \log g(p)}{\partial p} = \frac{k+\alpha-1}{p} - \frac{n-k+\beta-1}{1-p}$$ 
+&emsp;&emsp;令$\displaystyle g(p) = \frac{1}{B(\alpha, \beta)} p^{k+\alpha-1} (1-p)^{n-k+\beta-1}$，对函数$g(p)$先取对数，再对$p$求导，得
+$$ \frac{\partial \log g(p)}{\partial p} = \frac{1}{B(\alpha, \beta)} \left( \frac{k+\alpha-1}{p} - \frac{n-k+\beta-1}{1-p} \right)$$ 
 
 &emsp;&emsp;令上式等于0，得$\displaystyle \hat{p} = \frac{k+\alpha-1}{n+\alpha+\beta-2}$，其中$\alpha, \beta$为beta分布的参数。
 
