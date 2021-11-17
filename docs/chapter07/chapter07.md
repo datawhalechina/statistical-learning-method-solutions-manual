@@ -302,9 +302,9 @@ c_i^{(2)}(x) = - \xi_i, \quad i = 1,2,\cdots, N
 \end{array} \right.
 $$
 
-&emsp;&emsp;根据拉格朗日函数的定义，可得原始问题的拉格朗日函数（即书中第127页公式7.40）为
+&emsp;&emsp;根据拉格朗日函数的定义，可得原始问题的拉格朗日函数为
 $$
-L(w,b,\xi, \alpha, \mu) = \frac{1}{2} \|w\|^2 + C \sum_{i=1}^N \xi_i - \sum_{i=1}^N \alpha_i(y_i (w \cdot x_i + b)-1 + \xi_i) - \sum_{i=1}^N \mu_i \xi_i
+L(w,b,\xi, \alpha, \mu) = \frac{1}{2} \|w\|^2 + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N \alpha_i(y_i (w \cdot x_i + b)-1 + \xi_i) - \sum_{i=1}^N \mu_i \xi_i
 $$ 
 其中，$\alpha_i \geqslant 0, \mu_i \geqslant 0$
 
@@ -315,19 +315,31 @@ $$
 \begin{array}{l}
 \displaystyle \nabla_w L(w,b,\xi,\alpha,\mu)  = w - \sum_{i=1}^N \alpha_i y_i x_i = 0 \\ 
 \displaystyle \nabla_b L(w,b,\xi,\alpha,\mu)  =  -\sum_{i=1}^N \alpha_i y_i = 0 \\
-\nabla_{\xi_i} L(w,b,\xi,\alpha,\mu)  = C - \alpha_i - \mu_i = 0 
-\end{array}$$
+\displaystyle \nabla_{\xi_i} L(w,b,\xi,\alpha,\mu)  = 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 
+\end{array}
+$$
+
 &emsp;&emsp;可得：
-$$\begin{array}{l}
+$$
+\begin{array}{l}
 \displaystyle w = \sum_{i=1}^N \alpha_i y_i x_i \\ 
 \displaystyle \sum_{i=1}^N \alpha_i y_i = 0 \\
-C - \alpha_i - \mu_i = 0 
+\displaystyle 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 
 \end{array}
 $$
 
 &emsp;&emsp;将上式代入到原始问题的拉格朗日函数中，可得
 $$
-L(w, b, \xi, \alpha, \mu) = -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i
+\begin{aligned}
+L(w, b, \xi, \alpha, \mu) 
+&= \frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) +  C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N \alpha_i y_i \left( \left( \sum_{j=1}^N \alpha_j y_j x_j \right) \cdot x_i + b \right) \\
+& + \sum_{i=1}^N \alpha_i - \sum_{i=1}^N \alpha_i \xi_i - \sum_{i=1}^N \mu_i \xi_i \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N \alpha_i \xi_i - \sum_{i=1}^N \mu_i \xi_i \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N (\alpha_i + \mu_i) \xi_i \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N \left( 2C \sum_{j=1}^N \xi_j \right) \xi_i \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - 2C \left(\sum_{i=1}^N \xi_i \right)^2 \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \left(\sum_{i=1}^N \xi_i^2 - 2 \left(\sum_{i=1}^N \xi_i \right)^2 \right)
+\end{aligned}
 $$
 
 **第3步：对$\displaystyle \min \limits_{w,b,\xi} L(w,b,\xi,\alpha,\mu)$求$\alpha$的极大**
@@ -335,26 +347,22 @@ $$
 &emsp;&emsp;根据第2步，对$\displaystyle \min \limits_{w,b,\xi} L(w,b,\xi,\alpha,\mu)$求$\alpha$的极大，可得到对偶问题：
 $$
 \begin{array}{cl} 
-\displaystyle \max \limits_{\alpha} & \displaystyle -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i \\
+\displaystyle \max \limits_{\alpha} & \displaystyle -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \left(\sum_{i=1}^N \xi_i^2 - 2 \left(\sum_{i=1}^N \xi_i \right)^2 \right)\\
 \text{s.t.} & \displaystyle \sum_{i=1}^N \alpha_i y_i = 0 \\
-& C - \alpha_i - \mu_i = 0 \\
-& \alpha_i \geqslant 0 \\
-& \mu_i \geqslant 0, \quad i=1,2,\cdots, N 
+& \displaystyle 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 \\
+& \alpha_i \geqslant 0 ,\mu_i \geqslant 0, \xi_i \geqslant 0, \quad i=1,2,\cdots, N
 \end{array}
 $$
 
 **第4步：进行公式变换，得到对偶形式**
 
-&emsp;&emsp;根据第3步得到的式子，消去$\mu_i$，只留下变量$\alpha_i$，可得
-$$
-0 \leqslant \alpha_i \leqslant C
-$$
 &emsp;&emsp;再将对目标函数求极大转换为求极小，于是得到原始问题的对偶形式
 $$
 \begin{array}{cl} 
-\displaystyle \min \limits_{\alpha} & \displaystyle \frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) - \sum_{i=1}^N \alpha_i \\
+\displaystyle \min \limits_{\alpha} & \displaystyle \frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) - \sum_{i=1}^N \alpha_i + C \left(2 \left(\sum_{i=1}^N \xi_i \right)^2 - \sum_{i=1}^N \xi_i^2 \right) \\
 \text{s.t.} & \displaystyle \sum_{i=1}^N \alpha_i y_i = 0 \\
-& 0 \leqslant \alpha_i \leqslant C, \quad i=1,2,\cdots, N
+& \displaystyle 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 \\
+& \alpha_i \geqslant 0 ,\mu_i \geqslant 0, \xi_i \geqslant 0, \quad i=1,2,\cdots, N
 \end{array}
 $$
 
@@ -430,13 +438,23 @@ K(x,z)
 &= f_1(x)f_1(z)(x^{(1)}z^{(1)} + x^{(2)}z^{(2)} + \cdots + x^{(n)}z^{(n)}) \\ 
 & \quad + f_2(x)f_2(z)(x^{(1)}z^{(1)} + x^{(2)}z^{(2)} + \cdots + x^{(n)}z^{(n)}) + \cdots \\
 & \quad + f_m(x)f_m(z)(x^{(1)}z^{(1)} + x^{(2)}z^{(2)} + \cdots + x^{(n)}z^{(n)}) \\
-&= (f_1(x)x^{(1)})(f_1(z)z^{(1)}) + (f_1(x)x^{(2)})(f_1(z)z^{(2)}) + \cdots + (f_1(x)x^{(n)})(f_1(z)z^{(n)}) \\
-& \quad + (f_2(x)x^{(1)})(f_2(z)z^{(1)}) + (f_2(x)x^{(2)})(f_2(z)z^{(2)}) + \cdots + (f_2(x)x^{(n)})(f_2(z)z^{(n)}) + \cdots \\
-& \quad + (f_m(x)x^{(1)})(f_m(z)z^{(1)}) + (f_m(x)x^{(2)})(f_m(z)z^{(2)}) + \cdots + (f_m(x)x^{(n)})(f_m(z)z^{(n)}) 
+&= (f_1(x)x^{(1)})(f_1(z)z^{(1)}) + (f_1(x)x^{(2)})(f_1(z)z^{(2)}) + \cdots \\ 
+& \quad + (f_1(x)x^{(n)})(f_1(z)z^{(n)}) \\
+& \quad + (f_2(x)x^{(1)})(f_2(z)z^{(1)}) + (f_2(x)x^{(2)})(f_2(z)z^{(2)}) + \cdots \\
+& \quad + (f_2(x)x^{(n)})(f_2(z)z^{(n)}) + \cdots \\
+& \quad + (f_m(x)x^{(1)})(f_m(z)z^{(1)}) + (f_m(x)x^{(2)})(f_m(z)z^{(2)}) + \cdots \\ 
+& \quad + (f_m(x)x^{(n)})(f_m(z)z^{(n)}) 
 \end{aligned}
 $$
 
-&emsp;&emsp;可得$\phi'(x) = (f_1(x)x^{(1)}, f_1(x)x^{(2)}, \cdots, f_1(x)x^{(n)}, f_2(x)x^{(1)}, f_2(x)x^{(2)}, \cdots, f_2(x)x^{(n)}, f_m(x)x^{(1)}, \cdots, f_m(x)x^{(n)})^T$  
+&emsp;&emsp;可得
+$$
+\begin{aligned}
+\phi'(x) &= (f_1(x)x^{(1)}, f_1(x)x^{(2)}, \cdots, f_1(x)x^{(n)}, \\
+& \quad f_2(x)x^{(1)}, f_2(x)x^{(2)}, \cdots, f_2(x)x^{(n)}, \\
+& \quad f_m(x)x^{(1)}, \cdots, f_m(x)x^{(n)})^T
+\end{aligned}
+$$  
 
 &emsp;&emsp;故存在从$R^n$到希尔伯特空间$\mathcal{H}$的映射$\phi'(x)$，使得
 $$

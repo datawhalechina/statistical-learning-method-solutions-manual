@@ -17,10 +17,9 @@
 > 勘误表：http://blog.sina.com.cn/s/blog_7ad48fee0102yjdu.html
 
 ## 参考文献
-1. [李航《统计学习方法》习题笔记](https://sine-x.com/statistical-learning-method)
-2. [李航《统计学习方法笔记》中的代码、notebook、参考文献、Errata](https://github.com/SmirkCao/Lihang)  
-3. [CART剪枝详解](https://blog.csdn.net/wjc1182511338/article/details/76793164)
-4. [CART剪枝算法详解](http://www.pianshen.com/article/1752163397/)
+1. [李航《统计学习方法笔记》中的代码、notebook、参考文献、Errata](https://github.com/SmirkCao/Lihang)  
+2. [CART剪枝详解](https://blog.csdn.net/wjc1182511338/article/details/76793164)
+3. [CART剪枝算法详解](http://www.pianshen.com/article/1752163397/)
 
 ## 主要贡献者
 [@胡锐锋-天国之影-Relph](https://github.com/Relph1119)  
