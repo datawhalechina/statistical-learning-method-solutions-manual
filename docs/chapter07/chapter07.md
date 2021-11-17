@@ -315,7 +315,7 @@ $$
 \begin{array}{l}
 \displaystyle \nabla_w L(w,b,\xi,\alpha,\mu)  = w - \sum_{i=1}^N \alpha_i y_i x_i = 0 \\ 
 \displaystyle \nabla_b L(w,b,\xi,\alpha,\mu)  =  -\sum_{i=1}^N \alpha_i y_i = 0 \\
-\displaystyle \nabla_{\xi_i} L(w,b,\xi,\alpha,\mu)  = 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 
+\displaystyle \nabla_{\xi_i} L(w,b,\xi,\alpha,\mu)  = 2C \xi_i - \alpha_i - \mu_i = 0 
 \end{array}
 $$
 
@@ -324,7 +324,7 @@ $$
 \begin{array}{l}
 \displaystyle w = \sum_{i=1}^N \alpha_i y_i x_i \\ 
 \displaystyle \sum_{i=1}^N \alpha_i y_i = 0 \\
-\displaystyle 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 
+\displaystyle 2C \xi_i - \alpha_i - \mu_i = 0 
 \end{array}
 $$
 
@@ -336,9 +336,11 @@ L(w, b, \xi, \alpha, \mu)
 & + \sum_{i=1}^N \alpha_i - \sum_{i=1}^N \alpha_i \xi_i - \sum_{i=1}^N \mu_i \xi_i \\
 &= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N \alpha_i \xi_i - \sum_{i=1}^N \mu_i \xi_i \\
 &= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N (\alpha_i + \mu_i) \xi_i \\
-&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N \left( 2C \sum_{j=1}^N \xi_j \right) \xi_i \\
-&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - 2C \left(\sum_{i=1}^N \xi_i \right)^2 \\
-&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \left(\sum_{i=1}^N \xi_i^2 - 2 \left(\sum_{i=1}^N \xi_i \right)^2 \right)
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - \sum_{i=1}^N \left( 2C \xi_i \right) \xi_i \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \sum_{i=1}^N \xi_i^2 - 2C \sum_{i=1}^N \xi_i^2 \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i - C \sum_{i=1}^N \xi_i^2 \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i - C \sum_{i=1}^N \left(\frac{1}{4 C^2}(\alpha_i + \mu_i)^2 \right) \\
+&= -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i - \frac{1}{4 C}\sum_{i=1}^N (\alpha_i + \mu_i)^2
 \end{aligned}
 $$
 
@@ -347,9 +349,9 @@ $$
 &emsp;&emsp;根据第2步，对$\displaystyle \min \limits_{w,b,\xi} L(w,b,\xi,\alpha,\mu)$求$\alpha$的极大，可得到对偶问题：
 $$
 \begin{array}{cl} 
-\displaystyle \max \limits_{\alpha} & \displaystyle -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i + C \left(\sum_{i=1}^N \xi_i^2 - 2 \left(\sum_{i=1}^N \xi_i \right)^2 \right)\\
+\displaystyle \max \limits_{\alpha} & \displaystyle -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) + \sum_{i=1}^N \alpha_i - \frac{1}{4 C}\sum_{i=1}^N (\alpha_i + \mu_i)^2 \\
 \text{s.t.} & \displaystyle \sum_{i=1}^N \alpha_i y_i = 0 \\
-& \displaystyle 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 \\
+& \displaystyle 2C \xi_i - \alpha_i - \mu_i = 0 \\
 & \alpha_i \geqslant 0 ,\mu_i \geqslant 0, \xi_i \geqslant 0, \quad i=1,2,\cdots, N
 \end{array}
 $$
@@ -359,9 +361,9 @@ $$
 &emsp;&emsp;再将对目标函数求极大转换为求极小，于是得到原始问题的对偶形式
 $$
 \begin{array}{cl} 
-\displaystyle \min \limits_{\alpha} & \displaystyle \frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) - \sum_{i=1}^N \alpha_i + C \left(2 \left(\sum_{i=1}^N \xi_i \right)^2 - \sum_{i=1}^N \xi_i^2 \right) \\
+\displaystyle \min \limits_{\alpha} & \displaystyle \frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \alpha_i \alpha_j y_i y_j (x_i \cdot x_j) - \sum_{i=1}^N \alpha_i + \frac{1}{4 C}\sum_{i=1}^N (\alpha_i + \mu_i)^2 \\
 \text{s.t.} & \displaystyle \sum_{i=1}^N \alpha_i y_i = 0 \\
-& \displaystyle 2C \sum_{i=1}^N \xi_i - \alpha_i - \mu_i = 0 \\
+& \displaystyle 2C \xi_i - \alpha_i - \mu_i = 0 \\
 & \alpha_i \geqslant 0 ,\mu_i \geqslant 0, \xi_i \geqslant 0, \quad i=1,2,\cdots, N
 \end{array}
 $$
