@@ -6,6 +6,22 @@
 &emsp;&emsp;统计学习方法习题解答，主要完成了该书的前11章习题，并提供代码和运行之后的截图，里面的内容是以统计学习方法的内容为前置知识，该习题解答的最佳使用方法是以李航老师的《统计学习方法》为主线，并尝试完成课后习题，如果遇到不会的，再来查阅习题解答。  
 &emsp;&emsp;如果觉得解答不详细，可以[点击这里](https://github.com/datawhalechina/statistical-learning-method-solutions-manual/issues)提交你希望补充推导或者习题编号，我们看到后会尽快进行补充。
 
+## 自学指南
+- 建议自学时长：35天
+- 自学形式：以教材内容为主，学习与总结知识点；以课后习题为辅，尝试完成习题，巩固知识理论。
+- 学习安排：
+    - Task01（3天）：阅读第1章统计学习方法概论，总结知识点，完成习题1.1、习题1.2
+    - Task02（3天）：阅读第2章感知机，总结知识点，完成习题2.1、习题2.2
+    - Task03（3天）：阅读第3章k近邻法，总结知识点，完成习题3.1、习题3.2、习题3.3
+    - Task04（3天）：阅读第4章朴素贝叶斯法，总结知识点，完成习题4.1
+    - Task05（3天）：阅读第5章决策树，总结知识点，完成习题5.1、习题5.2
+    - Task06（3天）：阅读第6章Logistic回归与最大熵模型，总结知识点，完成习题6.2、习题6.3
+    - Task07（3天）：阅读第7章支持向量机，总结知识点，完成习题7.1、习题7.2、习题7.3
+    - Task08（3天）：阅读第8章提升方法，总结知识点，完成习题8.1、习题8.2
+    - Task09（3天）：阅读第9章EM算法及其推广，总结知识点，完成习题9.1
+    - Task10（4天）：阅读第10章隐马尔可夫模型，总结知识点，完成习题10.1、习题10.2
+    - Task11（4天）：阅读第11章条件随机场，总结知识点，完成习题11.1、习题11.4
+
 ## 选用的《统计学习方法》版本
 <img src="images/statistical-learning-method-book.png?raw=true" width="336" height= "500">
 
@@ -25,7 +41,8 @@
 [@胡锐锋-天国之影-Relph](https://github.com/Relph1119)  
 [@王维嘉-king-vega](https://github.com/king-vega)  
 [@王茸茸-CiCi-futurewq](https://blog.csdn.net/wangrongrongwq?spm=1000.21115.3001.5343)  
-[@王瀚翀-MSQ-ERIC](https://github.com/ericwang970322)
+[@王瀚翀-MSQ-ERIC](https://github.com/ericwang970322)  
+[@毛鹏志](https://github.com/NorthblueM)
 
 ## 项目结构
 <pre>
@@ -64,7 +81,8 @@ requirements.txt---------------------------运行环境依赖包
 </pre>
 
 ## 关注我们
-<div align=center><img src="images/qrcode.jpeg" width = "250" height = "270" alt="Datawhale，一个专注于AI领域的学习圈子。初衷是for the learner，和学习者一起成长。目前加入学习社群的人数已经数千人，组织了机器学习，深度学习，数据分析，数据挖掘，爬虫，编程，统计学，Mysql，数据竞赛等多个领域的内容学习，微信搜索公众号Datawhale可以加入我们。"></div>
+<div align=center><img src="images/qrcode.jpeg" width = "250" height = "270"></div>
+&emsp;&emsp;Datawhale，一个专注于AI领域的学习圈子。初衷是for the learner，和学习者一起成长。目前加入学习社群的人数已经数千人，组织了机器学习，深度学习，数据分析，数据挖掘，爬虫，编程，统计学，Mysql，数据竞赛等多个领域的内容学习，微信搜索公众号Datawhale可以加入我们。
 
 ## LICENSE
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
