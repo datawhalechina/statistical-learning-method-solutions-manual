@@ -199,9 +199,9 @@ class MyDecisionTree:
             A = np.array(train_data[:, feature].flat)
             # 计算信息增益
             gda = self._calc_ent_grap(A, D)
-            if self._calc_ent(A) != 0:
+            if self._calc_ent(D) != 0:
                 # 计算信息增益比
-                gda /= self._calc_ent(A)
+                gda /= self._calc_ent(D)
             # 选择信息增益最大的特征Ag
             if gda > max_gda:
                 max_gda, max_feature = gda, feature
