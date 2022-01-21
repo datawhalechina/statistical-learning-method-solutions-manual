@@ -23,7 +23,7 @@
 - 第11章 [条件随机场](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/chapter11/chapter11)
 
 ## 选用的《统计学习方法》版本
-<img src="res/statistical-learning-method-book.png?raw=true" width="336" height= "500">
+<img src="images/statistical-learning-method-book.png?raw=true" width="336" height= "500">
 
 
 > 书名：统计学习方法  
