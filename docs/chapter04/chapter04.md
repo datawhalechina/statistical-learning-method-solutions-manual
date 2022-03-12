@@ -38,28 +38,32 @@ $$
 &= C_N^m p^m (1-p)^{N-m}
 \end{aligned}
 $$
+
 对似然函数取对数，得到对数似然函数为：
 $$
 \begin{aligned} \displaystyle \log L(p|Y) &= \log C_N^m p^m (1-p)^{N-m} \\
-&= C_N^m \left[\log(p^m) + \log\left( (1-p)^{N-m} \right)\right] \\
-&= C_N^m \left[ m\log p + (N-m)\log (1-p)\right]
+&= \log C_N^m + \log(p^m) + \log\left( (1-p)^{N-m} \right) \\
+&= \log C_N^m + m\log p + (N-m)\log (1-p)
 \end{aligned}
 $$
+
 求解参数$p$：
 $$
 \begin{aligned}
 \hat{p} &= \mathop{\arg\max} \limits_{p} L(p|Y) \\
-&= \mathop{\arg\max} \limits_{p} C_N^m \left[ m\log p + (N-m)\log (1-p)\right]
+&= \mathop{\arg\max} \limits_{p} \left[\log C_N^m + m\log p + (N-m)\log (1-p) \right]
 \end{aligned}
 $$
+
 对参数$p$求导，并求解导数为0时的$p$值：
 $$
 \begin{aligned}
-\frac{\partial \log L(p)}{\partial p} &= C_N^m \left[ \frac{m}{p} - \frac{N-m}{1-p} \right] \\
-&= C_N^m \left[ \frac{m(1-p) - p(N-m)}{p(1-p)} \right] \\
-&= C_N^m \frac{m-Np}{p(1-p)} = 0
+\frac{\partial \log L(p)}{\partial p} &= \frac{m}{p} - \frac{N-m}{1-p} \\
+&= \frac{m(1-p) - p(N-m)}{p(1-p)} \\
+&= \frac{m-Np}{p(1-p)} = 0
 \end{aligned}
 $$
+
 从上式可得，$m-Np=0$，即$\displaystyle P(Y=c_k)=p=\frac{m}{N}$  
 综上所述，$\displaystyle P(Y=c_k)=p=\frac{m}{N}=\frac{\displaystyle \sum_{i=1}^N I(y_i=c_k)}{N}$，公式(4.8)得证。
 
