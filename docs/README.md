@@ -23,7 +23,7 @@
     - Task11（4天）：阅读第11章条件随机场，总结知识点，完成习题11.1、习题11.4
 
 ## 选用的《统计学习方法》版本
-<img src="images/statistical-learning-method-book.png?raw=true" width="336" height= "500">
+<img src="resources/statistical-learning-method-book.png?raw=true" width="336" height= "500">
 
 
 > 书名：统计学习方法  
@@ -83,7 +83,7 @@ requirements.txt---------------------------运行环境依赖包
 ## 关注我们
 <div align=center>
 <p>扫描下方二维码关注公众号：Datawhale</p>
-<img src="images/qrcode.jpeg" width = "180" height = "180">
+<img src="resources/qrcode.jpeg" width = "180" height = "180">
 </div>
 &emsp;&emsp;Datawhale，一个专注于AI领域的学习圈子。初衷是for the learner，和学习者一起成长。目前加入学习社群的人数已经数千人，组织了机器学习，深度学习，数据分析，数据挖掘，爬虫，编程，统计学，Mysql，数据竞赛等多个领域的内容学习，微信搜索公众号Datawhale可以加入我们。
 

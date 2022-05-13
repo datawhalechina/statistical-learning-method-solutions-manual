@@ -596,7 +596,7 @@ $$
 2. 当$C_\alpha(t) < C_\alpha(T_t)$时，对以结点$t$为根节点的子树进行剪枝。
 
 <br/><center>
-<img src="./images/5-1-prune.png" style="zoom: 50%;"><br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px;">图5.1 树$T_1$存在两个最优子树$T_2,T_3$</div></center>
+<img src="./part01/images/5-1-prune.png" style="zoom: 50%;"><br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px;">图5.1 树$T_1$存在两个最优子树$T_2,T_3$</div></center>
 
 &emsp;&emsp;如图5.1所示，整个树$T_1$有两个子树$T_2$和$T_3$，其剪枝位置分别为$t_2$和$t_3$，假设两棵子树都是$T_1$的最优子树，使得损失函数最小。则满足以下等式：
 $$
@@ -618,7 +618,7 @@ $$
 &emsp;&emsp;根据上述公式，可知$T_2$和$T_3$都可以进一步剪枝，剪枝之后的子树记作$T_4$：
 
 <br/><center>
-<img src="./images/5-2-prune-T4.png" style="zoom: 50%;"><br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px;">图5.2 剪枝后的子树$T_4$</div></center>
+<img src="./part01/images/5-2-prune-T4.png" style="zoom: 50%;"><br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px;">图5.2 剪枝后的子树$T_4$</div></center>
 
 &emsp;&emsp;因此，如果存在两棵以上的最优子树，其中一棵树总能找到一个来自另一棵子树的剪枝点，使得整体损失进一步下降，所以只能存在唯一的最小子树使得损失函数最小，得证。
 
