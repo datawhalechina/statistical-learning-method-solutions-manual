@@ -27,7 +27,7 @@ jupyter-highlight-selected-word==0.2.0
 jupyter-latex-envs==1.4.6
 jupyter-nbextensions-configurator==0.4.1
 kiwisolver==1.2.0
-lxml==4.6.3
+lxml==4.9.1
 MarkupSafe==1.1.1
 matplotlib==3.3.0
 mistune==0.8.4
