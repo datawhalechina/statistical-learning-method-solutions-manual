@@ -5,7 +5,7 @@
 @file: lsa_svd.py
 @time: 2022/7/11 15:21
 @project: statistical-learning-method-solutions-manual
-@desc: 习题17.1 根据题意，利用矩阵奇异值分解进行潜在语义分析
+@desc: 习题17.1 利用矩阵奇异值分解进行潜在语义分析
 """
 
 import numpy as np

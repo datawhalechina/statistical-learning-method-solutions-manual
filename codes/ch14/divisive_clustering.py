@@ -5,7 +5,7 @@
 @file: divisive_clustering.py
 @time: 2022/7/17 0:42
 @project: statistical-learning-method-solutions-manual
-@desc: 习题15.1 分裂聚类算法
+@desc: 习题14.1 分裂聚类算法
 """
 import numpy as np
 

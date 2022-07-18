@@ -10,17 +10,28 @@
 在线阅读地址：https://datawhalechina.github.io/statistical-learning-method-solutions-manual
 
 ## 目录
-- 第1章 [统计学习方法概论](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter01/chapter01)
-- 第2章 [感知机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter02/chapter02)
-- 第3章 [k近邻法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter03/chapter03)
-- 第4章 [朴素贝叶斯法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter04/chapter04)
-- 第5章 [决策树](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter05/chapter05)
-- 第6章 [Logistic回归与最大熵模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter06/chapter06)
-- 第7章 [支持向量机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter07/chapter07)
-- 第8章 [提升方法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter08/chapter08)
-- 第9章 [EM算法及其推广](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter09/chapter09)
-- 第10章 [隐马尔可夫模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter10/chapter10)
-- 第11章 [条件随机场](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter11/chapter11)
+- 第1篇 监督学习
+    - 第1章 [统计学习方法概论](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter01/ch01)
+    - 第2章 [感知机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter02/ch02)
+    - 第3章 [k近邻法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter03/ch03)
+    - 第4章 [朴素贝叶斯法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter04/ch04)
+    - 第5章 [决策树](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter05/ch05)
+    - 第6章 [Logistic回归与最大熵模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter06/ch06)
+    - 第7章 [支持向量机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter07/ch07)
+    - 第8章 [提升方法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter08/ch08)
+    - 第9章 [EM算法及其推广](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter09/ch09)
+    - 第10章 [隐马尔可夫模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter10/ch10)
+    - 第11章 [条件随机场](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter11/ch11)
+- 第2篇 无监督学习
+    - 第14章 [聚类方法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter14/ch14)
+    - 第15章 [奇异值分解](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter15/ch15)
+    - 第16章 [主成分分析](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter16/ch16)
+    - 第17章 [潜在语义分析](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter17/ch17)
+    - 第18章 [概率潜在语义分析](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter18/ch18)
+    - 第19章 [马尔可夫链蒙特卡罗法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter19/ch19)
+    - 第20章 [潜在狄利克雷分配](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter20/ch20)
+    - 第21章 [PageRank算法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter21/ch21)
+
 
 ## 选用的《统计学习方法》版本
 <img src="images/statistical-learning-method-book.png?raw=true" width="336" height= "500">
@@ -72,14 +83,14 @@
 |  9 | EM算法及其推广          | 已完成 | 胡锐锋 | 毛鹏志、范佳慧、王瀚翀、王茸茸 |
 | 10 | 隐马尔可夫模型          | 已完成 | 胡锐锋、王瀚翀 | 王维嘉、范佳慧、王天富、王茸茸 |
 | 11 | 条件随机场             | 已完成 | 胡锐锋、王瀚翀 | 王维嘉、范佳慧、王天富 |
-| 14 | 聚类方法               | 待认领 | - | - |
-| 15 | 奇异值分解             | 待认领 | - | - |
-| 16 | 主成分分析             | 待认领 | - | - |
-| 17 | 潜在语义分析            | 待认领 | - | - |
-| 18 | 概率潜在语义分析        | 待认领 | - | - |
-| 19 | 马尔可夫链蒙特卡罗法     | 待认领 | - | - |
-| 20 | 潜在狄利克雷分配        | 待认领 | - | - |
-| 21 | PageRank算法         | 待认领 | - | - |
+| 14 | 聚类方法               | 待评审 | 胡锐锋、刘晓东 | - |
+| 15 | 奇异值分解             | 待评审 | 胡锐锋、李小山 | - |
+| 16 | 主成分分析             | 待完善 | 胡锐锋、王茸茸 | - |
+| 17 | 潜在语义分析            | 待评审 | 胡锐锋 | - |
+| 18 | 概率潜在语义分析        | 待评审 | 胡锐锋 | - |
+| 19 | 马尔可夫链蒙特卡罗法     | 待评审 | 胡锐锋、王天富 | - |
+| 20 | 潜在狄利克雷分配        | 待评审 | 胡锐锋、薛博阳 | - |
+| 21 | PageRank算法         | 待评审 | 胡锐锋、毛鹏志 | - |
 | 23 | 前馈神经网络           | 待认领 | - | - |
 | 24 | 卷积神经网络           | 待认领 | - | - |
 | 25 | 循环神经网络           | 待认领 | - | - |
@@ -125,9 +136,29 @@ codes----------------------------------------------习题代码
 |   |   +---hidden_markov_viterbi.py---------------习题10.3（隐马尔可夫模型的维特比算法）
 |   +---ch11---------------------------------------第11章习题解答代码
 |   |   +---crf_matrix.py--------------------------习题11.4（使用条件随机场矩阵形式，计算所有路径状态序列的概率及概率最大的状态序列）
-docs---------------------------------------习题解答
-notebook-----------------------------------习题解答JupyterNotebook格式
-requirements.txt---------------------------运行环境依赖包
+|   +---ch14---------------------------------------第14章习题解答代码
+|   |   +---divisive_clustering.py-----------------习题14.1（分裂聚类算法）
+|   +---ch15---------------------------------------第15章习题解答代码
+|   |   +---my_svd.py------------------------------习题15.1（自编程实现奇异值分解）
+|   |   +---outer_product_expansion.py-------------习题15.2（外积展开式）
+|   +---ch16---------------------------------------第16章习题解答代码
+|   |   +---pca_svd.py-----------------------------习题16.1（样本矩阵的奇异值分解的主成分分析算法）
+|   +---ch17---------------------------------------第17章习题解答代码
+|   |   +---lsa_svd.py-----------------------------习题17.1（用矩阵奇异值分解进行潜在语义分析）
+|   |   +---divergence_nmf_lsa.py------------------习题17.2（损失函数是散度损失时的非负矩阵分解算法）
+|   +---ch18---------------------------------------第18章习题解答代码
+|   |   +---em_plsa.py-----------------------------习题18.1（基于生成模型的EM算法的概率潜在语义分析）
+|   +---ch19---------------------------------------第19章习题解答代码
+|   |   +---monte_carlo_method.py------------------习题19.1（蒙特卡洛法积分计算）
+|   |   +---metropolis_hastings.py-----------------习题19.7（使用Metropolis-Hastings算法求后验概率分布的均值和方差）
+|   |   +---gibbs_sampling.py----------------------习题19.8（使用吉布斯抽样算法估计参数的均值和方差）
+|   +---ch20---------------------------------------第20章习题解答代码
+|   |   +---gibbs_sampling_lda.py------------------习题20.2（LDA吉布斯抽样算法）
+|   +---ch21---------------------------------------第21章习题解答代码
+|   |   +---page_rank.py---------------------------习题20.2（基本定义的PageRank的迭代算法）
+docs-----------------------------------------------习题解答
+notebook-------------------------------------------习题解答JupyterNotebook格式
+requirements.txt-----------------------------------运行环境依赖包
 </pre>
 
 ## 感谢
