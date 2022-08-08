@@ -95,7 +95,7 @@ requirements.txt-----------------------------------运行环境依赖包
 - [王维嘉](https://github.com/king-vega) （中国石油大学（北京））
 - [王茸茸](https://www.zhihu.com/people/naruto-80-25) （北京邮电大学-风控算法工程师）
 - [王瀚翀](https://github.com/ericwang970322) （华东师范大学-推荐系统方向）
-- [毛鹏志](https://github.com/NorthblueM) （Datawhale成员-中科院计算所）
+- [毛鹏志](https://github.com/NorthblueM) （Datawhale成员-中科院计算所-信息检索与生物信息方向）
 - [刘晓东](https://blog.csdn.net/weixin_44212633) （中科院自动化研究所-意图识别与人机交互方向）
 - [李拥祺](https://github.com/L3Y1Q2) （北京航空航天大学-运动规划与控制决策方向）
 - [王天富](GeminiLight.cn) （中国科学技术大学-数据挖掘与强化学习方向）
