@@ -76,6 +76,7 @@ class KDTree:
         return np.sqrt(np.sum(np.square(node1 - node2)))
 
     def _search(self, point, tree=None, k=1, k_neighbor_sets=None, depth=0):
+        n = len(point)
         if k_neighbor_sets is None:
             k_neighbor_sets = []
         if tree is None:
@@ -94,22 +95,31 @@ class KDTree:
             direct = 'right'
             next_branch = tree.right_child
         if next_branch is not None:
-            # (3)(a) 判断当前结点，并更新当前k近邻点集
-            k_neighbor_sets = self._update_k_neighbor_sets(k_neighbor_sets, k, next_branch, point)
             # (3)(b)检查另一子结点对应的区域是否相交
+            k_neighbor_sets = self._search(point, tree=next_branch, k=k, depth=depth + 1,
+                                           k_neighbor_sets=k_neighbor_sets)
+
+            # 计算目标点与切分点形成的分割超平面的距离
+            temp_dist = abs(tree.value[depth % n] - point[0][depth % n])
+
             if direct == 'left':
-                node_distance = self._cal_node_distance(point, tree.right_child.value)
-                if k_neighbor_sets[0][0] > node_distance:
+                # 判断超球体是否与超平面相交
+                if not (k_neighbor_sets[0][0] < temp_dist and len(k_neighbor_sets) == k):
                     # 如果相交，递归地进行近邻搜索
+                    # (3)(a) 判断当前结点，并更新当前k近邻点集
+                    k_neighbor_sets = self._update_k_neighbor_sets(k_neighbor_sets, k, tree, point)
                     return self._search(point, tree=tree.right_child, k=k, depth=depth + 1,
                                         k_neighbor_sets=k_neighbor_sets)
             else:
-                node_distance = self._cal_node_distance(point, tree.left_child.value)
-                if k_neighbor_sets[0][0] > node_distance:
+                # 判断超球体是否与超平面相交
+                if not (k_neighbor_sets[0][0] < temp_dist and len(k_neighbor_sets) == k):
+                    # 如果相交，递归地进行近邻搜索
+                    # (3)(a) 判断当前结点，并更新当前k近邻点集
+                    k_neighbor_sets = self._update_k_neighbor_sets(k_neighbor_sets, k, tree, point)
                     return self._search(point, tree=tree.left_child, k=k, depth=depth + 1,
                                         k_neighbor_sets=k_neighbor_sets)
 
-        return self._search(point, tree=next_branch, k=k, depth=depth + 1, k_neighbor_sets=k_neighbor_sets)
+        return k_neighbor_sets
 
     def _update_k_neighbor_sets(self, best, k, tree, point):
         # 计算目标点与当前结点的距离
