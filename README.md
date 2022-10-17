@@ -165,7 +165,7 @@ requirements.txt-----------------------------------运行环境依赖包
 **其他**
 1. 特别感谢 [@Sm1les](https://github.com/Sm1les)、[@LSGOMYP](https://github.com/LSGOMYP) 对本项目的帮助与支持
 2. 感谢[@GYHHAHA](https://github.com/GYHHAHA)，指出了第7章习题7.4的解答问题，并完善了该题的解答
-3. 感谢范佳慧同学对项目提供的完善建议
+3. 感谢范佳慧、汪健麟、张宇明、范致远、兰坤等同学对项目提供的完善建议
 
 ## 参考文献
 1. [李航《统计学习方法笔记》中的代码、notebook、参考文献、Errata](https://github.com/SmirkCao/Lihang)  
