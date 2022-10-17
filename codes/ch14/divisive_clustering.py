@@ -50,9 +50,9 @@ class DivisiveClustering:
             class_center.append(data[class_2, :])
 
             num_class_temp = 2
-            # (5)判断类的个数是否满足设定的样本类别数
+            # (5) 判断类的个数是否满足设定的样本类别数
             while num_class_temp != self.num_class:
-                # (4.1)计算剩余样本与目前各个类中心的距离
+                # (4.1) 计算未分裂的样本与目前各个类中心的距离
                 data2class_distance = np.zeros((num_sample, 1))
                 for i in range(num_sample):
                     # 计算样本到各类中心的距离总和
