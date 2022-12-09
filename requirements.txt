@@ -4,7 +4,7 @@ autopep8==1.5.7
 backcall==0.2.0
 beautifulsoup4==4.11.1
 bleach==3.3.0
-certifi==2021.5.30
+certifi==2022.12.7
 cffi==1.14.1
 colorama==0.4.3
 cycler==0.10.0
