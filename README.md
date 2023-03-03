@@ -45,7 +45,7 @@
 
 ## Notebook运行环境配置
 1. Python版本  
-   请使用python3.7.X，如使用其他版本，requirements.txt中所列的依赖包可能不兼容。
+   请使用python3.10.X，如使用其他版本，requirements.txt中所列的依赖包可能不兼容。
 2. 安装相关的依赖包
     ```shell
     pip install -r requirements.txt
