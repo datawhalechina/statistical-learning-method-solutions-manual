@@ -45,7 +45,7 @@
 
 ## Notebook运行环境配置
 1. Python版本  
-   请使用python3.7.X，如使用其他版本，requirements.txt中所列的依赖包可能不兼容。
+   请使用python3.10.X，如使用其他版本，requirements.txt中所列的依赖包可能不兼容。
 2. 安装相关的依赖包
     ```shell
     pip install -r requirements.txt
@@ -53,7 +53,13 @@
 3. 安装graphviz（用于展示决策树）  
     可参考博客：https://blog.csdn.net/HNUCSEE_LJK/article/details/86772806
 
-4. docsify框架运行
+4. 安装PyTorch
+访问[PyTorch官网](https://pytorch.org/get-started/locally/)，选择合适的版本安装PyTorch，有条件的小伙伴可以下载GPU版本
+```shell
+pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+```
+
+5. docsify框架运行
     ```shell
     docsify serve ./docs
     ```
