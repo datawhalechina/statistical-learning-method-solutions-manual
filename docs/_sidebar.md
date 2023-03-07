@@ -20,3 +20,6 @@
       * [第19章 马尔可夫链蒙特卡罗法](part02/chapter19/ch19.md)
       * [第20章 潜在狄利克雷分配](part02/chapter20/ch20.md)
       * [第21章 PageRank算法](part02/chapter21/ch21.md)
+    * 第3篇 深度学习
+      * [第23章 前馈神经网络](part03/ch23.md)
+      * [第24章 卷积神经网络](part03/ch24.md)
