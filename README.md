@@ -9,33 +9,8 @@
 ### 在线阅读地址
 在线阅读地址：https://datawhalechina.github.io/statistical-learning-method-solutions-manual
 
-## 目录
-- 第1篇 监督学习
-    - 第1章 [统计学习方法概论](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter01/ch01)
-    - 第2章 [感知机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter02/ch02)
-    - 第3章 [k近邻法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter03/ch03)
-    - 第4章 [朴素贝叶斯法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter04/ch04)
-    - 第5章 [决策树](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter05/ch05)
-    - 第6章 [Logistic回归与最大熵模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter06/ch06)
-    - 第7章 [支持向量机](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter07/ch07)
-    - 第8章 [提升方法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter08/ch08)
-    - 第9章 [EM算法及其推广](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter09/ch09)
-    - 第10章 [隐马尔可夫模型](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part01/chapter10/ch10)
-    - 第11章 [条件随机场](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter11/ch11)
-- 第2篇 无监督学习
-    - 第14章 [聚类方法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter14/ch14)
-    - 第15章 [奇异值分解](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter15/ch15)
-    - 第16章 [主成分分析](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter16/ch16)
-    - 第17章 [潜在语义分析](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter17/ch17)
-    - 第18章 [概率潜在语义分析](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter18/ch18)
-    - 第19章 [马尔可夫链蒙特卡罗法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter19/ch19)
-    - 第20章 [潜在狄利克雷分配](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter20/ch20)
-    - 第21章 [PageRank算法](https://datawhalechina.github.io/statistical-learning-method-solutions-manual/#/part02/chapter21/ch21)
-
-
 ## 选用的《统计学习方法》版本
 <img src="images/statistical-learning-method-book.png?raw=true" width="336" height= "500">
-
 
 > 书名：统计学习方法  
 > 作者：李航  
@@ -46,10 +21,12 @@
 ## Notebook运行环境配置
 1. Python版本  
    请使用python3.10.X，如使用其他版本，requirements.txt中所列的依赖包可能不兼容。
+   
 2. 安装相关的依赖包
     ```shell
     pip install -r requirements.txt
     ```
+   
 3. 安装graphviz（用于展示决策树）  
     可参考博客：https://blog.csdn.net/HNUCSEE_LJK/article/details/86772806
 
@@ -66,10 +43,9 @@ pip3 install torch torchvision torchaudio --extra-index-url https://download.pyt
 
 ## 协作规范
 1. 由于习题解答中需要有程序和执行结果，采用jupyter notebook的格式进行编写（文件路径：notebook/notes），然后将其导出成markdown格式，再覆盖到docs对应的章节下。
-2. 目前已完成前11章习题解答，需要进行全部解答校对。
-3. 可按照Notebook运行环境配置，配置相关的运行环境。
-4. 校对过程中，关于数学概念补充，尽量使用初学者（有高数基础）能理解的数学概念，如果涉及公式定理的推导和证明，可附上参考链接。
-5. 当前进度
+2. 可按照Notebook运行环境配置，配置相关的运行环境。
+3. 习题解答编写中，需要尽量使用初学者（有高数基础）能理解的数学概念，如果涉及公式定理的推导和证明，可附上参考链接。
+4. 当前进度
 
 | 章节号 |           标题           |  进度  | 负责人 | 审核人 |
 | :---: | :----------------------: | :----: | :----: | :----: |
@@ -92,12 +68,12 @@ pip3 install torch torchvision torchaudio --extra-index-url https://download.pyt
 | 19 | 马尔可夫链蒙特卡罗法     | 已完成 | 胡锐锋、王天富 | 毛鹏志、刘晓东、范致远、汪健麟 |
 | 20 | 潜在狄利克雷分配        | 已完成 | 胡锐锋、薛博阳 | 毛鹏志、刘晓东、范致远、王天富 |
 | 21 | PageRank算法         | 已完成 | 胡锐锋、毛鹏志 | 张宇明、范致远、王天富 |
-| 23 | 前馈神经网络           | 待认领 | 胡锐锋、毛鹏志 | - |
-| 24 | 卷积神经网络           | 待认领 | 胡锐锋、王天富 | - |
-| 25 | 循环神经网络           | 待认领 | 胡锐锋、王昊文 | - |
-| 26 | 序列到序列模型         | 待认领 | 胡锐锋、薛博阳 | - |
-| 27 | 预训练语言模型         | 待认领 | 胡锐锋、范致远 | - |
-| 28 | 生成对抗网络           | 待认领 | 胡锐锋、胡磊 | - |
+| 23 | 前馈神经网络           | 待审核 | 胡锐锋、毛鹏志 | - |
+| 24 | 卷积神经网络           | 待审核 | 胡锐锋、王天富 | - |
+| 25 | 循环神经网络           | 待审核 | 胡锐锋、王昊文 | - |
+| 26 | 序列到序列模型         | 待审核 | 胡锐锋、薛博阳 | - |
+| 27 | 预训练语言模型         | 待审核 | 胡锐锋、范致远 | - |
+| 28 | 生成对抗网络           | 待审核 | 胡锐锋、胡磊 | - |
 
 ## 项目结构
 <pre>
@@ -165,7 +141,7 @@ requirements.txt-----------------------------------运行环境依赖包
 - [毛鹏志](https://github.com/NorthblueM) （Datawhale成员-中科院计算所-信息检索与生物信息方向）
 - [刘晓东](https://blog.csdn.net/weixin_44212633) （中科院自动化研究所-意图识别与人机交互方向）
 - [李拥祺](https://github.com/L3Y1Q2) （北京航空航天大学-运动规划与控制决策方向）
-- [王天富](GeminiLight.cn) （中国科学技术大学-数据挖掘与强化学习方向）
+- [王天富](http://geminilight.cn/) （中国科学技术大学-数据挖掘与强化学习方向）
 - [薛博阳](https://amourwaltz.github.io) （香港中文大学-语言模型与语音识别方向）
 
 **其他**
