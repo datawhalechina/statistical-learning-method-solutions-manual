@@ -205,3 +205,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/
+/notebook/part03/data/
