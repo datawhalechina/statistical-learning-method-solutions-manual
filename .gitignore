@@ -206,4 +206,5 @@ dmypy.json
 .pyre/
 .idea/
 /notebook/part03/data/
-/notebook/part03/.vector_cache/
+/codes/ch27/data/
+/codes/ch24/data/
