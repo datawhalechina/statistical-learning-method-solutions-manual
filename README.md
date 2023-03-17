@@ -157,6 +157,10 @@ requirements.txt-----------------------------------运行环境依赖包
 - [李拥祺](https://github.com/L3Y1Q2) （北京航空航天大学-运动规划与控制决策方向）
 - [王天富](http://geminilight.cn/) （中国科学技术大学-数据挖掘与强化学习方向）
 - [薛博阳](https://amourwaltz.github.io) （香港中文大学-语言模型与语音识别方向）
+- [胡磊](https://github.com/DBinary) （北京科技大学-表征学习与生物信息方向）
+- [范致远](https://github.com/Elvisambition) （Datawhale成员-中科院自动化研究所-信息抽取与大模型可信推理方向）
+- [王昊文](https://github.com/whw199833) （帝国理工学院-算法工程师）
+
 
 **其他**
 1. 特别感谢 [@Sm1les](https://github.com/Sm1les)、[@LSGOMYP](https://github.com/LSGOMYP) 对本项目的帮助与支持
