@@ -205,6 +205,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/
-/notebook/part03/data/
+
 /codes/ch27/data/
 /codes/ch24/data/
+/notebook/part03/notes/data/

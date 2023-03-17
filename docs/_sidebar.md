@@ -21,5 +21,9 @@
       * [第20章 潜在狄利克雷分配](part02/chapter20/ch20.md)
       * [第21章 PageRank算法](part02/chapter21/ch21.md)
     * 第3篇 深度学习
-      * [第23章 前馈神经网络](part03/ch23.md)
-      * [第24章 卷积神经网络](part03/ch24.md)
+      * [第23章 前馈神经网络](part03/chapter23/ch23.md)
+      * [第24章 卷积神经网络](part03/chapter24/ch24.md)
+      * [第25章 循环神经网络](part03/chapter25/ch25.md)
+      * [第26章 序列到序列模型](part03/chapter26/ch26.md)
+      * [第27章 预训练语言模型](part03/chapter27/ch27.md)
+      * [第28章 生成对抗网络](part03/chapter28/ch28.md)

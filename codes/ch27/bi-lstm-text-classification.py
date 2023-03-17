@@ -18,25 +18,40 @@ from torchtext.data.utils import get_tokenizer
 from torchtext.datasets import AG_NEWS
 from torchtext.vocab import build_vocab_from_iterator
 
-train_iter = AG_NEWS(split='train', root='./data')
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# 加载AG_NEWS数据集
+train_iter, test_iter = AG_NEWS(root='./data')
+# 定义tokenizer
 tokenizer = get_tokenizer('basic_english')
 
 
+# 定义数据处理函数
 def yield_tokens(data_iter):
     for _, text in data_iter:
         yield tokenizer(text)
 
 
+# 构建词汇表
 vocab = build_vocab_from_iterator(yield_tokens(train_iter), specials=["<unk>"])
 vocab.set_default_index(vocab["<unk>"])
 
+# 将数据集映射到MapStyleDataset格式
+train_dataset = to_map_style_dataset(train_iter)
+test_dataset = to_map_style_dataset(test_iter)
+# 划分验证集
+num_train = int(len(train_dataset) * 0.95)
+split_train_, split_valid_ = random_split(train_dataset, [num_train, len(train_dataset) - num_train])
+
+# 设置文本和标签的处理函数
 text_pipeline = lambda x: vocab(tokenizer(x))
 label_pipeline = lambda x: int(x) - 1
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 
 def collate_batch(batch):
+    """
+    对数据集进行数据处理
+    """
     label_list, text_list, offsets = [], [], [0]
     for (_label, _text) in batch:
         label_list.append(label_pipeline(_label))
@@ -49,12 +64,7 @@ def collate_batch(batch):
     return label_list.to(device), text_list.to(device), offsets.to(device)
 
 
-train_iter, test_iter = AG_NEWS(root='./data')
-train_dataset = to_map_style_dataset(train_iter)
-test_dataset = to_map_style_dataset(test_iter)
-num_train = int(len(train_dataset) * 0.95)
-split_train_, split_valid_ = random_split(train_dataset, [num_train, len(train_dataset) - num_train])
-
+# 构建数据集的数据加载器
 BATCH_SIZE = 256
 train_dataloader = DataLoader(split_train_, batch_size=BATCH_SIZE,
                               shuffle=True, collate_fn=collate_batch)
@@ -64,9 +74,11 @@ test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE,
                              shuffle=True, collate_fn=collate_batch)
 
 
-
-
 class TextClassifier(nn.Module):
+    """
+    基于双向LSTM的文本分类模型
+    """
+
     def __init__(self, vocab_size, embedding_dim, hidden_dim, num_classes):
         super().__init__()
         self.embedding = nn.EmbeddingBag(vocab_size, embedding_dim, sparse=False)
@@ -87,17 +99,23 @@ class TextClassifier(nn.Module):
         return x
 
 
+# 设置超参数
 EMBED_DIM = 64
 HIDDEN_DIM = 64
 NUM_CLASSES = 4
 LEARNING_RATE = 1e-2
 NUM_EPOCHS = 10
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# 创建模型、优化器和损失函数
 model = TextClassifier(len(vocab), EMBED_DIM, HIDDEN_DIM, NUM_CLASSES).to(device)
+criterion = nn.CrossEntropyLoss().to(device)
+optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 
 def train(dataloader):
+    """
+    模型训练
+    """
     model.train()
 
     for idx, (label, text, offsets) in enumerate(dataloader):
@@ -110,6 +128,9 @@ def train(dataloader):
 
 
 def evaluate(dataloader):
+    """
+    模型验证
+    """
     model.eval()
     total_acc, total_count = 0, 0
 
@@ -122,9 +143,6 @@ def evaluate(dataloader):
     return total_acc / total_count
 
 
-criterion = nn.CrossEntropyLoss().to(device)
-optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
-
 for epoch in range(1, NUM_EPOCHS + 1):
     epoch_start_time = time.time()
     train(train_dataloader)
@@ -136,6 +154,7 @@ for epoch in range(1, NUM_EPOCHS + 1):
                                             accu_val * 100))
     print('-' * 59)
 
+# 新闻的分类标签
 ag_news_label = {1: "World",
                  2: "Sports",
                  3: "Business",
@@ -149,6 +168,7 @@ def predict(text, text_pipeline):
         return output.argmax(1).item() + 1
 
 
+# 预测一个文本的类别
 ex_text_str = """
 Our younger Fox Cubs (Y2-Y4) also had a great second experience of swimming competition in February when they travelled 
 over to NIS at the end of February to compete in the SSL Development Series R2 event. For students aged 9 and under 

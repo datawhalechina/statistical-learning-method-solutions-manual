@@ -40,12 +40,15 @@ test_dataset = list(to_map_style_dataset(test_iter))
 num_train = int(len(train_dataset) * 0.9)
 train_dataset, val_dataset = random_split(train_dataset, [num_train, len(train_dataset) - num_train])
 
+# 设置文本和标签的处理函数
 text_pipeline = lambda x: vocab(tokenizer(x))
 label_pipeline = lambda x: int(x) - 1
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def collate_batch(batch):
+    """
+    对数据集进行数据处理
+    """
     label_list, text_list, offsets = [], [], [0]
     for (_label, _text) in batch:
         label_list.append(label_pipeline(_label))
@@ -57,9 +60,8 @@ def collate_batch(batch):
     text_list = torch.cat(text_list)
     return label_list.to(device), text_list.to(device), offsets.to(device)
 
-
+# 构建数据集的数据加载器
 BATCH_SIZE = 64
-
 train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE,
                               shuffle=True, collate_fn=collate_batch)
 valid_dataloader = DataLoader(val_dataset, batch_size=BATCH_SIZE,
@@ -69,6 +71,9 @@ test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE,
 
 
 class CNN_Text(nn.Module):
+    """
+    基于CNN的文本分类模型
+    """
     def __init__(self, vocab_size, embed_dim, class_num=4, dropout=0.5, kernel_size: list = None):
         super(CNN_Text, self).__init__()
         if kernel_size is None:
@@ -114,6 +119,9 @@ criterion = nn.CrossEntropyLoss()
 
 
 def train(dataloader):
+    """
+    模型训练
+    """
     model.train()
 
     for label, text, offsets in dataloader:
@@ -126,6 +134,9 @@ def train(dataloader):
 
 
 def evaluate(dataloader):
+    """
+    模型验证
+    """
     model.eval()
     total_acc, total_count = 0, 0
 
@@ -164,6 +175,7 @@ test_acc /= len(test_dataset)
 
 print(f"Test Acc: {test_acc * 100 :.1f}%")
 
+# 新闻的分类标签
 ag_news_label = {1: "World",
                  2: "Sports",
                  3: "Business",
@@ -176,7 +188,7 @@ def predict(text, text_pipeline):
         output = best_model(text, torch.tensor([0]))
         return output.argmax(1).item() + 1
 
-
+# 预测一个文本的类别
 ex_text_str = """
 Our younger Fox Cubs (Y2-Y4) also had a great second experience of swimming competition in February when they travelled 
 over to NIS at the end of February to compete in the SSL Development Series R2 event. For students aged 9 and under 
