@@ -92,6 +92,20 @@ class TextClassifier(nn.Module):
         self.fc.weight.data.uniform_(-initrange, initrange)
         self.fc.bias.data.zero_()
 
+    def load_elmo_weights(self, elmo):
+        self.embedding.weight.data.copy_(elmo.embedding.weight.data)
+        self.embedding.weight.requires_grad = False
+        self.lstm.weight_ih_l0.data.copy_(elmo.lstm.weight_ih_l0.data)
+        self.lstm.weight_hh_l0.data.copy_(elmo.lstm.weight_hh_l0.data)
+        self.lstm.bias_ih_l0.data.copy_(elmo.lstm.bias_ih_l0.data)
+        self.lstm.bias_hh_l0.data.copy_(elmo.lstm.bias_hh_l0.data)
+        self.lstm.weight_ih_l0_reverse.data.copy_(elmo.lstm.weight_ih_l0_reverse.data)
+        self.lstm.weight_hh_l0_reverse.data.copy_(elmo.lstm.weight_hh_l0_reverse.data)
+        self.lstm.bias_ih_l0_reverse.data.copy_(elmo.lstm.bias_ih_l0_reverse.data)
+        self.lstm.bias_hh_l0_reverse.data.copy_(elmo.lstm.bias_hh_l0_reverse.data)
+        self.fc.weight.data.copy_(elmo.fc.weight.data)
+        self.fc.bias.data.copy_(elmo.fc.bias.data)
+
     def forward(self, text, offsets):
         embedded = self.embedding(text, offsets)
         x, _ = self.lstm(embedded)
