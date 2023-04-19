@@ -157,7 +157,7 @@ threadpoolctl==3.1.0
 tinycss2==1.2.1
 tokenizers==0.12.1
 tomli==2.0.1
-torch==1.12.1+cu116
+torch==1.13.1
 torchaudio==0.12.1+cu116
 torchdata==0.4.1
 torchtext==0.13.1
