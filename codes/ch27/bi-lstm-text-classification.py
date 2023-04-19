@@ -5,157 +5,142 @@
 @file: bi-lstm-text-classification.py
 @time: 2023/3/15 14:30
 @project: statistical-learning-method-solutions-manual
-@desc: 习题27.1 基于双向LSTM的预训练语言模型，假设下游任务是文本分类
+@desc: 习题27.1 基于双向LSTM的ELMo预训练语言模型，假设下游任务是文本分类
 """
+import os
 import time
 
 import torch
 import torch.nn as nn
+import wget
+from allennlp.modules.elmo import Elmo
+from allennlp.modules.elmo import batch_to_ids
 from torch.utils.data import DataLoader
 from torch.utils.data.dataset import random_split
 from torchtext.data.functional import to_map_style_dataset
-from torchtext.data.utils import get_tokenizer
 from torchtext.datasets import AG_NEWS
-from torchtext.vocab import build_vocab_from_iterator
+
+
+def get_elmo_model():
+    elmo_options_file = './data/elmo_2x1024_128_2048cnn_1xhighway_options.json'
+    elmo_weight_file = './data/elmo_2x1024_128_2048cnn_1xhighway_weights.hdf5'
+    url = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x1024_128_2048cnn_1xhighway/elmo_2x1024_128_2048cnn_1xhighway_options.json"
+    if (not os.path.exists(elmo_options_file)):
+        wget.download(url, elmo_options_file)
+    url = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x1024_128_2048cnn_1xhighway/elmo_2x1024_128_2048cnn_1xhighway_weights.hdf5"
+    if (not os.path.exists(elmo_weight_file)):
+        wget.download(url, elmo_weight_file)
+
+    elmo = Elmo(elmo_options_file, elmo_weight_file, 1)
+    return elmo
+
+
+# 加载ELMo模型
+elmo = get_elmo_model()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# 加载AG_NEWS数据集
-train_iter, test_iter = AG_NEWS(root='./data')
-# 定义tokenizer
-tokenizer = get_tokenizer('basic_english')
-
-
-# 定义数据处理函数
-def yield_tokens(data_iter):
-    for _, text in data_iter:
-        yield tokenizer(text)
-
-
-# 构建词汇表
-vocab = build_vocab_from_iterator(yield_tokens(train_iter), specials=["<unk>"])
-vocab.set_default_index(vocab["<unk>"])
-
-# 将数据集映射到MapStyleDataset格式
-train_dataset = to_map_style_dataset(train_iter)
-test_dataset = to_map_style_dataset(test_iter)
-# 划分验证集
-num_train = int(len(train_dataset) * 0.95)
-split_train_, split_valid_ = random_split(train_dataset, [num_train, len(train_dataset) - num_train])
-
-# 设置文本和标签的处理函数
-text_pipeline = lambda x: vocab(tokenizer(x))
 label_pipeline = lambda x: int(x) - 1
 
 
 def collate_batch(batch):
-    """
-    对数据集进行数据处理
-    """
-    label_list, text_list, offsets = [], [], [0]
+    label_list, text_list = [], []
     for (_label, _text) in batch:
         label_list.append(label_pipeline(_label))
-        processed_text = torch.tensor(text_pipeline(_text), dtype=torch.int64)
-        text_list.append(processed_text)
-        offsets.append(processed_text.size(0))
+        text_list.append(_text.split())
     label_list = torch.tensor(label_list, dtype=torch.int64)
-    offsets = torch.tensor(offsets[:-1]).cumsum(dim=0)
-    text_list = torch.cat(text_list)
-    return label_list.to(device), text_list.to(device), offsets.to(device)
+    return label_list.to(device), text_list
 
 
-# 构建数据集的数据加载器
-BATCH_SIZE = 256
+# 加载AG_NEWS数据集
+train_iter, test_iter = AG_NEWS(root='./data')
+train_dataset = to_map_style_dataset(train_iter)
+test_dataset = to_map_style_dataset(test_iter)
+num_train = int(len(train_dataset) * 0.95)
+split_train_, split_valid_ = \
+    random_split(train_dataset, [num_train, len(train_dataset) - num_train])
+
+BATCH_SIZE = 128
 train_dataloader = DataLoader(split_train_, batch_size=BATCH_SIZE,
                               shuffle=True, collate_fn=collate_batch)
 valid_dataloader = DataLoader(split_valid_, batch_size=BATCH_SIZE,
-                              shuffle=True, collate_fn=collate_batch)
+                              shuffle=False, collate_fn=collate_batch)
 test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE,
-                             shuffle=True, collate_fn=collate_batch)
+                             shuffle=False, collate_fn=collate_batch)
 
 
 class TextClassifier(nn.Module):
-    """
-    基于双向LSTM的文本分类模型
-    """
-
-    def __init__(self, vocab_size, embedding_dim, hidden_dim, num_classes):
+    def __init__(self, embedding_dim, hidden_dim, num_classes):
         super().__init__()
-        self.embedding = nn.EmbeddingBag(vocab_size, embedding_dim, sparse=False)
+        # 使用预训练的ELMO
+        self.elmo = elmo
+
+        # 使用双向LSTM
         self.lstm = nn.LSTM(embedding_dim, hidden_dim, bidirectional=True, batch_first=True)
+
+        # 使用线性函数进行文本分类任务
         self.fc = nn.Linear(hidden_dim * 2, num_classes)
+
+        self.dropout = nn.Dropout(0.5)
         self.init_weights()
 
     def init_weights(self):
-        initrange = 0.5
-        self.embedding.weight.data.uniform_(-initrange, initrange)
+        initrange = 0.1
         self.fc.weight.data.uniform_(-initrange, initrange)
-        self.fc.bias.data.zero_()
+        self.fc.bias.data.uniform_(-initrange, initrange)
 
-    def load_elmo_weights(self, elmo):
-        self.embedding.weight.data.copy_(elmo.embedding.weight.data)
-        self.embedding.weight.requires_grad = False
-        self.lstm.weight_ih_l0.data.copy_(elmo.lstm.weight_ih_l0.data)
-        self.lstm.weight_hh_l0.data.copy_(elmo.lstm.weight_hh_l0.data)
-        self.lstm.bias_ih_l0.data.copy_(elmo.lstm.bias_ih_l0.data)
-        self.lstm.bias_hh_l0.data.copy_(elmo.lstm.bias_hh_l0.data)
-        self.lstm.weight_ih_l0_reverse.data.copy_(elmo.lstm.weight_ih_l0_reverse.data)
-        self.lstm.weight_hh_l0_reverse.data.copy_(elmo.lstm.weight_hh_l0_reverse.data)
-        self.lstm.bias_ih_l0_reverse.data.copy_(elmo.lstm.bias_ih_l0_reverse.data)
-        self.lstm.bias_hh_l0_reverse.data.copy_(elmo.lstm.bias_hh_l0_reverse.data)
-        self.fc.weight.data.copy_(elmo.fc.weight.data)
-        self.fc.bias.data.copy_(elmo.fc.bias.data)
+    def forward(self, sentence_lists):
+        character_ids = batch_to_ids(sentence_lists)
+        character_ids = character_ids.to(device)
 
-    def forward(self, text, offsets):
-        embedded = self.embedding(text, offsets)
+        embeddings = self.elmo(character_ids)
+        embedded = embeddings['elmo_representations'][0]
+
         x, _ = self.lstm(embedded)
+        x = x.mean(1)
+        x = self.dropout(x)
         x = self.fc(x)
         return x
 
 
-# 设置超参数
-EMBED_DIM = 64
+EMBED_DIM = 256
 HIDDEN_DIM = 64
 NUM_CLASSES = 4
 LEARNING_RATE = 1e-2
-NUM_EPOCHS = 10
+NUM_EPOCHS = 1
 
-# 创建模型、优化器和损失函数
-model = TextClassifier(len(vocab), EMBED_DIM, HIDDEN_DIM, NUM_CLASSES).to(device)
-criterion = nn.CrossEntropyLoss().to(device)
-optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+model = TextClassifier(EMBED_DIM, HIDDEN_DIM, NUM_CLASSES).to(device)
 
 
 def train(dataloader):
-    """
-    模型训练
-    """
     model.train()
 
-    for idx, (label, text, offsets) in enumerate(dataloader):
+    for idx, (label, text) in enumerate(dataloader):
         optimizer.zero_grad()
-        predicted_label = model(text, offsets)
+        predicted_label = model(text)
         loss = criterion(predicted_label, label)
         loss.backward()
-        torch.nn.utils.clip_grad_norm_(model.parameters(), 0.1)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
         optimizer.step()
 
 
 def evaluate(dataloader):
-    """
-    模型验证
-    """
     model.eval()
     total_acc, total_count = 0, 0
 
     with torch.no_grad():
-        for idx, (label, text, offsets) in enumerate(dataloader):
-            predicted_label = model(text, offsets)
-            criterion(predicted_label, label)
+        for idx, (label, text) in enumerate(dataloader):
+            predicted_label = model(text)
             total_acc += (predicted_label.argmax(1) == label).sum().item()
             total_count += label.size(0)
+
     return total_acc / total_count
 
+
+# 使用交叉熵损失函数
+criterion = nn.CrossEntropyLoss().to(device)
+# 设置优化器
+optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 for epoch in range(1, NUM_EPOCHS + 1):
     epoch_start_time = time.time()
@@ -168,26 +153,24 @@ for epoch in range(1, NUM_EPOCHS + 1):
                                             accu_val * 100))
     print('-' * 59)
 
-# 新闻的分类标签
-ag_news_label = {1: "World",
-                 2: "Sports",
-                 3: "Business",
-                 4: "Sci/Tec"}
+ag_news_label = {1: "World", 2: "Sports", 3: "Business", 4: "Sci/Tec"}
 
 
-def predict(text, text_pipeline):
+def predict(text):
     with torch.no_grad():
-        text = torch.tensor(text_pipeline(text))
-        output = model(text, torch.tensor([0]))
+        output = model([text])
         return output.argmax(1).item() + 1
 
 
-# 预测一个文本的类别
 ex_text_str = """
-Our younger Fox Cubs (Y2-Y4) also had a great second experience of swimming competition in February when they travelled 
-over to NIS at the end of February to compete in the SSL Development Series R2 event. For students aged 9 and under 
-these SSL Development Series events are a great introduction to competitive swimming, focussed on fun and participation 
-whilst also building basic skills and confidence as students build up to joining the full SSL team in Year 5 and beyond.
+Our younger Fox Cubs (Y2-Y4) also had a great second experience 
+of swimming competition in February when they travelled over to 
+NIS at the end of February to compete in the SSL Development 
+Series R2 event. For students aged 9 and under these SSL 
+Development Series events are a great introduction to 
+competitive swimming, focussed on fun and participation whilst 
+also building basic skills and confidence as students build up 
+to joining the full SSL team in Year 5 and beyond.
 """
-model = model.to("cpu")
-print("This is a %s news" % ag_news_label[predict(ex_text_str, text_pipeline)])
+
+print("This is a %s news" % ag_news_label[predict(ex_text_str)])

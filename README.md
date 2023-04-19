@@ -35,7 +35,7 @@
 4. 安装PyTorch
 访问[PyTorch官网](https://pytorch.org/get-started/locally/)，选择合适的版本安装PyTorch，有条件的小伙伴可以下载GPU版本
 ```shell
-pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+pip3 install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1+cu116 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 5. docsify框架运行
@@ -162,9 +162,10 @@ requirements.txt-----------------------------------运行环境依赖包
 - [王昊文](https://github.com/whw199833) （帝国理工学院-算法工程师）
 
 **其他**
-1. 特别感谢 [@Sm1les](https://github.com/Sm1les)、[@LSGOMYP](https://github.com/LSGOMYP) 对本项目的帮助与支持
-2. 感谢[@GYHHAHA](https://github.com/GYHHAHA)，指出了第7章习题7.4的解答问题，并完善了该题的解答
-3. 感谢范佳慧、汪健麟、张宇明、范致远、兰坤、李拙等同学对项目提供的完善建议
+1. 特别感谢 [@Sm1les](https://github.com/Sm1les)、[@LSGOMYP](https://github.com/LSGOMYP) 对本项目的帮助与支持；
+2. 感谢[@GYHHAHA](https://github.com/GYHHAHA)，指出了第7章习题7.4的解答问题，并完善了该题的解答；
+3. 感谢范佳慧、汪健麟、张宇明、兰坤、李拙等同学对项目提供的完善建议；
+4. 感觉张帆同学对习题27.1解答的帮助，解决了ELMo预训练模型的代码问题。
 
 ## 参考文献
 1. [李航《统计学习方法笔记》中的代码、notebook、参考文献、Errata](https://github.com/SmirkCao/Lihang)  
