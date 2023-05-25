@@ -163,7 +163,7 @@ torchdata==0.4.1
 torchtext==0.13.1
 torchvision==0.13.1+cu116
 torchviz==0.0.2
-tornado==6.2
+tornado==6.3.2
 tqdm==4.65.0
 traitlets==5.9.0
 transformers==4.20.1
