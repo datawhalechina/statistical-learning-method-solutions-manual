@@ -20,7 +20,7 @@ mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']
 class MyLogisticRegression:
     def __init__(self, max_iter=10000, distance=3, epsilon=1e-6):
         """
-        Logistic回归
+        逻辑斯谛回归
         :param max_iter: 最大迭代次数 
         :param distance: 一维搜索的长度范围
         :param epsilon: 迭代停止阈值
