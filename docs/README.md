@@ -130,7 +130,7 @@ requirements.txt-----------------------------------运行环境依赖包
 - [王瀚翀](https://github.com/ericwang970322) （华东师范大学-推荐系统方向）
 - [毛鹏志](https://github.com/NorthblueM) （Datawhale成员-中科院计算所-信息检索与生物信息方向）
 - [刘晓东](https://blog.csdn.net/weixin_44212633) （中科院自动化研究所-意图识别与人机交互方向）
-- [李拥祺](https://github.com/L3Y1Q2) （北京航空航天大学-运动规划与控制决策方向）
+- [李拥祺](https://github.com/L3Y1Q2) （南方科技大学-运动规划与控制决策方向）
 - [王天富](http://geminilight.cn/) （中国科学技术大学-数据挖掘与强化学习方向）
 - [薛博阳](https://amourwaltz.github.io) （香港中文大学-语言模型与语音识别方向）
 - [胡磊](https://github.com/DBinary) （北京科技大学-表征学习与生物信息方向）
