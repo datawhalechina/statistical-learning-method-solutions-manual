@@ -124,7 +124,7 @@ class MyAdaBoost:
                 break
             else:
                 # (d)更新训练数据集的权值分布
-                self.updata_w(alpha, y_predict)
+                self.updata_w(alpha, alpha * sign)
 
     def predict(self, X):
         """对新数据进行预测"""
