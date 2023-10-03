@@ -170,7 +170,7 @@ transformers==4.20.1
 typer==0.4.2
 typing_extensions==4.5.0
 uri-template==1.2.0
-urllib3==1.26.14
+urllib3==1.26.17
 wandb==0.12.21
 wasabi==0.10.1
 wcwidth==0.2.6
