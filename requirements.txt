@@ -50,7 +50,7 @@ googleapis-common-protos==1.59.0
 graphviz==0.20.1
 h5py==3.8.0
 huggingface-hub==0.10.1
-idna==3.4
+idna==3.7
 iniconfig==2.0.0
 ipykernel==6.21.2
 ipython==8.11.0
