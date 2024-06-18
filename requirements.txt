@@ -132,7 +132,7 @@ rich==12.6.0
 rsa==4.9
 s3transfer==0.6.0
 sacremoses==0.0.53
-scikit-learn==1.2.1
+scikit-learn==1.5.0
 scipy==1.10.1
 Send2Trash==1.8.0
 sentencepiece==0.1.97
