@@ -43,7 +43,7 @@ class MyGMM:
         return r_jk / r_jk.sum(axis=0)
 
     def update_params(self, r):
-        """更新mean, alpha, covariances每个分模型k的均值、权重、方差的平方"""
+        """更新mean, alpha, covariances每个分模型k的均值、权重、方差"""
         u = self.mean_[-1]
         _mean = ((r * self._y).sum(axis=1) / r.sum(axis=1)).reshape(self.K, 1)
         _covariances = ((r * (self._y - u) ** 2).sum(axis=1) / r.sum(axis=1)).reshape(self.K, 1)
