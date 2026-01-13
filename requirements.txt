@@ -35,7 +35,7 @@ exceptiongroup==1.1.1
 executing==1.2.0
 fairscale==0.4.6
 fastjsonschema==2.16.3
-filelock==3.7.1
+filelock==3.20.3
 fonttools==4.38.0
 fqdn==1.5.1
 gitdb==4.0.10
