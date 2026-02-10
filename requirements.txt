@@ -83,7 +83,7 @@ more-itertools==9.1.0
 murmurhash==1.0.9
 nbclassic==0.5.2
 nbclient==0.7.2
-nbconvert==7.2.9
+nbconvert==7.17.0
 nbformat==5.7.3
 nest-asyncio==1.5.6
 nltk==3.8.1
