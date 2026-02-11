@@ -97,7 +97,7 @@ parso==0.8.3
 pathtools==0.1.2
 pathy==0.10.1
 pickleshare==0.7.5
-Pillow==9.4.0
+Pillow==12.1.1
 platformdirs==3.0.0
 pluggy==1.0.0
 portalocker==2.7.0
